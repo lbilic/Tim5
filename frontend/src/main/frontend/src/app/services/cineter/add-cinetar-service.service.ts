@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CineterCreate} from "../models/cineterCreate";
+import {CineterCreate} from "../../models/cineterCreate";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable()

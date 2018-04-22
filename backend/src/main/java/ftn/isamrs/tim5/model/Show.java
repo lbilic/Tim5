@@ -20,6 +20,9 @@ public class Show {
 
 	@OneToMany(fetch = FetchType.LAZY)
     List<Performance> performances;
+
+	@ManyToOne
+	Cineter cineter;
 	
 	public Show() {}
 
@@ -62,6 +65,11 @@ public class Show {
 		this.performances = performances;
 	}
 
+	public Cineter getCineter() {
+		return cineter;
+	}
 
-	
+	public void setCineter(Cineter cineter) {
+		this.cineter = cineter;
+	}
 }

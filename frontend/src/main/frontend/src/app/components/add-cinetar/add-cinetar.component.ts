@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CineterCreate} from "../../models/cineterCreate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AddCinetarServiceService} from "../../services/add-cinetar-service.service";
+import {AddCinetarServiceService} from "../../services/cineter/add-cinetar-service.service";
 
 @Component({
   selector: 'app-add-cinetar',

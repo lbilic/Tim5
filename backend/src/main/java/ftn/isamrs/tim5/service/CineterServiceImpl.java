@@ -18,10 +18,9 @@ public class CineterServiceImpl implements CineterService {
     @Override
     @Transactional(rollbackOn=Exception.class)
     public Cineter save(CineterCreateDTO dto) {
-        Cineter cineter = ConvertDTOToModel.convertLogDTOToLog(dto);
+        Cineter cineter = ConvertDTOToModel.convertCineterCreateToCineter(dto);
 
         cineter = cineterRepository.save(cineter);
-        System.out.println(cineter.getId());
         return cineter;
     }
 }

@@ -22,7 +22,7 @@ public class Cineter {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cineter")
 	List<Review> review;
 
-	@OneToMany
+	@OneToMany(mappedBy = "cineter")
 	List<Show> shows;
 
 	@ManyToOne
