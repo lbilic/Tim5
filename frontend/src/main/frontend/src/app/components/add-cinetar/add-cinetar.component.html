@@ -59,7 +59,7 @@
       <label><input type="checkbox" [checked]="isTheater" (change)="isTheater = !isTheater">Is theater</label>
     </div>
 
-    <button type="submit" class="btn btn-success" >Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
 
   </form>
 </div>
