@@ -3,8 +3,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Theater")
-public class Theater {
+@Table(name = "CineterCreate")
+public class Cineter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -19,7 +19,7 @@ public class Theater {
 	@Column(nullable = false)
 	String city;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "theater")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cineter")
 	List<Review> review;
 
 	@OneToMany
@@ -27,6 +27,9 @@ public class Theater {
 
 	@ManyToOne
     TheaterAdmin theaterAdmin;
+
+	@Column
+    boolean isTheater;
 
 
     public double getScore() {
@@ -40,7 +43,7 @@ public class Theater {
     @Column
     double score;
 	
-	public Theater() {}
+	public Cineter() {}
 
 	public String getName() {
 		return name;
@@ -97,5 +100,13 @@ public class Theater {
 
     public void setTheaterAdmin(TheaterAdmin theaterAdmin) {
         this.theaterAdmin = theaterAdmin;
+    }
+
+    public boolean isTheater() {
+        return isTheater;
+    }
+
+    public void setTheater(boolean theater) {
+        isTheater = theater;
     }
 }

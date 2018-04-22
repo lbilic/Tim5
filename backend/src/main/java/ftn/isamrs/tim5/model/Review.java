@@ -22,7 +22,7 @@ public class Review {
     private Date date;
 
     @ManyToOne
-    private Theater theater;
+    private Cineter cineter;
 
     public Review() {
     }
@@ -59,11 +59,11 @@ public class Review {
         this.date = date;
     }
 
-    public Theater getTheater() {
-        return theater;
+    public Cineter getCineter() {
+        return cineter;
     }
 
-    public void setTheater(Theater theater) {
-        this.theater = theater;
+    public void setCineter(Cineter cineter) {
+        this.cineter = cineter;
     }
 }

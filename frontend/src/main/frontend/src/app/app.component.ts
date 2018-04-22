@@ -9,10 +9,8 @@ import {HttpClient} from "@angular/common/http";
 export class AppComponent {
   title = 'app';
 
-  constructor(private http : HttpClient)
+  constructor()
   {
-    this.http.get('http://localhost:8080/api/get_hello').subscribe((data) =>{
-        console.log(data);
-    });
+
   }
 }
