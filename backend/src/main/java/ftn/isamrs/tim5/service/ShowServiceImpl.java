@@ -15,7 +15,9 @@ public class ShowServiceImpl implements ShowService{
 
     @Override
     public Show save(ShowCreateDTO showCreateDTO) {
+
         Show show  = ConvertDTOToModel.convertShowCreateToShow(showCreateDTO);
+
         return showRepository.save(show);
     }
 }

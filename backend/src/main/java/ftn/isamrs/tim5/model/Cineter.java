@@ -3,7 +3,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "CineterCreate")
+@Table(name = "Cineter")
 public class Cineter {
 
 	@Id
@@ -26,7 +26,7 @@ public class Cineter {
 	List<Show> shows;
 
 	@ManyToOne
-    TheaterAdmin theaterAdmin;
+    CineterAdmin cineterAdmin;
 
 	@Column
     boolean isTheater;
@@ -94,12 +94,12 @@ public class Cineter {
     }
 
 
-    public TheaterAdmin getTheaterAdmin() {
-        return theaterAdmin;
+    public CineterAdmin getCineterAdmin() {
+        return cineterAdmin;
     }
 
-    public void setTheaterAdmin(TheaterAdmin theaterAdmin) {
-        this.theaterAdmin = theaterAdmin;
+    public void setCineterAdmin(CineterAdmin cineterAdmin) {
+        this.cineterAdmin = cineterAdmin;
     }
 
     public boolean isTheater() {

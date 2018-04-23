@@ -10,6 +10,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {AddCinetarServiceService} from "./services/cineter/add-cinetar-service.service";
 import { AddShowComponent } from './components/add-show/add-show.component';
 import {ShowService} from "./services/show/show.service";
+import { AddCineterAdminComponent } from './components/add-cineter-admin/add-cineter-admin.component';
+import {AdminService} from "./services/admin/admin.service";
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import {ShowService} from "./services/show/show.service";
     AppComponent,
     AddCinetarComponent,
     AddShowComponent,
+    AddCineterAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,10 +32,14 @@ import {ShowService} from "./services/show/show.service";
       },{
         path:'add_show',
         component: AddShowComponent
+        },
+        {
+          path: 'add_cineter_admin',
+          component: AddCineterAdminComponent
         }],
       )
   ],
-  providers: [HttpClientModule, AddCinetarServiceService, ShowService],
+  providers: [HttpClientModule, AddCinetarServiceService, ShowService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

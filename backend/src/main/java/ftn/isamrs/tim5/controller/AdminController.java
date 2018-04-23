@@ -1,12 +1,15 @@
 package ftn.isamrs.tim5.controller;
 
 
+import ftn.isamrs.tim5.dto.CineterAdminCreateDTO;
 import ftn.isamrs.tim5.dto.CineterCreateDTO;
 import ftn.isamrs.tim5.dto.ShowCreateDTO;
 import ftn.isamrs.tim5.model.Cineter;
+import ftn.isamrs.tim5.model.CineterAdmin;
 import ftn.isamrs.tim5.model.Show;
 import ftn.isamrs.tim5.model.User;
 import ftn.isamrs.tim5.repository.ShowRepository;
+import ftn.isamrs.tim5.service.AdminService;
 import ftn.isamrs.tim5.service.CineterService;
 import ftn.isamrs.tim5.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/admin")
 public class AdminController {
 
-
     @Autowired
     CineterService cineterService;
+
     @Autowired
     ShowService showService;
+
+    @Autowired
+    AdminService adminService;
 
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
@@ -35,7 +41,7 @@ public class AdminController {
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createTheater(@RequestBody CineterCreateDTO cineter)
     {
-        return new ResponseEntity<>(cineterService.save(cineter), HttpStatus.OK);
+        return new ResponseEntity<>(cineterService.save(cineter), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/create_show",
@@ -44,12 +50,20 @@ public class AdminController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createShow(@RequestBody ShowCreateDTO show)
     {
-        //Logika za dobavljanje trenutno ulogovanog administratora bioskopa,
-        // dobavljanje bioskopa i dodavanje show-a u listu svih show-ova
         Show s = showService.save(show);
-        return new ResponseEntity<>(s, HttpStatus.OK);
+        return new ResponseEntity<>(s, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/create_cineter_admin",
+                    method = RequestMethod.POST,
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createTheaterAdmin(@RequestBody CineterAdminCreateDTO admin)
+    {
+        CineterAdmin cineterAdmin = adminService.saveTheaterAdmin(admin);
+
+        return new ResponseEntity<>(cineterAdmin, HttpStatus.CREATED);
+    }
 
 
 }
