@@ -1,5 +1,7 @@
 package ftn.isamrs.tim5.model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 
 @Table(name = "Person")
@@ -16,7 +18,10 @@ public abstract class Person {
     @Column(nullable = false)
 	String lastName;
 
-    @Column(nullable = false)
+	@Column(nullable = false)
+	private String username;
+
+	@Column(nullable = false)
 	String password;
 
     @Column(nullable = false)
@@ -24,14 +29,19 @@ public abstract class Person {
 
     @Column(nullable = false)
 	String number;
+
+	@Column(nullable = false, columnDefinition = "BOOL DEFAULT FALSE")
+	private boolean deleted;
 	
 	public Person() {}
 
-	public Person(String name, String lastName, String password, String email, String number) {
+	public Person(String name, String lastName, String username, String password, String email, String number) {
 		super();
 		this.name = name;
 		this.lastName = lastName;
-		this.password = password;
+		this.username = username;
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		this.password = encoder.encode(password);
 		this.email = email;
 		this.number = number;
 	}
@@ -75,6 +85,28 @@ public abstract class Person {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
-	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 }

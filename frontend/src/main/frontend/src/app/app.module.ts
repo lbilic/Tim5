@@ -1,6 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import { ErrorHandler, NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from "@angular/common";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+//import { SharedModule } from "./shared/shared.module";
+import { CoreModule } from "./core/core.module";
+// error handler
+import { AppErrorHandler } from "./core/error-handlers/app-error-handler";
+// interceptor
+import { JwtInterceptor } from "./core/interceptors/jwt-interceptor";
 
 import { AppComponent } from './app.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
@@ -12,6 +19,7 @@ import { AddShowComponent } from './components/add-show/add-show.component';
 import {ShowService} from "./services/show/show.service";
 import { AddCineterAdminComponent } from './components/add-cineter-admin/add-cineter-admin.component';
 import {AdminService} from "./services/admin/admin.service";
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -20,6 +28,7 @@ import {AdminService} from "./services/admin/admin.service";
     AddCinetarComponent,
     AddShowComponent,
     AddCineterAdminComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,10 +45,27 @@ import {AdminService} from "./services/admin/admin.service";
         {
           path: 'add_cineter_admin',
           component: AddCineterAdminComponent
+        },
+        {
+          path: 'login;',
+          component: LoginComponent
         }],
       )
   ],
-  providers: [HttpClientModule, AddCinetarServiceService, ShowService, AdminService],
+  providers: [{
+    provide: ErrorHandler,
+    useClass: AppErrorHandler
+  },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    HttpClientModule, AddCinetarServiceService, ShowService, AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
