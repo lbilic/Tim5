@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Add new Show</h1>
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        formControlName="name"
+        id="name"
+        placeholder="Name..."
+        type="text"
+        class="form-control">
+      <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+        <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
+          The name is required!
+        </div>
+        <ng-template #firstNameMinLength>
+          <ng-container *ngIf="name.errors.minlength">
+            <div id="nameMinimumLengthError">
+              Minimum length is {{name.errors.minlength.requiredLength}} characters.
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input
+        formControlName="description"
+        id="description"
+        placeholder="Description..."
+        type="text"
+        class="form-control">
+      <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+        <div id="descriptionRequiredError" *ngIf="description.errors.required; else descriptionMinLength">
+          The description is required!
+        </div>
+
+        <ng-template #descriptionMinLength>
+          <ng-container *ngIf="description.errors.minlength">
+            <div id="descriptionMinimumLengthError">
+              Minimum length is {{description.errors.minlength.requiredLength}} characters.
+            </div>
+          </ng-container>
+        </ng-template>
+
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
+
+  </form>
+</div>

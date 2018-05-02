@@ -1,0 +1,15 @@
+input.ng-invalid.ng-touched {
+  border-color: rgb(255, 100, 90);
+}
+
+input{
+  margin: 2px;
+}
+
+button{
+}
+
+.form{
+  width:800px;
+  margin:auto;
+}

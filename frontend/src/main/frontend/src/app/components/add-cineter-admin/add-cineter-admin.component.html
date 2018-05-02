@@ -1,0 +1,97 @@
+<div class="container">
+  <h1>Add new Admin for Cinema or Theater</h1>
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        formControlName="name"
+        id="name"
+        placeholder="Name..."
+        type="text"
+        class="form-control">
+      <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+        <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
+          The name is required!
+        </div>
+        <ng-template #firstNameMinLength>
+          <ng-container *ngIf="name.errors.minlength">
+            <div id="nameMinimumLengthError">
+              Minimum length is {{name.errors.minlength.requiredLength}} characters.
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+
+    <label for="lastname">Last name</label>
+    <input
+      formControlName="lastname"
+      id="lastname"
+      placeholder="Last Name..."
+      type="text"
+      class="form-control">
+    <div *ngIf="lastname.touched && lastname.invalid" class="alert alert-danger">
+      <div id="lastnameRequiredError" *ngIf="lastname.errors.required; else lastNameMinLength">
+        The name is required!
+      </div>
+      <ng-template #lastNameMinLength>
+        <ng-container >
+          <div id="lastnameMinimumLengthError" *ngIf="lastname.errors.minlength">
+            Minimum length is {{lastname.errors.minlength.requiredLength}} characters.
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+
+    <label for="email">Email</label>
+    <input
+      formControlName="email"
+      id="email"
+      placeholder="Email..."
+      type="email"
+      class="form-control">
+    <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+      <div id="emailRequiredError" *ngIf="email.errors.required; else emailPattern">
+        The email is required!
+      </div>
+      <ng-template #emailPattern>
+        <ng-container *ngIf="email.errors.email">
+          <div id="validEmailError">
+            Please provide a valid email address.
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+
+    <label for="password">Password</label>
+    <input
+      formControlName="password"
+      id="password"
+      placeholder="password..."
+      type="password"
+      class="form-control">
+    <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+      <div id="passwordRequiredError" *ngIf="password.errors.required;">
+        The password is required!
+      </div>
+    </div>
+    <label >Number</label>
+    <input
+      formControlName="number"
+      id="number"
+      placeholder="number..."
+      type="number"
+      class="form-control">
+    <div *ngIf="number.touched && number.invalid" class="alert alert-danger">
+      <div id="numberRequiredError" *ngIf="number.errors.required;">
+        The number is required!
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
+
+  </form>
+</div>
