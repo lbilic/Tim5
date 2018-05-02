@@ -25,8 +25,8 @@ public class Cineter {
 	@OneToMany(mappedBy = "cineter")
 	List<Show> shows;
 
-	@ManyToOne
-    CineterAdmin cineterAdmin;
+	@OneToMany(mappedBy = "cineter")
+    List<CineterAdmin> cineterAdmin;
 
 	@Column
     boolean isTheater;
@@ -94,11 +94,11 @@ public class Cineter {
     }
 
 
-    public CineterAdmin getCineterAdmin() {
+    public List<CineterAdmin> getCineterAdmin() {
         return cineterAdmin;
     }
 
-    public void setCineterAdmin(CineterAdmin cineterAdmin) {
+    public void setCineterAdmin(List<CineterAdmin> cineterAdmin) {
         this.cineterAdmin = cineterAdmin;
     }
 

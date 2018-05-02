@@ -9,6 +9,9 @@ public class CineterAdmin extends Person {
     @ManyToOne
     Cineter cineter;
 
+    @Column(nullable = false)
+    boolean isFanZone;
+
     public CineterAdmin() {
     }
 
@@ -19,4 +22,8 @@ public class CineterAdmin extends Person {
     public void setCineter(Cineter cineter) {
         this.cineter = cineter;
     }
+
+    public boolean getIsFanZone() { return isFanZone; }
+
+    public void setIsFanZone(boolean isFanZone) {this.isFanZone = isFanZone; }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { FormControl } from "@angular/forms";
 // service
-import { AuthService } from "../../core/services/auth.service";
+import { AuthService } from "../../services/auth.service";
 // error
 import { AppError } from "../errors/app-error";
 import { BadRequestError } from "../errors/bad-request-error";

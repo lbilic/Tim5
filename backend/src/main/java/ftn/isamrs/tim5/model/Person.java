@@ -15,6 +15,7 @@ public abstract class Person {
 
     @Column(nullable = false)
 	String name;
+
     @Column(nullable = false)
 	String lastName;
 

@@ -15,4 +15,8 @@ export class AddCinetarServiceService {
      });
    }
 
+   getAllCineters(){
+      return this.http.get("http://localhost:8080/api/cineter/get_all");
+   }
+
 }

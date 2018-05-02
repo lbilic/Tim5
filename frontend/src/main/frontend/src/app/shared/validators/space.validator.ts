@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import { AuthService } from "../../core/services/auth.service";
+import { AuthService } from "../../services/auth.service";
 
 export class SpaceValidator {
 

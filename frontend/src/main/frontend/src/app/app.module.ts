@@ -20,6 +20,8 @@ import {ShowService} from "./services/show/show.service";
 import { AddCineterAdminComponent } from './components/add-cineter-admin/add-cineter-admin.component';
 import {AdminService} from "./services/admin/admin.service";
 import { LoginComponent } from './components/login/login.component';
+import { AddPropsComponent } from './components/add-props/add-props.component';
+import {PropsService} from "./services/props/props.service";
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { LoginComponent } from './components/login/login.component';
     AddCinetarComponent,
     AddShowComponent,
     AddCineterAdminComponent,
-    LoginComponent,
+    AddPropsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,10 @@ import { LoginComponent } from './components/login/login.component';
         {
           path: 'login;',
           component: LoginComponent
+        },
+        {
+          path: 'add_props',
+          component: AddPropsComponent
         }],
       )
   ],
@@ -65,7 +72,7 @@ import { LoginComponent } from './components/login/login.component';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    HttpClientModule, AddCinetarServiceService, ShowService, AdminService],
+    HttpClientModule, AddCinetarServiceService, ShowService, AdminService, PropsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

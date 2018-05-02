@@ -4,14 +4,17 @@ package ftn.isamrs.tim5.controller;
 import ftn.isamrs.tim5.dto.CineterAdminCreateDTO;
 import ftn.isamrs.tim5.dto.CineterCreateDTO;
 import ftn.isamrs.tim5.dto.ShowCreateDTO;
+import ftn.isamrs.tim5.dto.PropsCreateDTO;
 import ftn.isamrs.tim5.model.Cineter;
 import ftn.isamrs.tim5.model.CineterAdmin;
 import ftn.isamrs.tim5.model.Show;
+import ftn.isamrs.tim5.model.Props;
 import ftn.isamrs.tim5.model.User;
 import ftn.isamrs.tim5.repository.ShowRepository;
 import ftn.isamrs.tim5.service.AdminService;
 import ftn.isamrs.tim5.service.CineterService;
 import ftn.isamrs.tim5.service.ShowService;
+import ftn.isamrs.tim5.service.PropsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,6 +37,9 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    PropsService propsService;
 
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
@@ -65,5 +71,16 @@ public class AdminController {
         return new ResponseEntity<>(cineterAdmin, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/create_props",
+                    method = RequestMethod.POST,
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createProps(@RequestBody PropsCreateDTO prop)
+    {
+        System.out.println(prop);
+        Props props = propsService.saveProps(prop);
+
+        return new ResponseEntity<>(props, HttpStatus.CREATED);
+    }
 
 }
