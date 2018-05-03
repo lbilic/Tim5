@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import { JwtService } from './services/jwt.service';
+import { Router } from "@angular/router";
+import { Title } from "@angular/platform-browser";
+import { JwtService } from "./core/services/jwt.service";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,7 @@ import { JwtService } from './services/jwt.service';
 export class AppComponent {
   title = 'app';
 
-  constructor()
-  {
-
-  }
+  constructor(private jwtService: JwtService, private router: Router, private titleService: Title) {
+      this.titleService.setTitle('ISA/MRS');
+    }
 }

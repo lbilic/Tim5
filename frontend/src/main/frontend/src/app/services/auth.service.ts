@@ -22,7 +22,7 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtService: JwtService) { }
 
   login(credentials: Login): Observable<boolean> {
-    return this.http.post(`${this.urlBase}/login`, credentials)
+    return this.http.post(`http://localhost:8080/api/login`, credentials)
       .map((token: JwtToken) => {
         if(token.value) {
           this.jwtService.setToken(token.value);
@@ -39,12 +39,12 @@ export class AuthService {
   checkUsername(username: string): Observable<boolean> {
     let params: HttpParams = new HttpParams()
       .append('username', username);
-    return this.http.get<boolean>(`${this.urlBase}/check_username`, {params})
+    return this.http.get<boolean>(`http://localhost:8080/api/check_username`, {params})
       .catch(this.handleErrors);
   }
 
   currentUser(): Observable<any> {
-    return this.http.get<any>(`${this.urlBase}/current_user`)
+    return this.http.get<any>(`http://localhost:8080/api/current_user`)
       .catch(this.handleErrors);
   }
 
