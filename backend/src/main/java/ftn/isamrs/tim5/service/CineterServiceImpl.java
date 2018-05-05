@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 public class CineterServiceImpl implements CineterService {
@@ -22,11 +21,5 @@ public class CineterServiceImpl implements CineterService {
         Cineter cineter = ConvertDTOToModel.convertCineterCreateToCineter(dto);
         cineter = cineterRepository.save(cineter);
         return cineter;
-    }
-
-    @Override
-    public List<Cineter> findAll()
-    {
-        return cineterRepository.findAll();
     }
 }

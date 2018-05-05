@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Theater_Admin")
-public class TheaterAdmin extends Person {
+public class TheaterAdmin extends Account {
 
 
     public TheaterAdmin() {

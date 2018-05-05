@@ -4,13 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Cineter_Admin")
-public class CineterAdmin extends Person {
+public class CineterAdmin extends Account {
 
     @ManyToOne
     Cineter cineter;
 
-    @Column(nullable = false)
-    boolean isFanZone;
 
     public CineterAdmin() {
     }
@@ -23,7 +21,5 @@ public class CineterAdmin extends Person {
         this.cineter = cineter;
     }
 
-    public boolean getIsFanZone() { return isFanZone; }
 
-    public void setIsFanZone(boolean isFanZone) {this.isFanZone = isFanZone; }
 }

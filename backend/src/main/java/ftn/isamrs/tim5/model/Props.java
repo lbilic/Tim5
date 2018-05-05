@@ -17,27 +17,15 @@ public class Props {
 	float price;
 
     @Column(nullable = false)
-	String description;
-
-    @Column(nullable = false)
-	String cineterId;
+	String descripiton;
 	
 	public Props() {}
 
-	public Props(String name, float price, String description, String cineterId) {
+	public Props(String name, float price, String descripiton) {
 		super();
 		this.name = name;
 		this.price = price;
-		this.description = description;
-		this.cineterId = cineterId;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		this.descripiton = descripiton;
 	}
 
 	public String getName() {
@@ -56,30 +44,14 @@ public class Props {
 		this.price = price;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescripiton() {
+		return descripiton;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescripiton(String descripiton) {
+		this.descripiton = descripiton;
 	}
-
-	public String getCineterId() {
-		return cineterId;
-	}
-
-	public void setCineterId(String cineterId) {
-		this.cineterId = cineterId;
-	}
-
-	@Override
-	public String toString() {
-		return "Props{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", price=" + price +
-				", description='" + description + '\'' +
-				", cineterId='" + cineterId + '\'' +
-				'}';
-	}
+	
+	
+	
 }

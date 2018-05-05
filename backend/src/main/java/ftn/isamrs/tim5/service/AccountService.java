@@ -1,24 +1,24 @@
 package ftn.isamrs.tim5.service;
 
+import ftn.isamrs.tim5.model.Account;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import ftn.isamrs.tim5.model.User;
 
 import java.util.List;
 
 public interface AccountService {
 
-    List<User> findAll();
+    List<Account> findAll();
 
-    Page<User> findAll(Pageable page);
+    Page<Account> findAll(Pageable page);
 
-    User findOne(Long id);
+    Account findOne(Long id);
 
-    User findByUsername(String username);
+    Account findByUsername(String username);
 
     void checkUsername(String username);
 
-    User save(User account);
+    Account save(Account account);
 
     void remove(Long id);
 
