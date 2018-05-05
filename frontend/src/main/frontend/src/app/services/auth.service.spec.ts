@@ -1,8 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import {JwtService} from "./jwt.service";
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 
 describe('AuthService', () => {
   let authService: AuthService;

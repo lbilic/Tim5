@@ -13,11 +13,13 @@ import { AuthService } from "../../services/auth.service";
 import { SpaceValidator } from "../../shared/validators/space.validator";
 // model
 import { Login } from "../../shared/models/login";
+import { JwtService } from '../../services/jwt.service';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  providers: [JwtService, AuthService],
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
