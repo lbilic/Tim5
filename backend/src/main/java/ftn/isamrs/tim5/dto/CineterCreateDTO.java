@@ -1,6 +1,8 @@
 package ftn.isamrs.tim5.dto;
 
 
+import ftn.isamrs.tim5.model.Cineter;
+
 import java.io.Serializable;
 
 public class CineterCreateDTO implements Serializable {
@@ -18,6 +20,13 @@ public class CineterCreateDTO implements Serializable {
     }
 
     public CineterCreateDTO() {
+    }
+
+    public CineterCreateDTO(Cineter c) {
+        name = c.getName();
+        address = c.getAddress();
+        city = c.getCity();
+        isTheater = c.isTheater();
     }
 
     public String getName() {
