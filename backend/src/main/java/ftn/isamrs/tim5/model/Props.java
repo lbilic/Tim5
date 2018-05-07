@@ -17,7 +17,10 @@ public class Props {
 	float price;
 
     @Column(nullable = false)
-	String descripiton;
+	String description;
+
+    @ManyToOne
+	Cineter cineter;
 	
 	public Props() {}
 
@@ -25,7 +28,7 @@ public class Props {
 		super();
 		this.name = name;
 		this.price = price;
-		this.descripiton = descripiton;
+		this.description = descripiton;
 	}
 
 	public String getName() {
@@ -44,14 +47,28 @@ public class Props {
 		this.price = price;
 	}
 
-	public String getDescripiton() {
-		return descripiton;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescripiton(String descripiton) {
-		this.descripiton = descripiton;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
-	
-	
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Cineter getCineter() {
+        return cineter;
+    }
+
+    public void setCineter(Cineter cineter) {
+        this.cineter = cineter;
+    }
 }

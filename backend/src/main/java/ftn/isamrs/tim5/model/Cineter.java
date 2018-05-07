@@ -25,8 +25,11 @@ public class Cineter {
 	@OneToMany(mappedBy = "cineter")
 	List<Show> shows;
 
-	@ManyToOne
-    CineterAdmin cineterAdmin;
+	@OneToMany(mappedBy = "cineter")
+    List<CineterAdmin> cineterAdmin;
+
+	@OneToMany(mappedBy = "cineter")
+	List<Props> props;
 
 	@Column
     boolean isTheater;
@@ -94,19 +97,27 @@ public class Cineter {
     }
 
 
-    public CineterAdmin getCineterAdmin() {
-        return cineterAdmin;
-    }
+	public List<CineterAdmin> getCineterAdmin() {
+		return cineterAdmin;
+	}
 
-    public void setCineterAdmin(CineterAdmin cineterAdmin) {
-        this.cineterAdmin = cineterAdmin;
-    }
+	public void setCineterAdmin(List<CineterAdmin> cineterAdmin) {
+		this.cineterAdmin = cineterAdmin;
+	}
 
-    public boolean isTheater() {
+	public boolean isTheater() {
         return isTheater;
     }
 
     public void setTheater(boolean theater) {
         isTheater = theater;
     }
+
+	public List<Props> getProps() {
+		return props;
+	}
+
+	public void setProps(List<Props> props) {
+		this.props = props;
+	}
 }

@@ -1,10 +1,12 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.ShowCreateDTO;
+import ftn.isamrs.tim5.model.Account;
 import ftn.isamrs.tim5.model.Show;
-import org.springframework.stereotype.Service;
 
 public interface ShowService {
 
-    Show save(ShowCreateDTO showCreateDTO);
+    Show save(ShowCreateDTO showCreateDTO, Account user);
+
+    void delete(ShowCreateDTO dto, Account user);
 }

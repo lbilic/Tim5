@@ -1,11 +1,17 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.PropsCreateDTO;
+import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.model.CineterAdmin;
+import ftn.isamrs.tim5.repository.AccountRepository;
+import ftn.isamrs.tim5.repository.CineterRepository;
 import ftn.isamrs.tim5.repository.PropsRepository;
 import ftn.isamrs.tim5.model.Props;
 import ftn.isamrs.tim5.util.ConvertDTOToModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class PropsServiceImpl implements PropsService{
@@ -13,10 +19,22 @@ public class PropsServiceImpl implements PropsService{
     @Autowired
     private PropsRepository propsRepository;
 
+    @Autowired
+    private CineterRepository cineterRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
     @Override
-    public Props saveProps(PropsCreateDTO dto){
+    @Transactional
+    public Props saveProps(PropsCreateDTO dto, Account account){
         Props props = ConvertDTOToModel.convertPropsDTOtoProps(dto);
-        System.out.println(props);
-        return propsRepository.save(props);
+        CineterAdmin admin = (CineterAdmin)account;
+        props.setCineter(admin.getCineter());
+        admin.getCineter().getProps().add(props);
+        props = propsRepository.save(props);
+        accountRepository.save(admin);
+        cineterRepository.save(admin.getCineter());
+        return props;
     }
 }

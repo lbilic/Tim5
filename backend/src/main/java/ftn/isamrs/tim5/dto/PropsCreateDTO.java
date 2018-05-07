@@ -6,13 +6,11 @@ public class PropsCreateDTO implements Serializable {
     private String name;
     private float price;
     private String description;
-    private String cineterId;
 
     public PropsCreateDTO(String name, float price, String description, String cineterId) {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.cineterId = cineterId;
     }
 
     public PropsCreateDTO() {
@@ -42,13 +40,7 @@ public class PropsCreateDTO implements Serializable {
         this.description = description;
     }
 
-    public String getCineterId() {
-        return cineterId;
-    }
 
-    public void setCineterId(String cineterId) {
-        this.cineterId = cineterId;
-    }
 
     @Override
     public String toString() {
@@ -56,7 +48,6 @@ public class PropsCreateDTO implements Serializable {
                 "name='" + name + '\'' +
                 ", price='" + price + '\'' +
                 ", description='" + description + '\'' +
-                ", cineterId=" + cineterId +
                 '}';
     }
 

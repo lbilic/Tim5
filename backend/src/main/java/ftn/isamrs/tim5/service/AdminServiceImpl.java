@@ -36,7 +36,7 @@ public class AdminServiceImpl implements AdminService {
         CineterAdmin admin = ConvertDTOToModel.convertCineterAdminDTOtoCineterAdmin(dto);
         admin.setCineter(cineter);
 
-        cineter.setCineterAdmin(admin);
+        cineter.getCineterAdmin().add(admin);
         cineterRepository.save(cineter);
         return theaterAdminRepository.save(admin);
     }
