@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CineterCreate} from "../../models/cineterCreate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AddCinetarServiceService} from "../../services/cineter/add-cinetar-service.service";
+import {CineterService} from "../../services/cineter/cineter.service";
 
 @Component({
   selector: 'app-add-cinetar',
@@ -13,7 +13,7 @@ export class AddCinetarComponent implements OnInit {
   form : FormGroup;
   isTheater : boolean;
 
-  constructor(private fb : FormBuilder, private cinetarService : AddCinetarServiceService) {
+  constructor(private fb : FormBuilder, private cinetarService : CineterService) {
     this.form = this.fb.group({
       name: ['', [
         Validators.required,

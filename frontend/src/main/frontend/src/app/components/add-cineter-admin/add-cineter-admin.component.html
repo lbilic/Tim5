@@ -90,6 +90,11 @@
       </div>
     </div>
 
+    <select style="margin: 20px" (change)="onChange($event.target.selectedIndex)">
+      <option *ngFor="let c of cineters" [ngValue]="item" >{{c.name}} , {{c.city}} , {{c.address}}</option>
+    </select>
+
+    <br/>
 
     <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
 

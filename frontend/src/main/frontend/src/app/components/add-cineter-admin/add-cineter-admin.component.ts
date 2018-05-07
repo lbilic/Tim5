@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AdminService} from "../../services/admin/admin.service";
 import {CineterAdminCreate} from "../../models/cineterAdminCreate";
+import {CineterCreate} from "../../models/cineterCreate";
+import {CineterService} from "../../services/cineter/cineter.service";
 
 @Component({
   selector: 'app-add-cineter-admin',
@@ -11,7 +13,10 @@ import {CineterAdminCreate} from "../../models/cineterAdminCreate";
 export class AddCineterAdminComponent implements OnInit {
 
   form: FormGroup;
-  constructor(private fb : FormBuilder, private adminService: AdminService) {
+  cineters: Array<CineterCreate>;
+  selected_index : number;
+
+  constructor(private fb : FormBuilder, private adminService: AdminService, private cineterService : CineterService) {
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -33,6 +38,12 @@ export class AddCineterAdminComponent implements OnInit {
         Validators.required
       ]
 
+    });
+
+    this.selected_index = 0;
+
+    this.cineterService.getAllCineters().subscribe(data => {
+      this.cineters = data as Array<CineterCreate>;
     });
   }
 
@@ -66,9 +77,13 @@ export class AddCineterAdminComponent implements OnInit {
   }
 
   register(){
-    let admin = new CineterAdminCreate(this.name.value, this.lastname.value, this.email.value, this.password.value, this.number.value);
+    let admin = new CineterAdminCreate(this.name.value, this.lastname.value, this.email.value, this.password.value, this.number.value, this.cineters[this.selected_index]);
     this.adminService.registerCineterAdmin(admin).subscribe(data => {
       console.log(data);
     });
+  }
+
+  onChange(value){
+    this.selected_index = value;
   }
 }

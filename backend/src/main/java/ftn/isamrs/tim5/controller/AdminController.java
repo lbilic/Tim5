@@ -58,8 +58,7 @@ public class AdminController {
     public ResponseEntity createTheaterAdmin(@RequestBody CineterAdminCreateDTO admin)
     {
         CineterAdmin cineterAdmin = adminService.saveTheaterAdmin(admin);
-
-        return new ResponseEntity<>(cineterAdmin, HttpStatus.CREATED);
+        return new ResponseEntity<>(/*cineterAdmin, */HttpStatus.CREATED);
     }
 
 

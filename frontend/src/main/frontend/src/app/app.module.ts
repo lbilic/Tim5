@@ -15,9 +15,10 @@ import { JwtInterceptor } from "./core/interceptors/jwt-interceptor";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AddCinetarServiceService} from "./services/cineter/add-cinetar-service.service";
+import {CineterService} from "./services/cineter/cineter.service";
 import {ShowService} from "./services/show/show.service";
 import {AdminService} from "./services/admin/admin.service";
+
 
 //Components
 import { AppComponent } from './app.component';
@@ -47,18 +48,19 @@ import { JwtService } from './services/jwt.service';
       {
         path:'add_cinetar',
         component: AddCinetarComponent
-      },{
+      },
+      {
         path:'add_show',
         component: AddShowComponent
-        },
-        {
-          path: 'add_cineter_admin',
-          component: AddCineterAdminComponent
-        },
-        {
-          path: 'login',
-          component: LoginComponent
-        }],
+      },
+      {
+        path: 'add_cineter_admin',
+        component: AddCineterAdminComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
+      }],
       )
   ],
   providers: [
@@ -75,7 +77,7 @@ import { JwtService } from './services/jwt.service';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    HttpClientModule, AddCinetarServiceService, ShowService, AdminService, JwtService],
+    HttpClientModule, CineterService, ShowService, AdminService, JwtService],
   bootstrap: [AppComponent]
 })
 

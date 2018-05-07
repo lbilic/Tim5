@@ -6,7 +6,7 @@ public class CineterAdminCreateDTO {
     private String password;
     private String email;
     private String number;
-    private String cineterName;
+    private CineterCreateDTO cineter;
 
 
     public CineterAdminCreateDTO() {
@@ -53,11 +53,23 @@ public class CineterAdminCreateDTO {
         this.number = number;
     }
 
-    public String getCineterName() {
-        return cineterName;
+    public CineterCreateDTO getCineter() {
+        return cineter;
     }
 
-    public void setCineterName(String cineterName) {
-        this.cineterName = cineterName;
+    public void setCineter(CineterCreateDTO cineter) {
+        this.cineter = cineter;
+    }
+
+    @Override
+    public String toString() {
+        return "CineterAdminCreateDTO{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", number='" + number + '\'' +
+                ", cineter=" + cineter +
+                '}';
     }
 }

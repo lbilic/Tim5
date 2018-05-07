@@ -32,6 +32,6 @@ public class CineterController {
         for(Cineter c : cineterList)
             dtos.add(new CineterCreateDTO(c));
 
-        return new ResponseEntity(dtos, HttpStatus.OK);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 }

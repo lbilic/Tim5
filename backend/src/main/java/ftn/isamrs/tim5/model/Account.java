@@ -28,7 +28,7 @@ public class Account {
     @Column(nullable = false)
     String lastName;
 
-    @Column(nullable = false)
+    @Column()
     private String username;
 
     @Column(nullable = false)
