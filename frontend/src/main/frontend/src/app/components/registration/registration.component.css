@@ -1,0 +1,47 @@
+.container {
+  position:relative;
+  z-index:2;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-user-registration {
+  text-align: center;
+  background: none;
+  margin-top: 5.5%;
+}
+
+.panel-body {
+  background-color: rgba(31, 28, 28, 0.7);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.panel-heading {
+  background-color: rgba(66, 139, 202, 0.7);
+  color: white;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.panel-title {
+  font-size: 20px;
+}
+
+.btn {
+  background-color: rgb(66, 139, 202);
+  color: white;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: rgb(255, 100, 90);
+}
+
+.link-to-login {
+  color: white;
+}
+
+.link-to-login > a {
+  color: rgb(66, 139, 202);
+  font-weight: bold;
+}

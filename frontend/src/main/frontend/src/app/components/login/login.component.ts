@@ -19,7 +19,7 @@ import { JwtService } from '../../services/jwt.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  providers: [JwtService, AuthService],
+  providers: [JwtService, AuthService, ToasterService],
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {

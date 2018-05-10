@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~font-awesome/css/font-awesome.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~angular5-toaster/src/toaster.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+
+.customTabClass {
+  font-size: 16px!important;
+  color: #3c3c3c!important;
+}
+
+.customTabClass.active {
+  color: rgb(66, 139, 202)!important;
+  font-weight: bold;
+}
+
+.alert-danger {
+  padding: 2px;
+  color: rgb(255, 100, 90);
+  background: none;
+  border: none;
+}
+
+.alert-warning {
+  padding: 2px;
+  color: white;
+  background: none;
+  border: none;
+}
+
+.alert-success {
+  padding: 2px;
+  color: rgb(120, 160, 100);
+  background: none;
+  border: none;
+}
+

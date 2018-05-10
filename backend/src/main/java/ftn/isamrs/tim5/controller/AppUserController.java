@@ -1,5 +1,6 @@
 package ftn.isamrs.tim5.controller;
 
+import ftn.isamrs.tim5.exception.BadRequestException;
 import ftn.isamrs.tim5.model.Account;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -19,6 +21,8 @@ import ftn.isamrs.tim5.dto.LoginDTO;
 import ftn.isamrs.tim5.dto.TokenDTO;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @Api(value="user's essentials functionalities", description="Operations pertaining to all kind of users in application.")
@@ -76,5 +80,29 @@ public class AppUserController {
         } catch (Exception ex) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping(
+            value = "/api/check_username",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ApiOperation(
+            value = "Check does given username already exist.",
+            notes = "You must provide valid username in the URL.",
+            httpMethod = "GET",
+            produces = "application/json"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully checked availability of given username"),
+            @ApiResponse(code = 400, message = "Username parameter is missing")
+    })
+    public ResponseEntity checkUsername(
+            @ApiParam(value = "User's username") @RequestParam("username") String username) {
+
+        if(username == null || username.equals(""))
+            throw new BadRequestException("Username can't be empty!");
+
+        return new ResponseEntity(this.accountService.isUsernameTaken(username), HttpStatus.OK);
     }
 }
