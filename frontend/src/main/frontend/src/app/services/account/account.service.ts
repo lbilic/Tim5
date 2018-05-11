@@ -9,7 +9,7 @@ export class AccountService {
 
   save(account : Account)
     {
-        return this.http.post('http://localhost:8080/api/admin/register', account);
+        return this.http.post('http://localhost:8080/api/register', account);
     }
 
 }

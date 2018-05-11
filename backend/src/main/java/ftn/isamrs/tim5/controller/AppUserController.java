@@ -1,7 +1,12 @@
 package ftn.isamrs.tim5.controller;
 
+import ftn.isamrs.tim5.dto.LoginDTO;
+import ftn.isamrs.tim5.dto.TokenDTO;
 import ftn.isamrs.tim5.exception.BadRequestException;
 import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.security.JWTUtils;
+import ftn.isamrs.tim5.service.AccountService;
+import ftn.isamrs.tim5.util.MessageConstants;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,13 +17,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ftn.isamrs.tim5.security.JWTUtils;
-import ftn.isamrs.tim5.service.AccountService;
-import ftn.isamrs.tim5.dto.LoginDTO;
-import ftn.isamrs.tim5.dto.TokenDTO;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -105,4 +105,32 @@ public class AppUserController {
 
         return new ResponseEntity(this.accountService.isUsernameTaken(username), HttpStatus.OK);
     }
+
+    /*@RequestMapping(
+            value = "/api/current_user",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ApiOperation(
+            value = "Get current logged user.",
+            httpMethod = "GET",
+            produces = "application/json"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved current user")
+    })
+    public ResponseEntity getCurrentUser() {
+        Account account = this.accountService.findByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
+        List<String> roles = new ArrayList<>();
+        SecurityContextHolder.getContext().getAuthentication().getAuthorities().forEach(
+                authority -> roles.add(authority.getAuthority()));
+
+        ResponseEntity responseEntity = null;
+        if(roles.contains(MessageConstants.USER_ROLE))
+            responseEntity = new ResponseEntity(new UserProfileDTO(account.getUser()), HttpStatus.OK);
+        else if(roles.contains(MessageConstants.ADMIN_ROLE))
+            responseEntity = new ResponseEntity(new AdminDTO(account.getAdministrator()), HttpStatus.OK);
+        return responseEntity;
+    }*/
 }

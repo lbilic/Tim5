@@ -1,12 +1,6 @@
 package ftn.isamrs.tim5.util;
-import ftn.isamrs.tim5.dto.CineterAdminCreateDTO;
-import ftn.isamrs.tim5.dto.CineterCreateDTO;
-import ftn.isamrs.tim5.dto.PropsCreateDTO;
-import ftn.isamrs.tim5.dto.ShowCreateDTO;
-import ftn.isamrs.tim5.model.Cineter;
-import ftn.isamrs.tim5.model.Props;
-import ftn.isamrs.tim5.model.Show;
-import ftn.isamrs.tim5.model.CineterAdmin;
+import ftn.isamrs.tim5.dto.*;
+import ftn.isamrs.tim5.model.*;
 import org.modelmapper.ModelMapper;
 
 public class ConvertDTOToModel {
@@ -25,6 +19,12 @@ public class ConvertDTOToModel {
     public static CineterAdmin convertCineterAdminDTOtoCineterAdmin(CineterAdminCreateDTO dto)
     {
         return mapper.map(dto, CineterAdmin.class);
+    }
+
+    public static Account convertAccountCreateDTOToAccount(AccountCreateDTO accountCreateDTO)
+    {
+        ModelMapper mapper = new ModelMapper();
+        return mapper.map(accountCreateDTO, Account.class);
     }
 
     public static Props convertPropsDTOtoProps(PropsCreateDTO dto) {

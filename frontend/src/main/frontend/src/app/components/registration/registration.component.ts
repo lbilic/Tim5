@@ -101,7 +101,9 @@ export class RegistrationComponent implements OnInit {
 
   register() {
       let login = new Login(this.username.value, this.password.value);
+      console.log(login);
       let account = new Account(login, this.firstName.value, this.lastName.value, this.email.value);
+      console.log(account);
       this.accountService.save(account)
         .subscribe(() => {
           this.router.navigateByUrl(this.returnURL);

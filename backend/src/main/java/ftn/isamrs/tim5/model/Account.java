@@ -28,34 +28,50 @@ public class Account {
     @Column(nullable = false)
     String lastName;
 
-    @Column()
+    @Column(nullable = false)
+    private boolean confirmed;
+
+    @Column(nullable = false)
     private String username;
 
     @Column(nullable = false)
-    String password;
+    private String password;
 
     @Column(nullable = false)
-    String email;
+    private String email;
 
-    @Column(nullable = false)
-    String number;
+    //@Column(nullable = false)
+    //private String number;
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    private List<AccountAuthority> accountAuthorities;
 
 
     public Account(String username, String password, int version, boolean deleted, String name,
-                   String lastName, String username1, String password1, String email, String number) {
+                   String lastName, String email, /*String number,*/ boolean confirmed) {
         this.username = username;
-        this.password = password;
         this.version = version;
         this.deleted = deleted;
         this.name = name;
         this.lastName = lastName;
-        this.username = username1;
-        this.password = password1;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
         this.email = email;
-        this.number = number;
+        //this.number = number;
+        this.confirmed = confirmed;
     }
 
-    public Account(){}
+    public Account() {
+        this.accountAuthorities = new ArrayList<>();
+        this.confirmed = false;
+    }
+
+    public Account(String username, String password) {
+        this.username = username;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(password);
+        this.accountAuthorities = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
@@ -81,13 +97,13 @@ public class Account {
         this.email = email;
     }
 
-    public String getNumber() {
+    /*public String getNumber() {
         return number;
     }
 
     public void setNumber(String number) {
         this.number = number;
-    }
+    }*/
 
     public Long getId() { return id; }
 
@@ -108,4 +124,12 @@ public class Account {
     public boolean isDeleted() { return deleted; }
 
     public void setDeleted(boolean deleted) { this.deleted = deleted; }
+
+    public List<AccountAuthority> getAccountAuthorities() { return accountAuthorities; }
+
+    public void setAccountAuthorities(List<AccountAuthority> accountAuthorities) { this.accountAuthorities = accountAuthorities; }
+
+    public boolean isConfirmed() { return confirmed; }
+
+    public void setConfirmed(boolean confirmed) { this.confirmed = confirmed; }
 }
