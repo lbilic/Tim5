@@ -53,7 +53,7 @@ public class RegistrationController {
             consumes = "application/json"
     )
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Successfully created tenant", response = AccountDTO.class),
+            @ApiResponse(code = 201, message = "Successfully created account", response = AccountDTO.class),
             @ApiResponse(code = 400, message = "Inappropriate account object sent in request body"),
             @ApiResponse(code = 401, message = "You are not authorized to create the resource"),
             @ApiResponse(code = 403, message = "You don't have permission to create resource"),
@@ -75,19 +75,21 @@ public class RegistrationController {
         }
 
         if(!canRegister && !isAdmin) throw new ForbiddenException("You need to logout to register or you need to be admin.");
-        Account acc = convertAccountCreateDTOToAccount(accountCreateDTO);
-        System.out.println(acc.getUsername());
+
         this.accountService.checkUsername(accountCreateDTO.getLoginAccount().getUsername());
 
         Account account = new Account(accountCreateDTO.getLoginAccount().getUsername(), accountCreateDTO.getLoginAccount().getPassword());
         //Mapiranje istoimenih atributa iz DTO objekta na objekat koji se snima u bazu
-        //Account acc = convertAccountCreateDTOToAccount(accountCreateDTO);
+        Account acc = convertAccountCreateDTOToAccount(accountCreateDTO);
         //System.out.println(acc);
         //System.out.println(account);
         //if(isAdmin)
         //    acc.setConfirmed(true);
         //else
         //    acc.setConfirmed(false);
+        account.setName(acc.getName());
+        account.setLastName(acc.getLastName());
+        account.setEmail(acc.getEmail());
 
 
         Authority authority = this.authorityService.findByName("USER");
@@ -96,15 +98,9 @@ public class RegistrationController {
         account.getAccountAuthorities().add(accountAuthority);
         account = this.accountService.save(account);
 
-        //acc.setAccount(account);
-        //acc = this.tenantService.save(tenant);
-        //account.setTenant(tenant);
-        account = this.accountService.save(account);
-
         accountAuthority.setAccount(account);
         accountAuthority.setAuthority(authority);
         this.accountAuthorityService.save(accountAuthority);
-        System.out.println("OVDE4");
         return new ResponseEntity<>(new AccountDTO(account), HttpStatus.CREATED);
     }
 

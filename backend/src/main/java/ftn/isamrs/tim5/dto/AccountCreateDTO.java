@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.dto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class AccountCreateDTO implements Serializable {
@@ -9,9 +10,12 @@ public class AccountCreateDTO implements Serializable {
     @NotNull
     private LoginDTO loginAccount;
     @NotNull
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String lastName;
     @NotNull
+    @NotEmpty
     private String email;
 
     public AccountCreateDTO() { }

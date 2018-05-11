@@ -23,7 +23,6 @@ public class ConvertDTOToModel {
 
     public static Account convertAccountCreateDTOToAccount(AccountCreateDTO accountCreateDTO)
     {
-        ModelMapper mapper = new ModelMapper();
         return mapper.map(accountCreateDTO, Account.class);
     }
 

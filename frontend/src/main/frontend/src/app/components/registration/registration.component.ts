@@ -111,7 +111,7 @@ export class RegistrationComponent implements OnInit {
           if (error instanceof BadRequestError)
             this.toasterService.pop('error', 'Error', 'Given data have bad format!');
           else if (error instanceof NotFoundError)
-            this.toasterService.pop('error', 'Error', 'Registration can\'t be done, because tenant role is missing!');
+            this.toasterService.pop('error', 'Error', 'Registration can\'t be done, because account role is missing!');
           else {
             this.toasterService.pop('error', 'Error', 'Something unexpected happened! \nSee information about error in console.');
             throw error;
