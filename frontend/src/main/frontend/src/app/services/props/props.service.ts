@@ -9,8 +9,10 @@ export class PropsService {
   }
 
   registerProps(props: PropsCreate) {
-    console.log(props.cineterId + " " + props.price + " " + props.description)
     return this.http.post('http://localhost:8080/api/admin/create_props', props);
+  }
 
+  getAllProps(){
+    return this.http.get('http://localhost:8080/api/props/get_all');
   }
 }

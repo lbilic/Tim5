@@ -1,8 +1,11 @@
 package ftn.isamrs.tim5.dto;
 
+import ftn.isamrs.tim5.model.Props;
+
 import java.io.Serializable;
 
 public class PropsCreateDTO implements Serializable {
+    private Long id;
     private String name;
     private float price;
     private String description;
@@ -14,6 +17,13 @@ public class PropsCreateDTO implements Serializable {
     }
 
     public PropsCreateDTO() {
+    }
+
+    public PropsCreateDTO(Props prop) {
+        name = prop.getName();
+        price = prop.getPrice();
+        description = prop.getDescription();
+        id = prop.getId();
     }
 
     public String getName() {
@@ -40,7 +50,13 @@ public class PropsCreateDTO implements Serializable {
         this.description = description;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {

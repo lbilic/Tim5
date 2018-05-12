@@ -36,4 +36,13 @@ export class AccountService {
     return Observable.throw(new AppError(response));
   }
 
+  public getCurrentUser(){
+    return this.http.get('http://localhost:8080/api/current_user');
+  }
+
+  public changePassword(passwordChange){
+    return this.http.post('http://localhost:8080/api/change_password', passwordChange);
+  }
+
+
 }

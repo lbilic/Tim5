@@ -14,6 +14,8 @@ import { SpaceValidator } from "../../shared/validators/space.validator";
 // model
 import { Login } from "../../shared/models/login";
 import { JwtService } from '../../services/jwt.service';
+import {AccountService} from "../../services/account/account.service";
+import {CineterAdminCreate} from "../../models/cineterAdminCreate";
 
 
 @Component({
@@ -28,7 +30,8 @@ export class LoginComponent implements OnInit {
   toasterConfig: ToasterConfig;
 
   constructor(private fb: FormBuilder, private authService: AuthService,
-              private router: Router, private route: ActivatedRoute, private toasterService: ToasterService) {
+              private router: Router, private route: ActivatedRoute, private toasterService: ToasterService,
+              private accountService: AccountService) {
     this.form = this.fb.group({
       username: ['', [Validators.required, SpaceValidator.cannotContainSpace]],
       password: ['', Validators.required]
@@ -52,9 +55,21 @@ export class LoginComponent implements OnInit {
     let login = new Login(this.username.value, this.password.value);
     this.authService.login(login)
       .subscribe((successfullyLoggedIn) => {
-        if(successfullyLoggedIn)
+        if(successfullyLoggedIn) {
+
+          //Ovde saljes upit ka serveru opet
+          this.accountService.getCurrentUser().subscribe(data =>{
+
+              let user = data as CineterAdminCreate;
+
+              if(user.changedPassword == false)
+              {
+                this.router.navigateByUrl('change_password');
+                //redirektujes ga na komponentu za promenu sifre
+              }
+          });
           this.router.navigateByUrl(this.returnURL);
-        else
+        }else
           this.toasterService.pop('error', 'Error', 'Invalid login');
       }, (error: AppError) => {
         if (error instanceof BadRequestError)

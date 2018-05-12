@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class PropsServiceImpl implements PropsService{
@@ -37,4 +38,10 @@ public class PropsServiceImpl implements PropsService{
         cineterRepository.save(admin.getCineter());
         return props;
     }
+
+    @Override
+    public List<Props> findAllByCineterId(Long id) {
+        return propsRepository.findAllByCineterId(id);
+    }
+
 }

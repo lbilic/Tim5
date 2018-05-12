@@ -15,10 +15,15 @@ export class AddCineterAdminComponent implements OnInit {
   form: FormGroup;
   cineters: Array<CineterCreate>;
   selected_index : number;
+  isFanZone;
 
   constructor(private fb : FormBuilder, private adminService: AdminService, private cineterService : CineterService) {
     this.form = this.fb.group({
       name: ['', [
+        Validators.required,
+        Validators.minLength(3)
+      ]],
+      username: ['', [
         Validators.required,
         Validators.minLength(3)
       ]],
@@ -62,6 +67,11 @@ export class AddCineterAdminComponent implements OnInit {
     return this.form.get('email');
   }
 
+  get username()
+  {
+    return this.form.get('username');
+  }
+
 
   get password()
   {
@@ -77,7 +87,8 @@ export class AddCineterAdminComponent implements OnInit {
   }
 
   register(){
-    let admin = new CineterAdminCreate(this.name.value, this.lastname.value, this.email.value, this.password.value, this.number.value, this.cineters[this.selected_index]);
+    let admin = new CineterAdminCreate(this.name.value, this.lastname.value, this.email.value, this.password.value, this.number.value, this.username.value, this.isFanZone,
+      this.cineters[this.selected_index]);
     this.adminService.registerCineterAdmin(admin).subscribe(data => {
       console.log(data);
     });

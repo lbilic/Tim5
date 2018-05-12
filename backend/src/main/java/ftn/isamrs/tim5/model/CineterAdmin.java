@@ -9,6 +9,11 @@ public class CineterAdmin extends Account {
     @ManyToOne
     Cineter cineter;
 
+    @Column
+    private Boolean isFanZone;
+
+    @Column
+    private Boolean changedPassword;
 
     public CineterAdmin() {
     }
@@ -21,5 +26,19 @@ public class CineterAdmin extends Account {
         this.cineter = cineter;
     }
 
+    public Boolean isFanZone() {
+        return isFanZone;
+    }
 
+    public void setFanZone(boolean fanZone) {
+        isFanZone = fanZone;
+    }
+
+    public boolean getChangedPassword() {
+        return changedPassword;
+    }
+
+    public void setChangedPassword(boolean changedPassword) {
+        this.changedPassword = changedPassword;
+    }
 }

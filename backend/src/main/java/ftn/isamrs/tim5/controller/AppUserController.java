@@ -1,9 +1,10 @@
 package ftn.isamrs.tim5.controller;
 
-import ftn.isamrs.tim5.dto.LoginDTO;
-import ftn.isamrs.tim5.dto.TokenDTO;
+import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.exception.BadRequestException;
 import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.model.Cineter;
+import ftn.isamrs.tim5.model.CineterAdmin;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.AccountService;
 import ftn.isamrs.tim5.util.MessageConstants;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@Api(value="user's essentials functionalities", description="Operations pertaining to all kind of users in application.")
+@Api(value = "user's essentials functionalities", description = "Operations pertaining to all kind of users in application.")
+@CrossOrigin(value = "http://localhost:4200")
 public class AppUserController {
 
     @Autowired
@@ -63,7 +66,7 @@ public class AppUserController {
     public ResponseEntity login(
             @ApiParam(value = "The user's credentials.", required = true) @Valid @RequestBody LoginDTO loginDTO,
             @ApiParam(value = "The object that contains all errors from validation of DTO object") BindingResult errors) {
-
+        System.out.println(loginDTO);
         try {
 
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
@@ -74,10 +77,11 @@ public class AppUserController {
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
 
             Long id = account.getId();
-
             TokenDTO userToken = new TokenDTO(jwtUtils.generateToken(details, id));
             return new ResponseEntity<>(userToken, HttpStatus.OK);
         } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("ASFIASJFOISAJOI");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
@@ -100,11 +104,77 @@ public class AppUserController {
     public ResponseEntity checkUsername(
             @ApiParam(value = "User's username") @RequestParam("username") String username) {
 
-        if(username == null || username.equals(""))
+        if (username == null || username.equals(""))
             throw new BadRequestException("Username can't be empty!");
 
         return new ResponseEntity(this.accountService.isUsernameTaken(username), HttpStatus.OK);
     }
+
+    @RequestMapping(
+            value = "/api/current_user",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ApiOperation(
+            value = "Get current logged user.",
+            httpMethod = "GET",
+            produces = "application/json"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved current user")
+    })
+    public ResponseEntity getCurrentuser(@RequestHeader("Authentication-Token") String token) {
+        String username = jwtUtils.getUsernameFromToken(token);
+
+        Account acc = accountService.findByUsername(username);
+
+        CineterAdmin admin = (CineterAdmin) acc;
+
+        if (admin.getCineter() != null)
+            return new ResponseEntity<>(new CineterAdminCreateDTO(admin), HttpStatus.OK);
+
+        return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+
+    }
+
+    @RequestMapping(
+            value = "/api/change_password",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity changePassword(@RequestHeader("Authentication-Token") String token,
+                                         @RequestBody PasswordDTO password) {
+
+        String username = jwtUtils.getUsernameFromToken(token);
+
+        Account acc = accountService.findByUsername(username);
+        System.out.println("prosao" + password);
+        if (!BCrypt.checkpw(password.getOldPassword(), acc.getPassword()))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        System.out.println("Prosao");
+        if (!password.getNewPassword().equals(password.getConfirmPassword()))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        System.out.println("I ovde prosao");
+        CineterAdmin admin = (CineterAdmin) acc;
+
+        String newPassword = BCrypt.hashpw(password.getNewPassword(), BCrypt.gensalt());
+        acc.setPassword(newPassword);
+
+        if (admin.getCineter() != null) {
+            if (!admin.getChangedPassword())
+                admin.setChangedPassword(true);
+
+            accountService.save(admin);
+            return new ResponseEntity<>(new CineterAdminCreateDTO(admin), HttpStatus.OK);
+        }
+
+        accountService.save(acc);
+        return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+
+    }
+
+
 
     /*@RequestMapping(
             value = "/api/current_user",

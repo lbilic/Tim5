@@ -42,7 +42,7 @@ export class JwtService {
     localStorage.removeItem('Authentication-Token');
   }
 
-  private decodeToken(): Token {
+  public decodeToken(): Token {
     return this.jwtHelper.decodeToken(this.getToken());
   }
 }

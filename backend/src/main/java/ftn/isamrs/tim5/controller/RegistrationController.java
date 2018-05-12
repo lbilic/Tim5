@@ -18,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,6 +26,7 @@ import static ftn.isamrs.tim5.util.ConvertDTOToModel.convertAccountCreateDTOToAc
 
 @RestController
 @Api(value="registration", description="Operations pertaining to registration in application.")
+@CrossOrigin(value = "http://localhost:4200")
 public class RegistrationController {
     @Autowired
     private AccountService accountService;

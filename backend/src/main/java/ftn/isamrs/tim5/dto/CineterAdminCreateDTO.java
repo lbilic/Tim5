@@ -1,15 +1,32 @@
 package ftn.isamrs.tim5.dto;
 
+import ftn.isamrs.tim5.model.CineterAdmin;
+
 public class CineterAdminCreateDTO {
     private String name;
     private String lastName;
     private String password;
     private String email;
     private String number;
+    private String username;
     private CineterCreateDTO cineter;
-
-
+    private Boolean isFanZone;
+    private Boolean changedPassword;
     public CineterAdminCreateDTO() {
+    }
+
+    public CineterAdminCreateDTO(CineterAdmin admin) {
+
+        name = admin.getName();
+        lastName = admin.getLastName();
+        password = admin.getPassword();
+        email = admin.getEmail();
+        //number = admin.getNumber();
+        username = admin.getUsername();
+        cineter = new CineterCreateDTO(admin.getCineter());
+        isFanZone = admin.isFanZone();
+        changedPassword = admin.getChangedPassword();
+
     }
 
 
@@ -59,6 +76,30 @@ public class CineterAdminCreateDTO {
 
     public void setCineter(CineterCreateDTO cineter) {
         this.cineter = cineter;
+    }
+
+    public boolean isFanZone() {
+        return isFanZone;
+    }
+
+    public void setFanZone(boolean fanZone) {
+        isFanZone = fanZone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isChangedPassword() {
+        return changedPassword;
+    }
+
+    public void setChangedPassword(boolean changedPassword) {
+        this.changedPassword = changedPassword;
     }
 
     @Override
