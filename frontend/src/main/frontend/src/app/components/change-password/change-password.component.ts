@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../services/account/account.service";
 import {Password} from "../../models/password";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-change-password',
@@ -12,7 +13,7 @@ export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb : FormBuilder, private accountService: AccountService ) {
+  constructor(private fb : FormBuilder, private accountService: AccountService, private router: Router ) {
     this.form = this.fb.group({
       oldPassword: ['', [
         Validators.required
@@ -46,7 +47,7 @@ export class ChangePasswordComponent implements OnInit {
   changePassword(){
     let passwordChange = new Password(this.oldPassword.value, this.newPassword.value, this.confirmPassword.value);
     this.accountService.changePassword(passwordChange).subscribe(data =>{
-
+      this.router.navigateByUrl('');
     });
   }
 

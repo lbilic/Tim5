@@ -44,5 +44,9 @@ export class AccountService {
     return this.http.post('http://localhost:8080/api/change_password', passwordChange);
   }
 
+  public changeProfile(account){
+    return this.http.post('http://localhost:8080/api/profile', account)
+  }
+
 
 }

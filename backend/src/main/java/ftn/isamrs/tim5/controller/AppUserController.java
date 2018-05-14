@@ -22,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,13 +128,13 @@ public class AppUserController {
         String username = jwtUtils.getUsernameFromToken(token);
 
         Account acc = accountService.findByUsername(username);
-
-        CineterAdmin admin = (CineterAdmin) acc;
-
-        if (admin.getCineter() != null)
+        try {
+            CineterAdmin admin = (CineterAdmin) acc;
             return new ResponseEntity<>(new CineterAdminCreateDTO(admin), HttpStatus.OK);
-
-        return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+        }
+        catch(ClassCastException e){
+            return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+        }
 
     }
 
@@ -149,13 +150,13 @@ public class AppUserController {
         String username = jwtUtils.getUsernameFromToken(token);
 
         Account acc = accountService.findByUsername(username);
-        System.out.println("prosao" + password);
+
         if (!BCrypt.checkpw(password.getOldPassword(), acc.getPassword()))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        System.out.println("Prosao");
+
         if (!password.getNewPassword().equals(password.getConfirmPassword()))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        System.out.println("I ovde prosao");
+
         CineterAdmin admin = (CineterAdmin) acc;
 
         String newPassword = BCrypt.hashpw(password.getNewPassword(), BCrypt.gensalt());
@@ -173,6 +174,30 @@ public class AppUserController {
         return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
 
     }
+
+    @RequestMapping(
+            value = "/api/profile",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+
+    public ResponseEntity changeProfile(@RequestHeader("Authentication-Token") String token,
+                                        @RequestBody ProfileChangeDTO profile){
+
+        String username = jwtUtils.getUsernameFromToken(token);
+
+        Account acc = accountService.findByUsername(username);
+
+        acc.setName(profile.getName());
+        acc.setLastName(profile.getLastName());
+
+        accountService.save(acc);
+
+        return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+    }
+
+
 
 
 

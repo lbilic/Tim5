@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>Add new Admin for Cinema or Theater</h1>
-  <form [formGroup]="form" (ngSubmit)="register()">
+  <h1>Change profile information</h1>
+  <form [formGroup]="form" (ngSubmit)="changeProfile()">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -8,7 +8,9 @@
         id="name"
         placeholder="Name..."
         type="text"
-        class="form-control">
+        class="form-control"
+        [(ngModel)]="account.name"
+      >
       <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
         <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
           The name is required!
@@ -29,7 +31,8 @@
       id="lastname"
       placeholder="Last Name..."
       type="text"
-      class="form-control">
+      class="form-control"
+      [(ngModel)]="account.lastName">
     <div *ngIf="lastname.touched && lastname.invalid" class="alert alert-danger">
       <div id="lastnameRequiredError" *ngIf="lastname.errors.required; else lastNameMinLength">
         The name is required!
@@ -43,14 +46,15 @@
       </ng-template>
     </div>
 
-
     <label for="email">Email</label>
     <input
       formControlName="email"
       id="email"
       placeholder="Email..."
       type="email"
-      class="form-control">
+      class="form-control"
+      [(ngModel)]="account.email"
+   >
     <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
       <div id="emailRequiredError" *ngIf="email.errors.required; else emailPattern">
         The email is required!
@@ -64,57 +68,24 @@
       </ng-template>
     </div>
 
-
-    <label for="password">Password</label>
-    <input
-      formControlName="password"
-      id="password"
-      placeholder="password..."
-      type="password"
-      class="form-control">
-    <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
-      <div id="passwordRequiredError" *ngIf="password.errors.required;">
-        The password is required!
-      </div>
-    </div>
-    <label >Number</label>
-    <input
-      formControlName="number"
-      id="number"
-      placeholder="number..."
-      type="number"
-      class="form-control">
-    <div *ngIf="number.touched && number.invalid" class="alert alert-danger">
-      <div id="numberRequiredError" *ngIf="number.errors.required;">
-        The number is required!
-      </div>
-    </div>
-
     <label >Username</label>
     <input
       formControlName="username"
       id="username"
       placeholder="username..."
       type="text"
-      class="form-control">
+      class="form-control"
+      [(ngModel)]="account.username"
+      >
     <div *ngIf="username.touched && number.invalid" class="alert alert-danger">
       <div id="usernameRequiredError" *ngIf="username.errors.required;">
         The username is required!
       </div>
     </div>
 
-
-    <label><input type="checkbox" [checked]="isTheater" (change)="isFanZone = !isFanZone">Is fan zone admin</label>
-
-
-    <br/>
-    <select style="margin: 20px" (change)="onChange($event.target.selectedIndex)">
-      <option *ngFor="let c of cineters" [ngValue]="item" >{{c.name}} , {{c.city}} , {{c.address}}</option>
-    </select>
-
     <br/>
 
-    <button type="submit"  class="btn btn-success" [disabled]="!form.valid" >Register</button>
+    <button type="submit"  class="btn btn-success" [disabled]="!form.valid" >Save</button>
 
   </form>
 </div>

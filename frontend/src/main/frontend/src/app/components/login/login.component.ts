@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
       .subscribe((successfullyLoggedIn) => {
         if(successfullyLoggedIn) {
 
-          //Ovde saljes upit ka serveru opet
           this.accountService.getCurrentUser().subscribe(data =>{
 
               let user = data as CineterAdminCreate;
@@ -65,7 +64,7 @@ export class LoginComponent implements OnInit {
               if(user.changedPassword == false)
               {
                 this.router.navigateByUrl('change_password');
-                //redirektujes ga na komponentu za promenu sifre
+
               }
           });
           this.router.navigateByUrl(this.returnURL);
