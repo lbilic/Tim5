@@ -9,6 +9,7 @@ import ftn.isamrs.tim5.model.Authority;
 import ftn.isamrs.tim5.service.AccountAuthorityService;
 import ftn.isamrs.tim5.service.AccountService;
 import ftn.isamrs.tim5.service.AuthorityService;
+import ftn.isamrs.tim5.service.EmailService;
 import ftn.isamrs.tim5.util.MessageConstants;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import static ftn.isamrs.tim5.util.ConvertDTOToModel.convertAccountCreateDTOToAccount;
@@ -36,6 +38,9 @@ public class RegistrationController {
 
     @Autowired
     private AccountAuthorityService accountAuthorityService;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping(
             value = "/api/register",
@@ -94,12 +99,36 @@ public class RegistrationController {
 
         AccountAuthority accountAuthority = new AccountAuthority(account, authority);
         account.getAccountAuthorities().add(accountAuthority);
+        try {
+            emailService.sendActivationMail(account);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         account = this.accountService.save(account);
 
         accountAuthority.setAccount(account);
         accountAuthority.setAuthority(authority);
         this.accountAuthorityService.save(accountAuthority);
         return new ResponseEntity<>(new AccountDTO(account), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(
+            value = "/api/activate",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> activateAccount(@RequestParam("activationId") String activationId) {
+        Account account = accountService.findByActivationId(activationId);
+        account.setConfirmed(true);
+        boolean successActivate = false;
+        System.out.println(account.getUsername());
+        if(account != null)
+            if(account.isConfirmed())
+                successActivate = true;
+        System.out.println(account.isConfirmed());
+        accountService.save(account);
+        return new ResponseEntity<>(successActivate, HttpStatus.OK);
     }
 
 }

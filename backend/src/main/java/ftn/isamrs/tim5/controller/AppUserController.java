@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.controller;
 
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.exception.BadRequestException;
+import ftn.isamrs.tim5.exception.ForbiddenException;
 import ftn.isamrs.tim5.model.Account;
 import ftn.isamrs.tim5.model.Cineter;
 import ftn.isamrs.tim5.model.CineterAdmin;
@@ -73,13 +74,18 @@ public class AppUserController {
                     loginDTO.getUsername(), loginDTO.getPassword());
             authenticationManager.authenticate(token);
             Account account = this.accountService.findByUsername(loginDTO.getUsername());
+            if(!account.isConfirmed())
+                throw new ForbiddenException("Account not confirmed!");
 
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
 
             Long id = account.getId();
             TokenDTO userToken = new TokenDTO(jwtUtils.generateToken(details, id));
             return new ResponseEntity<>(userToken, HttpStatus.OK);
-        } catch (Exception ex) {
+        } catch(ForbiddenException ex) {
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
+        catch (Exception ex) {
             ex.printStackTrace();
             System.out.println("ASFIASJFOISAJOI");
             return new ResponseEntity(HttpStatus.NOT_FOUND);

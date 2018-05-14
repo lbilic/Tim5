@@ -13,6 +13,7 @@ import { BadRequestError } from "../shared/errors/bad-request-error";
 import { NotFoundError } from "../shared/errors/not-found-error";
 // service
 import { JwtService } from "./jwt.service";
+import {ForbiddenError} from "../../../../../../../../../ISA/tim5/frontend/src/main/frontend/src/app/shared/errors/forbidden-error";
 
 
 @Injectable()
@@ -53,6 +54,8 @@ export class AuthService {
       return Observable.throw(new BadRequestError());
     else if(response.status === 404)
       return Observable.throw(new NotFoundError());
+    else if(response.status === 403)
+      return Observable.throw(new ForbiddenError());
     return Observable.throw(new AppError(response));
   }
 }

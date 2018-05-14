@@ -7,6 +7,7 @@ import { ToasterConfig, ToasterService } from "angular5-toaster/dist";
 import { AppError } from "../../shared/errors/app-error";
 import { BadRequestError } from "../../shared/errors/bad-request-error";
 import { NotFoundError } from "../../shared/errors/not-found-error";
+import {ForbiddenError} from "../../shared/errors/forbidden-error";
 // service
 import { AuthService } from "../../services/auth.service";
 // validator
@@ -74,6 +75,8 @@ export class LoginComponent implements OnInit {
       }, (error: AppError) => {
         if (error instanceof BadRequestError)
           this.toasterService.pop('error', 'Error','Invalid format of given data!');
+        else if (error instanceof ForbiddenError)
+          this.toasterService.pop('error', 'Error', 'Account not confirmed!');
         else if (error instanceof NotFoundError)
           this.toasterService.pop('error', 'Error', 'Bad credentials!');
         else {
