@@ -40,6 +40,9 @@ public class Account {
     @Column(nullable = false)
     private String email;
 
+    @Column
+    private String activationId;
+
     //@Column(nullable = false)
     //private String number;
 
