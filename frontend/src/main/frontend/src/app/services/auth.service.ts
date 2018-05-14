@@ -13,7 +13,7 @@ import { BadRequestError } from "../shared/errors/bad-request-error";
 import { NotFoundError } from "../shared/errors/not-found-error";
 // service
 import { JwtService } from "./jwt.service";
-import {ForbiddenError} from "../../../../../../../../../ISA/tim5/frontend/src/main/frontend/src/app/shared/errors/forbidden-error";
+import {ForbiddenError} from "../shared/errors/forbidden-error";
 
 
 @Injectable()
