@@ -28,7 +28,7 @@ public class Account {
     @Column(nullable = false)
     String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "BOOL DEFAULT FALSE")
     private boolean confirmed;
 
     @Column(nullable = false)
@@ -40,6 +40,9 @@ public class Account {
     @Column(nullable = false)
     private String email;
 
+    @Column
+    private String activationId;
+
     //@Column(nullable = false)
     //private String number;
 
@@ -48,7 +51,7 @@ public class Account {
 
 
     public Account(String username, String password, int version, boolean deleted, String name,
-                   String lastName, String email, /*String number,*/ boolean confirmed) {
+                   String lastName, String email, String activationId, /*String number,*/ boolean confirmed) {
         this.username = username;
         this.version = version;
         this.deleted = deleted;
@@ -59,6 +62,7 @@ public class Account {
         this.email = email;
         //this.number = number;
         this.confirmed = confirmed;
+        this.activationId = activationId;
     }
 
     public Account() {
@@ -132,4 +136,8 @@ public class Account {
     public boolean isConfirmed() { return confirmed; }
 
     public void setConfirmed(boolean confirmed) { this.confirmed = confirmed; }
+
+    public String getActivationId() { return activationId; }
+
+    public void setActivationId(String activationID) { this.activationId = activationID; }
 }

@@ -16,6 +16,8 @@ public interface AccountService {
 
     Account findByUsername(String username);
 
+    Account findByActivationId(String activationId);
+
     void checkUsername(String username);
 
     Account save(Account account);

@@ -49,6 +49,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional(readOnly = true)
+    public Account findByActivationId(String activationId) {
+        Account account = this.accountRepository.findByActivationId(activationId);
+        if(account == null) throw new NotFoundException("Account not found!");
+        return account;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public void checkUsername(String username) {
         Account account = this.accountRepository.findByUsername(username);
         if(account != null) throw new BadRequestException("Username is already used!");
