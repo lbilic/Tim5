@@ -28,22 +28,22 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Override
     @Transactional
     public Performance savePerformance(PerformanceCreateDTO dto) {
-
+        System.out.println(dto);
         Performance performance = ConvertDTOToModel.convertPerformanceCreateDTOtoPerformance(dto);
 
-        ShowCreateDTO showDTO = dto.getShow();
+        /*ShowCreateDTO showDTO = dto.getShow();
 
         Show show = showRepository.findByNameAndDescription(showDTO.getName(), showDTO.getDescription());
         if(show == null) try {
             throw new Exception("Null- show");
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
-        performance.setShow(show);
-        show.getPerformances().add(performance);
+        //performance.setShow(show);
+        //show.getPerformances().add(performance);
 
-        showRepository.save(show);
+        //showRepository.save(show);
         return performanceRepository.save(performance);
     }
 }

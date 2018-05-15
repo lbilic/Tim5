@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../services/account/account.service";
 import {Password} from "../../models/password";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-change-password',
@@ -12,8 +12,9 @@ import {Router} from "@angular/router";
 export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
+  returnURL: string = '';
 
-  constructor(private fb : FormBuilder, private accountService: AccountService, private router: Router ) {
+  constructor(private fb : FormBuilder, private accountService: AccountService, private router: Router, private route: ActivatedRoute ) {
     this.form = this.fb.group({
       oldPassword: ['', [
         Validators.required
@@ -40,14 +41,13 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
+    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   changePassword(){
     let passwordChange = new Password(this.oldPassword.value, this.newPassword.value, this.confirmPassword.value);
     this.accountService.changePassword(passwordChange).subscribe(data =>{
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl(this.returnURL);
     });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddPerformanceService} from "../../services/performance/add-performance.service";
 import {PerformanceCreate} from "../../models/performanceCreate";
+import {Router, ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-add-performance',
@@ -11,8 +12,9 @@ import {PerformanceCreate} from "../../models/performanceCreate";
 export class AddPerformanceComponent implements OnInit {
 
   form : FormGroup;
+  returnURL: string = '';
 
-  constructor(private fb : FormBuilder, private performanceService: AddPerformanceService)
+  constructor(private fb : FormBuilder, private performanceService: AddPerformanceService, private router: Router, private route: ActivatedRoute)
   {
     this.form = this.fb.group({
       date: ['', [
@@ -54,6 +56,7 @@ export class AddPerformanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   register() {
@@ -62,7 +65,10 @@ export class AddPerformanceComponent implements OnInit {
     this.performanceService.registerPerformance(performance).subscribe(data => {
       console.log(data);
     });**/
+   console.log("hm?");
     this.performanceService.registerPerformance(new PerformanceCreate(this.date.value,this.seatLayout.value,
-      this.price.value,  this.hall.value));
+      this.price.value,  this.hall.value)).subscribe(data =>{
+      this.router.navigateByUrl(this.returnURL);
+    });
 
 }}

@@ -18,7 +18,13 @@
 
       <!-- start of navbar right -->
       <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-personal-dropdown" dropdown>
+        <li *ngIf="!jwtService.tokenExist()">
+          <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="!jwtService.tokenExist()">
+          <a routerLink="/register">Sign up</a>
+        </li>
+        <li class="navbar-personal-dropdown" dropdown *ngIf="jwtService.tokenExist()">
           <a href dropdownToggle (click)="false">
             {{ jwtService.getUsernameFromToken() }}
             <span class="fa fa-caret-down"></span>

@@ -21,18 +21,18 @@ public class Performance {
 	@Column(nullable = false)
 	String hall;
 
-	@ManyToOne
-    private Show show;
+	//@ManyToOne
+    //private Show show;
 	
 	public Performance() {}
 
-	public Performance(Date date, String seatLayout, float price, String hall, Show show) {
+	public Performance(Date date, String seatLayout, float price, String hall/*, Show show*/) {
 		super();
 		this.date = date;
 		this.seatLayout = seatLayout;
 		this.price = price;
 		this.hall = hall;
-		this.show = show;
+		//this.show = show;
 	}
 
 	public Date getDate() {
@@ -75,7 +75,7 @@ public class Performance {
         this.id = id;
     }
 
-	public Show getShow() { return show; }
+	//public Show getShow() { return show; }
 
-	public void setShow(Show show) { this.show = show; }
+	//public void setShow(Show show) { this.show = show; }
 }

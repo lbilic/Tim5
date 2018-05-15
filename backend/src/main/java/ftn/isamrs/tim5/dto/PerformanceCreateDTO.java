@@ -15,12 +15,12 @@ public class PerformanceCreateDTO implements Serializable {
 
     public PerformanceCreateDTO(){}
 
-    public PerformanceCreateDTO(Date date, String seatLayout, float price, String hall, ShowCreateDTO show) {
+    public PerformanceCreateDTO(Date date, String seatLayout, float price, String hall/*, ShowCreateDTO show*/) {
         this.date = date;
         this.seatLayout = seatLayout;
         this.price = price;
         this.hall = hall;
-        this.show = show;
+        //this.show = show;
     }
 
     public Date getDate() { return date; }
