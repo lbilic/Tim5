@@ -1,14 +1,8 @@
 package ftn.isamrs.tim5.controller;
 
 
-import ftn.isamrs.tim5.dto.CineterAdminCreateDTO;
-import ftn.isamrs.tim5.dto.CineterCreateDTO;
-import ftn.isamrs.tim5.dto.PropsCreateDTO;
-import ftn.isamrs.tim5.dto.ShowCreateDTO;
-import ftn.isamrs.tim5.model.Account;
-import ftn.isamrs.tim5.model.CineterAdmin;
-import ftn.isamrs.tim5.model.Props;
-import ftn.isamrs.tim5.model.Show;
+import ftn.isamrs.tim5.dto.*;
+import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +35,9 @@ public class AdminController {
     @Autowired
     PropsService propsService;
 
+    @Autowired
+    PerformanceService performanceService;
+
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -59,6 +56,16 @@ public class AdminController {
     {
         Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
         Show s = showService.save(show, account);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping (value = "/create_performance",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection)
+    {
+        Performance performance = performanceService.savePerformance(projection);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

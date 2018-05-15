@@ -12,7 +12,7 @@ public class MovieScreening {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column //(nullable = false)
 	Date date;
 	@Column(nullable = false)
 	String seatLayout;
@@ -23,7 +23,10 @@ public class MovieScreening {
     String hall;
     @Column(nullable = false)
     String type; // 2d/3d
-	
+
+	@ManyToOne
+	private Show show;
+
 	public MovieScreening() {}
 
 	public MovieScreening(Date date, Time time, String seatLayout, float price, String hall, String type) {

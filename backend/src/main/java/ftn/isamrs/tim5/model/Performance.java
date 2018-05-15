@@ -12,7 +12,7 @@ public class Performance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-	@Column(nullable = false)
+	@Column //(nullable = false)
 	Date date;
 	@Column
 	String seatLayout;
@@ -25,18 +25,15 @@ public class Performance {
     private Show show;
 	
 	public Performance() {}
-	
-	
 
-	public Performance(Date date, Time time, String seatLayout, float price, String hall) {
+	public Performance(Date date, String seatLayout, float price, String hall, Show show) {
 		super();
 		this.date = date;
 		this.seatLayout = seatLayout;
 		this.price = price;
 		this.hall = hall;
+		this.show = show;
 	}
-
-
 
 	public Date getDate() {
 		return date;
@@ -77,4 +74,8 @@ public class Performance {
     public void setId(Long id) {
         this.id = id;
     }
+
+	public Show getShow() { return show; }
+
+	public void setShow(Show show) { this.show = show; }
 }
