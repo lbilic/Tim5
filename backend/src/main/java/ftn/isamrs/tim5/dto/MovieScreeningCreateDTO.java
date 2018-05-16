@@ -1,27 +1,27 @@
 package ftn.isamrs.tim5.dto;
 
-import ftn.isamrs.tim5.model.Show;
 import ftn.isamrs.tim5.model.Hall;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.sql.Time;
 
-public class PerformanceCreateDTO implements Serializable {
+public class MovieScreeningCreateDTO {
 
     private Date date;
     private Time time;
     private float price;
-   // private Hall hall;
+    private Hall hall;
+    private String type;
     private ShowCreateDTO show;
 
-    public PerformanceCreateDTO(){}
+    public MovieScreeningCreateDTO(){}
 
-    public PerformanceCreateDTO(Date date, Time time, float price/*, Hall hall/*, ShowCreateDTO show*/) {
+    public MovieScreeningCreateDTO(Date date, Time time, float price, Hall hall, String type/*, ShowCreateDTO show*/) {
         this.date = date;
         this.time = time;
         this.price = price;
-     //   this.hall = hall;
+        this.hall = hall;
+        this.type = type;
         //this.show = show;
     }
 
@@ -43,13 +43,17 @@ public class PerformanceCreateDTO implements Serializable {
         this.price = price;
     }
 
-   /* public Hall getHall() {
+    public Hall getHall() {
         return hall;
     }
 
     public void setHall(Hall hall) {
         this.hall = hall;
-    }*/
+    }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 
     public ShowCreateDTO getShow() {
         return show;

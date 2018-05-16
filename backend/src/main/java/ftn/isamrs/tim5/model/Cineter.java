@@ -34,6 +34,9 @@ public class Cineter {
 	@Column
     boolean isTheater;
 
+	@Column
+	double score;
+
 
     public double getScore() {
         return score;
@@ -42,9 +45,6 @@ public class Cineter {
     public void setScore(double score) {
         this.score = score;
     }
-
-    @Column
-    double score;
 	
 	public Cineter() {}
 
@@ -95,7 +95,6 @@ public class Cineter {
     public void setReview(List<Review> review) {
         this.review = review;
     }
-
 
 	public List<CineterAdmin> getCineterAdmin() {
 		return cineterAdmin;
