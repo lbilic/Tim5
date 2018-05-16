@@ -13,17 +13,24 @@
         </li>
         <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
             <button id="button-classic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
-              System admin <span class="caret"></span>
+              Admins <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" routerLink="/add_cineter_admin">Add a new admin</a></li>
+            </ul>
+        </li>
+        <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
+            <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
+              Cinemas and theaters <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item" routerLink="/add_cinetar">Add a cineter</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/add_cineter_admin">Add a new admin</a></li>
               <li role="menuitem"><a class="dropdown-item" routerLink="/cineters">View all cineters</a></li>
             </ul>
         </li>
         <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
             <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
-              Admin <span class="caret"></span>
+              Shows and projections <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item" routerLink="/add_show">Add a new show</a></li>
@@ -34,14 +41,14 @@
         </li>
         <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
             <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
-              Fan zone admin <span class="caret"></span>
+              Props <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="menuitem"><a class="dropdown-item" routerLink="/add_props">Add props</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/props">View all props</a></li>
+                <li role="menuitem"><a class="dropdown-item" routerLink="/add_props">Add props</a></li>
+                <li role="menuitem"><a class="dropdown-item" routerLink="/props">View all props</a></li>  
             </ul>
         </li>
-        <!-- end of home option -->
+      <!-- end of home option -->
       </ul>
       <!-- end of navbar left -->
 
