@@ -11,14 +11,6 @@
         class="form-control">
     </div>
 
-    <label>Seat layout</label>
-    <input
-      formControlName="seatLayout"
-      id="seatLayout"
-      placeholder="Seat layout..."
-      type="text"
-      class="form-control">
-
     <label>Price</label>
     <input
       formControlName="price"
@@ -32,19 +24,6 @@
       </div>
     </div>
 
-
-    <label>Hall</label>
-    <input
-      formControlName="hall"
-      id="hall"
-      placeholder="hall..."
-      type="text"
-      class="form-control">
-    <div *ngIf="hall.touched && hall.invalid" class="alert alert-danger">
-      <div id="hallError" *ngIf="hall.errors.required;">
-        The hall is required!
-      </div>
-    </div>
 
     <br/>
 

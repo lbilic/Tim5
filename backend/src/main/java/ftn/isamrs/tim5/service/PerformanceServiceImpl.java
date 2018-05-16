@@ -19,12 +19,10 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     private PerformanceRepository performanceRepository;
 
-    @Autowired
-    private CineterRepository cineterRepository;
-
+/*
     @Autowired
     private ShowRepository showRepository;
-
+*/
     @Override
     @Transactional
     public Performance savePerformance(PerformanceCreateDTO dto) {

@@ -38,6 +38,9 @@ public class AdminController {
     @Autowired
     PerformanceService performanceService;
 
+    @Autowired
+    MovieScreeningService movieScreeningService;
+
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -66,6 +69,16 @@ public class AdminController {
     public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection)
     {
         Performance performance = performanceService.savePerformance(projection);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping (value = "/create_movie_screening",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity createMovieScreening(@RequestBody MovieScreeningCreateDTO dto)
+    {
+        MovieScreening movieScreening = movieScreeningService.saveMovieScreening(dto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
