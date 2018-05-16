@@ -47,6 +47,7 @@ import {AddPropsComponent} from "./components/add-props/add-props.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddPerformanceComponent } from './components/add-performance/add-performance.component';
 import {AddPerformanceService} from "./services/performance/add-performance.service";
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -63,7 +64,8 @@ import {AddPerformanceService} from "./services/performance/add-performance.serv
     ChangePasswordComponent,
     AddPropsComponent,
     ProfileComponent,
-    AddPerformanceComponent
+    AddPerformanceComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
@@ -121,6 +123,10 @@ import {AddPerformanceService} from "./services/performance/add-performance.serv
       {
         path:'profile',
         component: ProfileComponent
+      },
+      {
+        path:'profil',
+        component:ProfilComponent
       }],
 
     )
