@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Address</th>
+    <th scope="col">City</th>
+    <th scope="col">Theater</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of cineters">
+  <td>{{i.name}}</td>
+  <td>{{i.address}}</td>
+  <td>{{i.city}}</td>
+  <td>{{i.isTheater}}</td>
+  </tr>
+
+  </tbody>
+</table>

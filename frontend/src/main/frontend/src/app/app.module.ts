@@ -35,7 +35,7 @@ import {LoginComponent} from './components/login/login.component';
 import {JwtService} from './services/jwt.service';
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {RegistrationComponent} from './components/registration/registration.component'
+import {RegistrationComponent} from './components/registration/registration.component';
 
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
@@ -48,6 +48,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AddPerformanceComponent } from './components/add-performance/add-performance.component';
 import {AddPerformanceService} from "./services/performance/add-performance.service";
 import { ProfilComponent } from './components/profil/profil.component';
+import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -65,7 +66,8 @@ import { ProfilComponent } from './components/profil/profil.component';
     AddPropsComponent,
     ProfileComponent,
     AddPerformanceComponent,
-    ProfilComponent
+    ProfilComponent,
+    ShowCinetersComponent
   ],
   imports: [
     BrowserModule,
@@ -109,6 +111,10 @@ import { ProfilComponent } from './components/profil/profil.component';
         component: PropsComponent
       },
       {
+        path:'cineters',
+        component:ShowCinetersComponent
+      },
+      {
         path: 'change_password',
         component: ChangePasswordComponent
       },
@@ -146,7 +152,8 @@ import { ProfilComponent } from './components/profil/profil.component';
       useClass: HashLocationStrategy
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
-    AddCinetarServiceService, PropsService, AccountService, AddPerformanceService, AuthService],
+    AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
+    AuthService],
   bootstrap: [AppComponent]
 })
 
