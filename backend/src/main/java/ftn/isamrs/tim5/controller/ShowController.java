@@ -1,9 +1,9 @@
 package ftn.isamrs.tim5.controller;
 
-import ftn.isamrs.tim5.dto.HallCreateDTO;
-import ftn.isamrs.tim5.model.Hall;
+import ftn.isamrs.tim5.dto.ShowCreateDTO;
+import ftn.isamrs.tim5.model.Show;
 import ftn.isamrs.tim5.security.JWTUtils;
-import ftn.isamrs.tim5.service.HallService;
+import ftn.isamrs.tim5.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/halls")
-public class HallControler {
+@RequestMapping(value = "/api/show")
+public class ShowController {
 
 
     @Autowired
-    HallService hallService;
+    ShowService showService;
 
     @Autowired
     JWTUtils jwtUtils;
@@ -29,15 +29,13 @@ public class HallControler {
     @RequestMapping(value = "/get_all",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllShows() {
+        List<Show> shows = showService.findAll();
+        ArrayList<ShowCreateDTO> dtos = new ArrayList<>();
 
-    public ResponseEntity getAllHalls() {
-        List<Hall> halls = this.hallService.findAll();
-        ArrayList<HallCreateDTO> dtos = new ArrayList<>();
-
-        for (Hall hall : halls)
-            dtos.add(new HallCreateDTO(hall));
+        for (Show show : shows)
+            dtos.add(new ShowCreateDTO(show));
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
-
     }
 }

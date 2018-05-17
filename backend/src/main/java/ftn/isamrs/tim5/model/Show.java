@@ -37,6 +37,15 @@ public class Show {
 		this.isMovie = isMovie;
 	}
 
+
+	public Show(String name, String description, boolean isMovie) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.isMovie = isMovie;
+	}
+
+
     public Long getId() {
         return id;
     }

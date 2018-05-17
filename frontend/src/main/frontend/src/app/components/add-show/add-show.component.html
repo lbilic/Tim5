@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add new Show</h1>
+  <h1>Add new Show or Movie</h1>
   <form [formGroup]="form" (ngSubmit)="register()">
     <div class="form-group">
       <label for="name">Name</label>
@@ -47,7 +47,11 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
+    <div class="checkbox">
+      <label><input type="checkbox" [checked]="isMovie" (change)="isMovie = !isMovie">Is movie</label>
+    </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
 
   </form>
 </div>

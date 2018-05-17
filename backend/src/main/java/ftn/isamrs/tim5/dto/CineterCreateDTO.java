@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public class CineterCreateDTO implements Serializable {
 
+    private Long id;
     private String name;
     private String address;
     private String city;
@@ -23,6 +24,8 @@ public class CineterCreateDTO implements Serializable {
     }
 
     public CineterCreateDTO(Cineter c) {
+
+        id=c.getId();
         name = c.getName();
         address = c.getAddress();
         city = c.getCity();
@@ -60,6 +63,14 @@ public class CineterCreateDTO implements Serializable {
     public void setIsTheater(boolean theater) {
         isTheater = theater;
     }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
+
+    public boolean isTheater() { return isTheater; }
+
+    public void setTheater(boolean theater) { isTheater = theater; }
 
     @Override
     public String toString() {

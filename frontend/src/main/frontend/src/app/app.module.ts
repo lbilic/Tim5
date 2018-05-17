@@ -49,6 +49,7 @@ import { AddPerformanceComponent } from './components/add-performance/add-perfor
 import {AddPerformanceService} from "./services/performance/add-performance.service";
 import { ProfilComponent } from './components/profil/profil.component';
 import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
+import { ListShowsComponent } from './components/list-shows/list-shows.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -67,7 +68,8 @@ import { ShowCinetersComponent } from './components/show-cineters/show-cineters.
     ProfileComponent,
     AddPerformanceComponent,
     ProfilComponent,
-    ShowCinetersComponent
+    ShowCinetersComponent,
+    ListShowsComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,11 @@ import { ShowCinetersComponent } from './components/show-cineters/show-cineters.
       {
         path:'cineters',
         component:ShowCinetersComponent
+      },
+
+      {
+        path:'shows',
+        component:ListShowsComponent
       },
       {
         path: 'change_password',

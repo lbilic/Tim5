@@ -12,5 +12,8 @@ export class ShowService {
   {
       return this.http.post('http://localhost:8080/api/admin/create_show', show);
   }
+  getAllShows(){
+    return this.http.get('http://localhost:8080/api/show/get_all');
+  }
 
 }

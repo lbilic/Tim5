@@ -56,12 +56,6 @@ export class AddPerformanceComponent implements OnInit {
   }
 
   register() {
-    /** let performance = new PerformanceCreate(this.date.value, this.price.value, this.seatLayout.value, this.hall.value);
-
-     this.performanceService.registerPerformance(performance).subscribe(data => {
-      console.log(data);
-    });**/
-    console.log("hm?");
     this.performanceService.registerPerformance(new PerformanceCreate(this.date.value,
       this.price.value, /*this.halls[this.selected_index]*/)).subscribe(data => {
       this.router.navigateByUrl(this.returnURL);

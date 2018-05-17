@@ -9,6 +9,8 @@ import ftn.isamrs.tim5.util.ConvertDTOToModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShowServiceImpl implements ShowService{
 
@@ -26,5 +28,10 @@ public class ShowServiceImpl implements ShowService{
     @Override
     public void delete(ShowCreateDTO dto, Account user) {
         showRepository.findByNameAndCineterId(dto.getName(), ((CineterAdmin)user).getCineter().getId());
+    }
+
+    @Override
+    public List<Show> findAll() {
+        return showRepository.findAll();
     }
 }

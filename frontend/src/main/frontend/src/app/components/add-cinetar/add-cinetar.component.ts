@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {CineterCreate} from "../../models/cineterCreate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CineterService} from "../../services/cineter/cineter.service";
+import {Router, ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: 'app-add-cinetar',
@@ -11,9 +13,11 @@ import {CineterService} from "../../services/cineter/cineter.service";
 export class AddCinetarComponent implements OnInit {
 
   form : FormGroup;
+  returnURL: string = '';
   isTheater : boolean;
 
-  constructor(private fb : FormBuilder, private cinetarService : CineterService) {
+  constructor(private fb : FormBuilder, private router: Router,
+              private cinetarService : CineterService, private route: ActivatedRoute) {
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -43,11 +47,13 @@ export class AddCinetarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   register(){
-    this.cinetarService.sendRegistration(new CineterCreate(this.name.value, this.address.value, this.city.value, this.
-      isTheater));
+    this.cinetarService.sendRegistration(new CineterCreate(this.name.value,
+      this.address.value, this.city.value, this.isTheater)).subscribe(data => {
+      this.router.navigateByUrl(this.returnURL);
+    });
   }
-
 }
