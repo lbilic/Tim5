@@ -20,8 +20,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.messaging.MessagingException;
 
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import static ftn.isamrs.tim5.util.ConvertDTOToModel.convertAccountCreateDTOToAccount;
@@ -104,6 +104,8 @@ public class RegistrationController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (Exception e){
             e.printStackTrace();
         }
         account = this.accountService.save(account);

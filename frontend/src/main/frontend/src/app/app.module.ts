@@ -45,6 +45,7 @@ import {PropsService} from "./services/props/props.service";
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import {AddPropsComponent} from "./components/add-props/add-props.component";
 import { ProfileComponent } from './components/profile/profile.component';
+import { ChangePropsComponent } from './components/change-props/change-props.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -60,7 +61,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     PropsComponent,
     ChangePasswordComponent,
     AddPropsComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChangePropsComponent
   ],
   imports: [
     BrowserModule,

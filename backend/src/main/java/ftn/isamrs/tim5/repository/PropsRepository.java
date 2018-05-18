@@ -11,4 +11,7 @@ public interface PropsRepository extends JpaRepository<Props, Long>{
 
     @Query(value = "SELECT * FROM Props p WHERE p.cineter_id = :pera", nativeQuery = true)
     List<Props> findAllByCineterId(@Param("pera") Long id);
+
+    @Query(value = "SELECT PROP FROM Props p where p.id = :propId", nativeQuery = true)
+    Props findPropById(@Param("propId") Long id);
 }

@@ -16,6 +16,13 @@ public class PropsCreateDTO implements Serializable {
         this.description = description;
     }
 
+    public PropsCreateDTO(Long id, String name, float price, String description) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
     public PropsCreateDTO() {
     }
 

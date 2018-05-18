@@ -10,4 +10,6 @@ public interface PropsService {
 
     Props saveProps(PropsCreateDTO props, Account account);
     List<Props> findAllByCineterId(Long id);
+    Props findPropById(Long id);
+    Props saveProp(Props props);
 }

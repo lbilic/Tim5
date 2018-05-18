@@ -40,8 +40,17 @@ public class PropsServiceImpl implements PropsService{
     }
 
     @Override
+    public Props saveProp(Props prop){
+        prop = propsRepository.save(prop);
+        return prop;
+    }
+
+    @Override
     public List<Props> findAllByCineterId(Long id) {
         return propsRepository.findAllByCineterId(id);
     }
+
+    @Override
+    public Props findPropById(Long id) {return propsRepository.findPropById(id);}
 
 }
