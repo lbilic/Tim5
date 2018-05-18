@@ -10,18 +10,11 @@
         </div>
       </div>
     </div>
-    <div class="row justify-content-center">
-        <ul class="nav navbar-nav justify-content-center">
-          <li class="list-inline-item">
-            <a>Friends</a>
-          </li>
-          <li class="list-inline-item">
-            <a>Invitations</a>
-          </li>
-          <li class="list-inline-item">
-           <a>Previous visits</a>
-          </li>
-        </ul>
-    </div>
+    <tabset [justified]="true">
+      <tab heading="About">User info</tab>
+      <tab heading="Friends">Friends</tab>
+      <tab heading="Reserved tickets">All reserved tickets</tab>
+      <tab heading="Past visits">All previous visits</tab>
+    </tabset>
   </div>
 </div>
