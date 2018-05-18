@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,29 @@ public class PropsController
         props = propsService.saveProp(props);
 
         return new ResponseEntity(props, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "find_prop",
+                   method = RequestMethod.GET,
+                   produces = MediaType.APPLICATION_JSON_VALUE,
+                   consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity findProp(@RequestBody Long id){
+
+        Props props = propsService.findPropById(id);
+
+        return new ResponseEntity(props, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "delete_prop",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteProps(@RequestBody Long id){
+
+        Boolean bool = propsService.deleteProp(id);
+
+        return new ResponseEntity(bool, HttpStatus.OK);
 
     }
 

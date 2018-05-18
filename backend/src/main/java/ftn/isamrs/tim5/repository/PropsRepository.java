@@ -14,4 +14,7 @@ public interface PropsRepository extends JpaRepository<Props, Long>{
 
     @Query(value = "SELECT PROP FROM Props p where p.id = :propId", nativeQuery = true)
     Props findPropById(@Param("propId") Long id);
+
+    @Query(value = "DELETE from Props p where p.id = :propId", nativeQuery = true)
+    Boolean deleteProp(@Param("propId") Long id);
 }

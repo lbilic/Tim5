@@ -18,6 +18,9 @@ public class Show {
 	@Column(nullable = false)
     String description;
 
+	@Column (nullable = false, columnDefinition = "BOOL DEFAULT FALSE")
+	boolean isMovie;
+
 	@OneToMany(fetch = FetchType.LAZY)
     List<Performance> performances;
 
@@ -26,12 +29,22 @@ public class Show {
 	
 	public Show() {}
 
-	public Show(String name, String description, List<Performance> performances) {
+	public Show(String name, String description, boolean isMovie, List<Performance> performances) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.performances = performances;
+		this.isMovie = isMovie;
 	}
+
+
+	public Show(String name, String description, boolean isMovie) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.isMovie = isMovie;
+	}
+
 
     public Long getId() {
         return id;
@@ -56,6 +69,10 @@ public class Show {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public boolean isMovie() { return isMovie; }
+
+	public void setMovie(boolean movie) { isMovie = movie; }
 
 	public List<Performance> getPerformances() {
 		return performances;

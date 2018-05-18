@@ -35,7 +35,7 @@ import {LoginComponent} from './components/login/login.component';
 import {JwtService} from './services/jwt.service';
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {RegistrationComponent} from './components/registration/registration.component'
+import {RegistrationComponent} from './components/registration/registration.component';
 
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
@@ -46,6 +46,11 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import {AddPropsComponent} from "./components/add-props/add-props.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChangePropsComponent } from './components/change-props/change-props.component';
+import { AddPerformanceComponent } from './components/add-performance/add-performance.component';
+import {AddPerformanceService} from "./services/performance/add-performance.service";
+import { ProfilComponent } from './components/profil/profil.component';
+import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
+import { ListShowsComponent } from './components/list-shows/list-shows.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -62,7 +67,11 @@ import { ChangePropsComponent } from './components/change-props/change-props.com
     ChangePasswordComponent,
     AddPropsComponent,
     ProfileComponent,
-    ChangePropsComponent
+    ChangePropsComponent,
+    AddPerformanceComponent,
+    ProfilComponent,
+    ShowCinetersComponent,
+    ListShowsComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +115,15 @@ import { ChangePropsComponent } from './components/change-props/change-props.com
         component: PropsComponent
       },
       {
+        path:'cineters',
+        component:ShowCinetersComponent
+      },
+
+      {
+        path:'shows',
+        component:ListShowsComponent
+      },
+      {
         path: 'change_password',
         component: ChangePasswordComponent
       },
@@ -114,8 +132,20 @@ import { ChangePropsComponent } from './components/change-props/change-props.com
         component: AddPropsComponent
       },
       {
+        path:'add_performance',
+        component:AddPerformanceComponent
+      },
+      {
         path:'profile',
         component: ProfileComponent
+      },
+      {
+        path:'profil',
+        component:ProfilComponent
+      },
+      {
+        path:'change_props',
+        component: ChangePropsComponent
       }],
 
     )
@@ -134,8 +164,9 @@ import { ChangePropsComponent } from './components/change-props/change-props.com
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    HttpClientModule, CineterService, ShowService, AdminService, JwtService, AddCinetarServiceService, PropsService,
-    AccountService, AuthService],
+    HttpClientModule, CineterService, ShowService, AdminService, JwtService,
+    AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
+    AuthService],
   bootstrap: [AppComponent]
 })
 

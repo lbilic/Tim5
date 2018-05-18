@@ -70,7 +70,6 @@ export class ProfileComponent implements OnInit {
   changeProfile() {
     let acc = new ProfileDisplay(this.name.value, this.lastname.value, this.email.value, this.username.value);
     this.accountService.changeProfile(acc).subscribe(data => {
-      this.router.navigateByUrl('');
     });
 
 }}

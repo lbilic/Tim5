@@ -27,10 +27,6 @@ export class AddPropsComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ]],
-
-      cineterId: ['', [
-        Validators.required
-      ]],
     });
   }
 
@@ -49,18 +45,11 @@ export class AddPropsComponent implements OnInit {
     return this.form.get('description');
   }
 
-
-  get cineterId()
-  {
-    return this.form.get('cineterId');
-  }
-
   ngOnInit() {
   }
 
   register() {
-    let props = new PropsCreate(this.name.value, this.price.value, this.description.value, this.cineterId.value);
-    console.log(props.cineterId);
+    let props = new PropsCreate(this.name.value, this.price.value, this.description.value);
     this.propsService.registerProps(props).subscribe(data => {
       console.log(data);
     });

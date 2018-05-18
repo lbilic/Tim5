@@ -11,6 +11,7 @@ import {ShowCreate} from "../../models/showCreate";
 export class AddShowComponent implements OnInit {
 
   form : FormGroup;
+  isMovie: boolean;
 
   constructor(private fb: FormBuilder, private show: ShowService) {
     this.form = this.fb.group({
@@ -32,11 +33,14 @@ export class AddShowComponent implements OnInit {
   get description(){
     return this.form.get('description');
   }
+
+
   ngOnInit() {
   }
 
   register(){
-    this.show.registerShow(new ShowCreate(this.name.value,  this.description.value)).subscribe((data) =>{
+    this.show.registerShow(new ShowCreate(this.name.value,
+      this.description.value, this.isMovie)).subscribe((data) =>{
       console.log(data);
     });
   }

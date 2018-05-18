@@ -9,4 +9,8 @@ public interface ShowRepository extends JpaRepository<Show, Long> {
 
     @Query(value = "SELECT * FROM SHOW  s where s.name = :name and s.cineter_id = :cineter_id", nativeQuery = true)
     Show findByNameAndCineterId(@Param("name") String name, @Param("cineter_id") Long cineter_id);
+
+    @Query(value = "SELECT * FROM SHOW  s where s.name = :name and s.description = :description", nativeQuery = true)
+    Show findByNameAndDescription(@Param("name") String name, @Param("description") String description);
+
 }

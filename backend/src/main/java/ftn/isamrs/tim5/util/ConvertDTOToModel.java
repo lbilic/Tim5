@@ -29,4 +29,8 @@ public class ConvertDTOToModel {
     public static Props convertPropsDTOtoProps(PropsCreateDTO dto) {
         return mapper.map(dto, Props.class);
     }
+
+    public static Performance convertPerformanceCreateDTOtoPerformance(PerformanceCreateDTO dto){ return mapper.map(dto, Performance.class);}
+
+    public static MovieScreening convertMovieScreeningCreateDTOtoMovieScreening(MovieScreeningCreateDTO dto){ return mapper.map(dto, MovieScreening.class);}
 }

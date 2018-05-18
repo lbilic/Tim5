@@ -12,4 +12,5 @@ public interface PropsService {
     List<Props> findAllByCineterId(Long id);
     Props findPropById(Long id);
     Props saveProp(Props props);
+    Boolean deleteProp(Long id);
 }

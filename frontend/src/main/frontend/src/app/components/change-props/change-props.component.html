@@ -1,6 +1,31 @@
 <div class="container">
   <h1>Change profile information</h1>
-  <form [formGroup]="form" (ngSubmit)="">
+  <form [formGroup]="form" (ngSubmit)="register()">
+
+    <div class="form-group">
+      <label for="id">ID</label>
+      <input
+        formControlName="id"
+        id="id"
+        placeholder="id..."
+        type="text"
+        class="form-control"
+        [(ngModel)]="prop.id"
+      >
+      <div *ngIf="id.touched && id.invalid" class="alert alert-danger">
+        <div id="idRequiredError" *ngIf="id.errors.required; else firstidMinLength">
+          The id is required!
+        </div>
+        <ng-template #firstidMinLength>
+          <ng-container *ngIf="id.errors.minlength">
+            <div id="idMinimumLengthError">
+              Minimum length is {{id.errors.minlength.requiredLength}} characters.
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -9,7 +34,7 @@
         placeholder="Name..."
         type="text"
         class="form-control"
-        [(ngModel)]="account.name"
+        [(ngModel)]="prop.name"
       >
       <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
         <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
@@ -25,63 +50,41 @@
       </div>
     </div>
 
-    <label for="Description">Description</label>
+    <label>Price</label>
     <input
-      formControlName="lastname"
-      id="lastname"
-      placeholder="Last Name..."
-      type="text"
-      class="form-control"
-      [(ngModel)]="account.lastName">
-    <div *ngIf="lastname.touched && lastname.invalid" class="alert alert-danger">
-      <div id="lastnameRequiredError" *ngIf="lastname.errors.required; else lastNameMinLength">
-        The name is required!
+      formControlName="price"
+      id="price"
+      placeholder="price..."
+      type="number"
+      class="form-control">
+      [(ngModel)]="prop.price"
+    <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
+      <div id="numberRequiredError" *ngIf="price.errors.required;">
+        The number is required!
       </div>
-      <ng-template #lastNameMinLength>
+    </div>
+
+    <label for="description">Description</label>
+    <input
+      formControlName="description"
+      id="description"
+      placeholder="Description..."
+      type="text"
+      class="form-control">
+      [(ngModel)]="prop.description"
+    <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+      <div id="descriptionRequiredError" *ngIf="description.errors.required; else descriptionMinLength">
+        The description is required!
+      </div>
+      <ng-template #descriptionMinLength>
         <ng-container >
-          <div id="lastnameMinimumLengthError" *ngIf="lastname.errors.minlength">
-            Minimum length is {{lastname.errors.minlength.requiredLength}} characters.
+          <div id="descriptionMinimumLengthError" *ngIf="description.errors.minlength">
+            Minimum length is {{description.errors.minlength.requiredLength}} characters.
           </div>
         </ng-container>
       </ng-template>
     </div>
 
-    <label for="email">Email</label>
-    <input
-      formControlName="email"
-      id="email"
-      placeholder="Email..."
-      type="email"
-      class="form-control"
-      [(ngModel)]="account.email"
-    >
-    <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-      <div id="emailRequiredError" *ngIf="email.errors.required; else emailPattern">
-        The email is required!
-      </div>
-      <ng-template #emailPattern>
-        <ng-container *ngIf="email.errors.email">
-          <div id="validEmailError">
-            Please provide a valid email address.
-          </div>
-        </ng-container>
-      </ng-template>
-    </div>
-
-    <label >Username</label>
-    <input
-      formControlName="username"
-      id="username"
-      placeholder="username..."
-      type="text"
-      class="form-control"
-      [(ngModel)]="account.username"
-    >
-    <div *ngIf="username.touched && number.invalid" class="alert alert-danger">
-      <div id="usernameRequiredError" *ngIf="username.errors.required;">
-        The username is required!
-      </div>
-    </div>
 
     <br/>
 

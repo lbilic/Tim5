@@ -10,7 +10,7 @@ public class PropsCreateDTO implements Serializable {
     private float price;
     private String description;
 
-    public PropsCreateDTO(String name, float price, String description, String cineterId) {
+    public PropsCreateDTO(String name, float price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -30,7 +30,7 @@ public class PropsCreateDTO implements Serializable {
         name = prop.getName();
         price = prop.getPrice();
         description = prop.getDescription();
-        id = prop.getId();
+
     }
 
     public String getName() {
