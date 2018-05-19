@@ -16,6 +16,7 @@ import {JwtInterceptor} from "./core/interceptors/jwt-interceptor";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import {CineterService} from "./services/cineter/cineter.service";
 import {ShowService} from "./services/show/show.service";
 import {AdminService} from "./services/admin/admin.service";
@@ -72,13 +73,14 @@ import { TabsModule } from 'ngx-bootstrap';
     AddPerformanceComponent,
     ProfilComponent,
     ShowCinetersComponent,
-    ListShowsComponent
+    ListShowsComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpModule,
     ToasterModule,
     SharedModule,

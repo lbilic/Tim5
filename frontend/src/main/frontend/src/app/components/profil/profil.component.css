@@ -1,0 +1,13 @@
+.user-image {
+    width:64px;
+    height:64px;
+}
+
+.friend-content{
+    margin: 10px;
+}
+
+.friend {
+    padding: 20px;
+    display: inline-block;
+}
