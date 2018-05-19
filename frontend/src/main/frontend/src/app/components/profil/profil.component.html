@@ -12,7 +12,17 @@
     </div>
     <tabset [justified]="true">
       <tab heading="About">User info</tab>
-      <tab heading="Friends">Friends</tab>
+      <tab heading="Friends">
+        <div class="col-lg-6">
+          <label for="typeahead-basic">Search:</label>
+          <div class="input-group">
+            <input id="typeahead-basic" type="text" class="form-control search-field" /> <!--[(ngModel)]="model" [ngbTypeahead]="search"/-->
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="button">Search</button>
+            </div>
+          </div>
+        </div>
+      </tab>
       <tab heading="Reserved tickets">All reserved tickets</tab>
       <tab heading="Past visits">All previous visits</tab>
     </tabset>
