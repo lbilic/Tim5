@@ -45,15 +45,12 @@ import {PropsService} from "./services/props/props.service";
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import {AddPropsComponent} from "./components/add-props/add-props.component";
 import { ProfileComponent } from './components/profile/profile.component';
-<<<<<<< HEAD
 import { ChangePropsComponent } from './components/change-props/change-props.component';
-=======
 import { AddPerformanceComponent } from './components/add-performance/add-performance.component';
 import {AddPerformanceService} from "./services/performance/add-performance.service";
 import { ProfilComponent } from './components/profil/profil.component';
 import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
->>>>>>> 2ed02b89dd4cd79183b7c06c5c2b70f61628136b
 
 @NgModule({
   exports: [RouterModule],
@@ -70,14 +67,11 @@ import { ListShowsComponent } from './components/list-shows/list-shows.component
     ChangePasswordComponent,
     AddPropsComponent,
     ProfileComponent,
-<<<<<<< HEAD
-    ChangePropsComponent
-=======
+    ChangePropsComponent,
     AddPerformanceComponent,
     ProfilComponent,
     ShowCinetersComponent,
     ListShowsComponent
->>>>>>> 2ed02b89dd4cd79183b7c06c5c2b70f61628136b
   ],
   imports: [
     BrowserModule,
