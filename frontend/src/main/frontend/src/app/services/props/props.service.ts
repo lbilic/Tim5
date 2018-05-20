@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PropsCreate} from "../../models/propsCreate";
+import {Props} from "../../models/props";
 
 @Injectable()
 export class PropsService {
@@ -16,11 +17,15 @@ export class PropsService {
     return this.http.get('http://localhost:8080/api/props/get_all');
   }
 
-  changeProps(props: PropsCreate){
-    return this.http.get('http://localhost:8080/api/change_props');
+  changeProps(props: Props){
+    return this.http.post('http://localhost:8080/api/props/change_propd', props);
   }
 
   findProp(id){
-    return this.http.get('http://localhost:8080/api/find_prop');
+    return this.http.get('http://localhost:8080/api/props/find_prop?id='+ id);
+  }
+
+  deleteProp(prop){
+    return this.http.post('http://localhost:8080/api/props/delete_prop', prop);
   }
 }

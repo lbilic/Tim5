@@ -1,0 +1,66 @@
+<div class="container">
+  <h1>Add new Props for Cinema or Theater</h1>
+  <form [formGroup]="form" (ngSubmit)="change()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        formControlName="name"
+        id="name"
+        placeholder="Name..."
+        type="text"
+        class="form-control"
+        [(ngModel)]="prop.name">
+      <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+        <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
+          The name is required!
+        </div>
+        <ng-template #firstNameMinLength>
+          <ng-container *ngIf="name.errors.minlength">
+            <div id="nameMinimumLengthError">
+              Minimum length is {{name.errors.minlength.requiredLength}} characters.
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+
+    <label>Price</label>
+    <input
+      formControlName="price"
+      id="price"
+      placeholder="price..."
+      type="number"
+      class="form-control"
+      [(ngModel)]="prop.price">
+    <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
+      <div id="numberRequiredError" *ngIf="price.errors.required;">
+        The number is required!
+      </div>
+    </div>
+
+    <label for="description">Description</label>
+    <input
+      formControlName="description"
+      id="description"
+      placeholder="Description..."
+      type="text"
+      class="form-control"
+      [(ngModel)]="prop.description">
+    <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+      <div id="descriptionRequiredError" *ngIf="description.errors.required; else descriptionMinLength">
+        The description is required!
+      </div>
+      <ng-template #descriptionMinLength>
+        <ng-container >
+          <div id="descriptionMinimumLengthError" *ngIf="description.errors.minlength">
+            Minimum length is {{description.errors.minlength.requiredLength}} characters.
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Change</button>
+
+  </form>
+</div>

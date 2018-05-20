@@ -54,6 +54,10 @@ public class PropsServiceImpl implements PropsService{
     public Props findPropById(Long id) {return propsRepository.findPropById(id);}
 
     @Override
-    public Boolean deleteProp(Long id) {return propsRepository.deleteProp(id);}
+    public Boolean deleteProp(Long id) {
+        Props props = propsRepository.findPropById(id);
+        propsRepository.delete(props);
+        return true;
+    }
 
 }

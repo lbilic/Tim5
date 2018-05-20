@@ -51,6 +51,7 @@ import {AddPerformanceService} from "./services/performance/add-performance.serv
 import { ProfilComponent } from './components/profil/profil.component';
 import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
+import { PropsDetailComponent } from './components/props-detail/props-detail.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -71,7 +72,8 @@ import { ListShowsComponent } from './components/list-shows/list-shows.component
     AddPerformanceComponent,
     ProfilComponent,
     ShowCinetersComponent,
-    ListShowsComponent
+    ListShowsComponent,
+    PropsDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,10 @@ import { ListShowsComponent } from './components/list-shows/list-shows.component
       {
         path: 'props',
         component: PropsComponent
+      },
+      {
+        path: 'props/:id',
+        component: PropsDetailComponent
       },
       {
         path:'cineters',
