@@ -16,7 +16,6 @@ import {JwtInterceptor} from "./core/interceptors/jwt-interceptor";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
-import { FormsModule } from '@angular/forms';
 import {CineterService} from "./services/cineter/cineter.service";
 import {ShowService} from "./services/show/show.service";
 import {AdminService} from "./services/admin/admin.service";
@@ -52,8 +51,6 @@ import {AddPerformanceService} from "./services/performance/add-performance.serv
 import { ProfilComponent } from './components/profil/profil.component';
 import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
-import { TabsModule } from 'ngx-bootstrap';
-import { PropsDetailComponent } from './components/props-detail/props-detail.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -74,19 +71,16 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
     AddPerformanceComponent,
     ProfilComponent,
     ShowCinetersComponent,
-    ListShowsComponent,
-    PropsDetailComponent
+    ListShowsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
     HttpModule,
     ToasterModule,
     SharedModule,
-    TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
@@ -121,10 +115,6 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
         component: PropsComponent
       },
       {
-        path: 'props/:id',
-        component: PropsDetailComponent
-      },
-      {
         path:'cineters',
         component:ShowCinetersComponent
       },
@@ -152,10 +142,6 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
       {
         path:'profil',
         component:ProfilComponent
-      },
-      {
-        path:'change_props',
-        component: ChangePropsComponent
       }],
 
     )
