@@ -62,12 +62,14 @@ export class CineterDetailsComponent implements OnInit {
   clicked()
   {
     this.cineter.isTheater = !this.cineter.isTheater;
-    this.cineter.theater = !this.cineter.theater;
+
     console.log(this.cineter.isTheater);
   }
 
   private change()
   {
+    //Iz nekog razloga dodaje se polje theater u klasu cineter (samo od sebe) pa ga na ovaj nacin uklanjam.
+    delete this.cineter['theater'];
     console.log(this.cineter);
     this.cineterService.updateCineter(this.cineter).subscribe(data =>{
 
