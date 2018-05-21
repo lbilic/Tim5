@@ -19,7 +19,7 @@ public class Props {
     @Column(nullable = false)
 	String description;
 
-    @ManyToOne
+    @ManyToOne()
 	Cineter cineter;
 	
 	public Props() {}

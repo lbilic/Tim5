@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CineterCreate} from "../../models/cineterCreate";
 import {HttpClient} from "@angular/common/http";
+import {Cineter} from "../../models/cineter";
 
 @Injectable()
 export class CineterService {
@@ -18,4 +19,16 @@ export class CineterService {
      return this.http.get("http://localhost:8080/api/cineter/get_all");
    }
 
+   deleteCineter(cineter){
+      return this.http.post("http://localhost:8080/api/cineter/delete_cineter", cineter);
+   }
+
+   getCineterById(id)
+   {
+     return this.http.get("http://localhost:8080/api/cineter/get?id=" + id);
+   }
+
+  updateCineter(cineter: Cineter) {
+    return this.http.post("http://localhost:8080/api/cineter/update_cineter", cineter);
+  }
 }

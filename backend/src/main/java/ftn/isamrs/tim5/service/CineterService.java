@@ -11,4 +11,10 @@ public interface CineterService {
     Cineter save(CineterCreateDTO dto);
 
     List<Cineter> findAll();
+
+    void delete(CineterCreateDTO cineter);
+
+    Cineter findById(Long id);
+
+    Cineter updateCineter(CineterCreateDTO dto);
 }

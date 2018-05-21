@@ -53,6 +53,7 @@ import { ShowCinetersComponent } from './components/show-cineters/show-cineters.
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
+import { CineterDetailsComponent } from './components/cineter-details/cineter-details.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -73,7 +74,8 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
     ProfilComponent,
     ShowCinetersComponent,
     ListShowsComponent,
-    PropsDetailComponent
+    PropsDetailComponent,
+    CineterDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -150,7 +152,12 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
       {
         path:'profil',
         component:ProfilComponent
-      }],
+      },
+      {
+        path:'cineters/:id',
+        component: CineterDetailsComponent
+      }
+      ],
 
     )
   ],

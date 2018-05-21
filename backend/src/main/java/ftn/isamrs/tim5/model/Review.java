@@ -21,7 +21,7 @@ public class Review {
     @Column
     private Date date;
 
-    @ManyToOne
+    @ManyToOne()
     private Cineter cineter;
 
     public Review() {

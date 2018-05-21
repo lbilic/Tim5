@@ -18,7 +18,7 @@ export class PropsService {
   }
 
   changeProps(props: Props){
-    return   this.http.post('http://localhost:8080/api/props/change_prop', props);
+    return this.http.post('http://localhost:8080/api/props/change_prop', props);
   }
 
   findProp(id){
