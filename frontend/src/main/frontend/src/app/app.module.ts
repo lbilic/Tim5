@@ -46,7 +46,6 @@ import {PropsService} from "./services/props/props.service";
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import {AddPropsComponent} from "./components/add-props/add-props.component";
 import { ProfileComponent } from './components/profile/profile.component';
-import { ChangePropsComponent } from './components/change-props/change-props.component';
 import { AddPerformanceComponent } from './components/add-performance/add-performance.component';
 import {AddPerformanceService} from "./services/performance/add-performance.service";
 import { ProfilComponent } from './components/profil/profil.component';
@@ -70,7 +69,6 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
     ChangePasswordComponent,
     AddPropsComponent,
     ProfileComponent,
-    ChangePropsComponent,
     AddPerformanceComponent,
     ProfilComponent,
     ShowCinetersComponent,
@@ -152,10 +150,6 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
       {
         path:'profil',
         component:ProfilComponent
-      },
-      {
-        path:'change_props',
-        component: ChangePropsComponent
       }],
 
     )
