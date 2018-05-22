@@ -54,7 +54,7 @@ import { ListShowsComponent } from './components/list-shows/list-shows.component
 import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
 import { CineterDetailsComponent } from './components/cineter-details/cineter-details.component';
-import { FriendsService } from "./services/friends.service"
+import { FriendsService } from "./services/friends/friends.service"
 
 @NgModule({
   exports: [RouterModule],
