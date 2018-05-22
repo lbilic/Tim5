@@ -48,14 +48,20 @@ public class FriendshipServiceImpl implements FriendshipService{
         Account sender = this.accountService.findByUsername(senderUsername);
         Account receiver = this.accountService.findByUsername(receiverUsername);
         Friendship friendship = this.friendshipRepository.findBySenderAndReceiver(sender, receiver);
+        if(friendship == null)
+            friendship = this.friendshipRepository.findBySenderAndReceiver(receiver, sender);
         return friendship;
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Boolean removeFriend(Long id) {
-        Optional<Friendship> fs = friendshipRepository.findById(id);
-        fs.ifPresent(friendship -> friendshipRepository.delete(fs.get()));
+        //Optional<Friendship> fs = friendshipRepository.findById(id);
+        //Friendship friendship = fs.get();
+        //if(friendship == null)
+            //return false;
+        //this.friendshipRepository.delete(friendship);
+        friendshipRepository.deleteById(id);
         return true;
     }
 }

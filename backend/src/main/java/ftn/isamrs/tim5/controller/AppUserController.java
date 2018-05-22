@@ -3,6 +3,7 @@ package ftn.isamrs.tim5.controller;
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.exception.BadRequestException;
 import ftn.isamrs.tim5.exception.ForbiddenException;
+import ftn.isamrs.tim5.exception.NotFoundException;
 import ftn.isamrs.tim5.model.Account;
 import ftn.isamrs.tim5.model.Cineter;
 import ftn.isamrs.tim5.model.CineterAdmin;
@@ -228,6 +229,8 @@ public class AppUserController {
     })
     public ResponseEntity send_request(@RequestHeader("Authentication-Token") String token,
                                        @RequestBody String receiverUsername) {
+        if(!this.accountService.isUsernameTaken(receiverUsername))
+            throw new NotFoundException("Account doesn't exist!");
         String senderUsername = jwtUtils.getUsernameFromToken(token);
         Account sender = this.accountService.findByUsername(senderUsername);
         Account receiver = this.accountService.findByUsername(receiverUsername);
@@ -236,7 +239,7 @@ public class AppUserController {
 
         friendshipService.save(f);
 
-        return new ResponseEntity(null, HttpStatus.OK);
+        return new ResponseEntity(this.friendshipService.findBySenderAndReceiver(sender.getUsername(), receiver.getUsername()), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/get_friends",
@@ -258,7 +261,7 @@ public class AppUserController {
         for (Friendship friendship : friendships) {
             if(friendship.getStatus() != FriendshipStatus.ACCEPTED)
                 continue;
-            Account account = friendship.getReceiver();
+            Account account = friendship.getSender();
             dtos.add(new AccountDTO(account));
         }
 
@@ -335,16 +338,20 @@ public class AppUserController {
         return new ResponseEntity(null, HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "remove_friend",
+    @RequestMapping(value = "/api/remove_friend",
             method = RequestMethod.POST,
-            produces = MediaType.TEXT_PLAIN_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+            consumes = MediaType.TEXT_PLAIN_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity removeFriend(@RequestHeader("Authentication-Token") String token,
                                        @RequestBody String senderUsername){
         try {
+            System.out.println(senderUsername);
             String receiverUsername = jwtUtils.getUsernameFromToken(token);
-            Account sender = this.accountService.findByUsername(senderUsername);
-            Account receiver = this.accountService.findByUsername(receiverUsername);
+            System.out.println(receiverUsername);
+            //Account sender = this.accountService.findByUsername(senderUsername);
+            //Account receiver = this.accountService.findByUsername(receiverUsername);
+            //System.out.println(sender);
+            //System.out.println(receiver);
 
             Friendship f = friendshipService.findBySenderAndReceiver(senderUsername, receiverUsername);
 
