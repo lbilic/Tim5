@@ -45,7 +45,7 @@ export class AccountService {
   }
 
   public changeProfile(account){
-    return this.http.post('http://localhost:8080/api/profile', account)
+    return this.http.post('http://localhost:8080/api/profile', account);
   }
 
 

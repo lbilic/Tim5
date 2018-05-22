@@ -14,13 +14,18 @@
       <tab heading="About">User info</tab>
       <tab heading="Friends">
         <div class="col-lg-6">
-          <label for="typeahead-basic">Search:</label>
-          <div class="input-group">
-            <input id="typeahead-basic" type="text" class="form-control search-field"/> <!--[(ngModel)]="model" [ngbTypeahead]="search"/-->
-            <div class="input-group-btn">
-              <button class="btn btn-default" type="button">Search</button>
+          <form [formGroup]="form" (ngSubmit)="sendRequest()" accept-charset="UTF-8">
+            <label for="username">Add by username:</label>
+            <div class="form-group">
+              <input 
+                formControlName="username"
+                id="username" 
+                placeholder="username..." 
+                type="text" 
+                class="form-control"/>
+                <button class="btn btn-default" type="submit">Add</button>
             </div>
-          </div>
+          </form>
         </div>
         <div class="row"></div>
         <div class="friend-list">
@@ -51,19 +56,41 @@
                 </td>
                 <td>
                   <tr>
-                    {{friend.name}}
-                  </tr>
-                  <tr>
-                    {{friend.number}}
+                    {{friend.username}}
                   </tr>
                 </td>
                 <td rowspan=2>
-                  <button type="button" class="btn btn-primary" style="background-color:#791c1c">Remove</button>
+                  <button type="button" (click)="remove(friend.username)" class="btn btn-primary" style="background-color:#791c1c">Remove</button>
                 </td>
               </table>
             </div>
           </div>
         </div>
+      </tab>
+      <tab heading="Friend requests">
+          <div class="friend-list">
+              <div *ngFor="let request of requests" class="friend">
+                <div class="col-sm-6 friend-content">
+                  <table>
+                    <td rowspan=2>
+                      <img src={{request.image}} class="user-image" *ngIf="request.image">
+                      <img src="../../../assets/images/userprofile.png" class="user-image" *ngIf="!request.image">
+                    </td>
+                    <td>
+                      <tr>
+                        {{request.username}}
+                      </tr>
+                    </td>
+                    <td rowspan=2>
+                      <button type="button" (click)="accept(request.username)" class="btn btn-primary" style="background-color:#1c834f">Accept</button>
+                    </td>
+                    <td rowspan=2>
+                      <button type="button" (click)="decline(request.username)" class="btn btn-primary" style="background-color:#791c1c">Reject</button>
+                    </td>
+                  </table>
+                </div>
+              </div>
+            </div>
       </tab>
       <tab heading="Reserved tickets">All reserved tickets</tab>
       <tab heading="Past visits">All previous visits</tab>

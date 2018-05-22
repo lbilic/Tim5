@@ -6,8 +6,11 @@ import ftn.isamrs.tim5.exception.ForbiddenException;
 import ftn.isamrs.tim5.model.Account;
 import ftn.isamrs.tim5.model.Cineter;
 import ftn.isamrs.tim5.model.CineterAdmin;
+import ftn.isamrs.tim5.model.Friendship;
+import ftn.isamrs.tim5.model.enumeration.FriendshipStatus;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.AccountService;
+import ftn.isamrs.tim5.service.FriendshipService;
 import ftn.isamrs.tim5.util.MessageConstants;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class AppUserController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private FriendshipService friendshipService;
 
     @Autowired
     private JWTUtils jwtUtils;
@@ -203,6 +209,155 @@ public class AppUserController {
         return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value = "/api/send_request",
+            method = RequestMethod.POST,
+            consumes = MediaType.TEXT_PLAIN_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ApiOperation(
+            value = "Send a request for friendship to another user.",
+            notes = "User has to exist, and not be in your friendlist.",
+            httpMethod = "POST",
+            consumes = "text/plain",
+            produces = "application/json"
+    )
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Friend request successfully sent"),
+            @ApiResponse(code = 404, message = "User doesn't exist")
+    })
+    public ResponseEntity send_request(@RequestHeader("Authentication-Token") String token,
+                                       @RequestBody String receiverUsername) {
+        String senderUsername = jwtUtils.getUsernameFromToken(token);
+        Account sender = this.accountService.findByUsername(senderUsername);
+        Account receiver = this.accountService.findByUsername(receiverUsername);
+
+        Friendship f = new Friendship(sender, receiver, FriendshipStatus.AWAITING);
+
+        friendshipService.save(f);
+
+        return new ResponseEntity(null, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/api/get_friends",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllShows(@RequestHeader("Authentication-Token") String token) {
+        String username = jwtUtils.getUsernameFromToken(token);
+        List<Friendship> friendships = friendshipService.findAllBySender(username);
+        ArrayList<AccountDTO> dtos = new ArrayList<>();
+
+        for (Friendship friendship : friendships) {
+            if(friendship.getStatus() != FriendshipStatus.ACCEPTED)
+                continue;
+            Account account = friendship.getReceiver();
+            dtos.add(new AccountDTO(account));
+        }
+
+        friendships = friendshipService.findAllByReceiver(username);
+        for (Friendship friendship : friendships) {
+            if(friendship.getStatus() != FriendshipStatus.ACCEPTED)
+                continue;
+            Account account = friendship.getReceiver();
+            dtos.add(new AccountDTO(account));
+        }
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/api/get_requests",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getRequests(@RequestHeader("Authentication-Token") String token) {
+        String receiverUsername = jwtUtils.getUsernameFromToken(token);
+        List<Friendship> friendships = friendshipService.findAllByReceiver(receiverUsername);
+        ArrayList<AccountDTO> dtos = new ArrayList<>();
+
+        for (Friendship friendship : friendships) {
+            if(friendship.getStatus() != FriendshipStatus.AWAITING)
+                continue;
+            Account account = friendship.getSender();
+            dtos.add(new AccountDTO(account));
+        }
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/api/accept_request",
+            method = RequestMethod.POST,
+            consumes = MediaType.TEXT_PLAIN_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity accept_request(@RequestHeader("Authentication-Token") String token,
+                                       @RequestBody String senderUsername) {
+        try {
+            String receiverUsername = jwtUtils.getUsernameFromToken(token);
+            Account sender = this.accountService.findByUsername(senderUsername);
+            Account receiver = this.accountService.findByUsername(receiverUsername);
+
+            Friendship f = friendshipService.findBySenderAndReceiver(senderUsername, receiverUsername);
+            f.setStatus(FriendshipStatus.ACCEPTED);
+
+            friendshipService.save(f);
+
+            return new ResponseEntity(null, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(
+            value = "/api/decline_request",
+            method = RequestMethod.POST,
+            consumes = MediaType.TEXT_PLAIN_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity decline_request(@RequestHeader("Authentication-Token") String token,
+                                         @RequestBody String senderUsername) {
+        try {
+            String receiverUsername = jwtUtils.getUsernameFromToken(token);
+            Account sender = this.accountService.findByUsername(senderUsername);
+            Account receiver = this.accountService.findByUsername(receiverUsername);
+
+            Friendship f = friendshipService.findBySenderAndReceiver(senderUsername, receiverUsername);
+            f.setStatus(FriendshipStatus.REJECTED);
+
+            friendshipService.save(f);
+
+            return new ResponseEntity(null, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(value = "remove_friend",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_PLAIN_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity removeFriend(@RequestHeader("Authentication-Token") String token,
+                                       @RequestBody String senderUsername){
+        try {
+            String receiverUsername = jwtUtils.getUsernameFromToken(token);
+            Account sender = this.accountService.findByUsername(senderUsername);
+            Account receiver = this.accountService.findByUsername(receiverUsername);
+
+            Friendship f = friendshipService.findBySenderAndReceiver(senderUsername, receiverUsername);
+
+            friendshipService.removeFriend(f.getId());
+
+            return new ResponseEntity(null, HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+
+    }
 
 
 

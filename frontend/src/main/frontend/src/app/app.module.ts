@@ -53,6 +53,7 @@ import { ShowCinetersComponent } from './components/show-cineters/show-cineters.
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
+import { FriendsService } from './services/friends/friends.service';
 
 @NgModule({
   exports: [RouterModule],
@@ -170,7 +171,7 @@ import { PropsDetailComponent } from './components/props-detail/props-detail.com
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
-    AuthService],
+    AuthService, FriendsService],
   bootstrap: [AppComponent]
 })
 
