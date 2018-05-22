@@ -92,7 +92,7 @@ public class PropsController
     public ResponseEntity deleteProps(@RequestBody PropsCreateDTO props){
 
         System.out.println(props);
-        Boolean bool = propsService.deleteProp(props.getId());
+        propsService.deleteProp(props.getId());
 
         return new ResponseEntity(HttpStatus.OK);
 

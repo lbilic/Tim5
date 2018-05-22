@@ -24,7 +24,7 @@ public class Show {
 	@OneToMany(fetch = FetchType.LAZY)
     List<Performance> performances;
 
-	@ManyToOne
+	@ManyToOne()
 	Cineter cineter;
 	
 	public Show() {}

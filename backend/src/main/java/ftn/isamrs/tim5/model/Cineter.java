@@ -19,16 +19,16 @@ public class Cineter {
 	@Column(nullable = false)
 	String city;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cineter")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cineter", cascade = CascadeType.REMOVE)
 	List<Review> review;
 
-	@OneToMany(mappedBy = "cineter")
+	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
 	List<Show> shows;
 
-	@OneToMany(mappedBy = "cineter")
+	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
     List<CineterAdmin> cineterAdmin;
 
-	@OneToMany(mappedBy = "cineter")
+	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
 	List<Props> props;
 
 	@Column

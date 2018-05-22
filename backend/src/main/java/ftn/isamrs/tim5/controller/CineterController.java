@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +39,41 @@ public class CineterController {
     }
 
 
+    @RequestMapping(value = "/delete_cineter",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteCineter(@RequestBody CineterCreateDTO cineter)
+    {
+        cineterService.delete(cineter);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getCineter(@RequestParam Long id){
+        Cineter cineter = cineterService.findById(id);
+
+        if(cineter == null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(new CineterCreateDTO(cineter), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update_cineter",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateCineter(@RequestBody CineterCreateDTO dto){
+
+        System.out.println(dto);
+
+        Cineter cineter = cineterService.updateCineter(dto);
+
+        if(cineter == null) return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(new CineterCreateDTO(cineter), HttpStatus.OK);
+    }
 
 
 }
