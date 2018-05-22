@@ -53,7 +53,7 @@ import { ShowCinetersComponent } from './components/show-cineters/show-cineters.
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
-import { FriendsService } from './services/friends/friends.service';
+import { CineterDetailsComponent } from './components/cineter-details/cineter-details.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -74,7 +74,8 @@ import { FriendsService } from './services/friends/friends.service';
     ProfilComponent,
     ShowCinetersComponent,
     ListShowsComponent,
-    PropsDetailComponent
+    PropsDetailComponent,
+    CineterDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -151,7 +152,12 @@ import { FriendsService } from './services/friends/friends.service';
       {
         path:'profil',
         component:ProfilComponent
-      }],
+      },
+      {
+        path:'cineters/:id',
+        component: CineterDetailsComponent
+      }
+      ],
 
     )
   ],
@@ -171,7 +177,7 @@ import { FriendsService } from './services/friends/friends.service';
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
-    AuthService, FriendsService],
+    AuthService],
   bootstrap: [AppComponent]
 })
 
