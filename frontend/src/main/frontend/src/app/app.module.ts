@@ -53,7 +53,10 @@ import { ShowCinetersComponent } from './components/show-cineters/show-cineters.
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
+<<<<<<< Updated upstream
 import { CineterDetailsComponent } from './components/cineter-details/cineter-details.component';
+=======
+>>>>>>> Stashed changes
 
 @NgModule({
   exports: [RouterModule],
