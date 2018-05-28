@@ -5,10 +5,12 @@ import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -149,24 +151,28 @@ public class AdminController {
 
     }
 
+    @Transactional
     @RequestMapping(value = "/accept_request",
                     method = RequestMethod.GET,
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity accept_request(@RequestParam("id") Long id){
 
-        PropRequest request = propsRequestService.findRequestById(id);
 
-        Props prop = request.getProps();
+        try {
+            PropRequest request = propsRequestService.findRequestById(id);
+
+            Props prop = request.getProps();
 
 
+            propsRequestService.deleteRequest(request);
 
-        propsRequestService.deleteRequest(request);
+            propsService.saveProp(prop);
 
-        propsService.saveProp(prop);
-        
-        return new ResponseEntity(HttpStatus.OK);
-
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (OptimisticEntityLockException e){ return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
 

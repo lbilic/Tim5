@@ -7,10 +7,12 @@ import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
 import ftn.isamrs.tim5.util.ConvertDTOToModel;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -128,50 +130,49 @@ public class PropsController
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
+    @Transactional
     @RequestMapping(value = "reserve_props",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity reserveProp(@RequestParam("id") Long id,
-                                      @RequestHeader(value = "Authentication-Token") String token
-                                      ){
+                                      @RequestHeader(value = "Authentication-Token") String token){
 
 
-        System.out.println(id);
-        Props props = propsService.findPropById(id);
-        System.out.println("ovo je prop stvarno" + props);
-        System.out.println("ovo je prop"+ props.getName());
+        try {
+            Props props = propsService.findPropById(id);
 
+            BoughtProps boughtProps = new BoughtProps();
 
+            Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
 
-        BoughtProps boughtProps = new BoughtProps();
+            BoughtProps boughtProps1 = boughtPropsService.findBoughtPropById(id);
 
-        Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
+            if (boughtProps1 == null) {
+                boughtProps.setAmount(1);
+            } else {
+                boughtProps.setAmount(boughtProps.getAmount() + 1);
+            }
 
-        BoughtProps boughtProps1 = boughtPropsService.findBoughtPropById(id);
+            boughtProps.setName(props.getName());
+            boughtProps.setDescription(props.getDescription());
 
-       if(boughtProps1 == null){
-            boughtProps.setAmount(1);
+            propsService.sellProp(id);
+
+            props = propsService.findPropById(id);
+
+            if (props.getAmount() == 0) {
+                propsService.deleteProp(id);
+            }
+
+            boughtProps = boughtPropsService.saveBoughtProp(boughtProps, account);
+
+            BoughtPropDTO dto = new BoughtPropDTO(boughtProps);
+
+            return new ResponseEntity<>(dto, HttpStatus.OK);
         }
-        else{
-            boughtProps.setAmount(boughtProps.getAmount()+1);
-        }
+        catch(OptimisticEntityLockException e){return new ResponseEntity(HttpStatus.CONFLICT);}
 
-        boughtProps.setName(props.getName());
-        boughtProps.setDescription(props.getDescription());
-
-        propsService.sellProp(id);
-
-        props = propsService.findPropById(id);
-
-        if(props.getAmount() == 0){
-            propsService.deleteProp(id);
-        }
-
-        boughtProps = boughtPropsService.saveBoughtProp(boughtProps, account);
-
-        BoughtPropDTO dto = new BoughtPropDTO(boughtProps);
-
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        
 
     }
 
