@@ -19,9 +19,6 @@ export class AddPerformanceComponent implements OnInit {
   halls: Array<HallCreate>;
   selected_index : number;
 
-  @Input()
-  tralala : number;
-
   constructor(private fb : FormBuilder,
               private performanceService: AddPerformanceService, private router: Router,
               private route: ActivatedRoute)
