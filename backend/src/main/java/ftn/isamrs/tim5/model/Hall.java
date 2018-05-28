@@ -1,6 +1,7 @@
 package ftn.isamrs.tim5.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Hall")
@@ -10,28 +11,46 @@ public class Hall {
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     int number;
 
-    @Column (nullable = false)
-    String seatLayout;
+    @Column(nullable = false)
+    int rows;
 
-    Hall (){}
+    @Column(nullable = false)
+    int columns;
 
-    public Hall(int number, String seatLayout) {
-        this.number = number;
-        this.seatLayout = seatLayout;
+    @ManyToOne
+    Cineter cineter;
+
+    Hall() {
     }
 
-    public int getNumber() { return number; }
+    public Hall(int number) {
+        this.number = number;
+    }
 
-    public void setNumber(int number) { this.number = number; }
+    public int getNumber() {
+        return number;
+    }
 
-    public Long getId() { return id; }
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getSeatLayout() { return seatLayout; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public void setSeatLayout(String seatLayout) { this.seatLayout = seatLayout; }
+    public Cineter getCineter() {
+        return cineter;
+    }
+
+    public void setCineter(Cineter cineter) {
+        this.cineter = cineter;
+    }
 }

@@ -151,6 +151,9 @@ import { RequestsComponent } from './components/requests/requests.component'
       {
         path:'add_performance',
         component:AddPerformanceComponent
+      },{
+        path:'add_performance/:id',
+        component:AddPerformanceComponent
       },
       {
         path:'profile',

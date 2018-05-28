@@ -15,8 +15,8 @@ public class Performance extends PSBase {
 
 	public Performance() { }
 
-	public Performance(Date date, float price /*, Hall hall*/) {
-		super(date, price /*, hall*/);
+	public Performance(Date date, float price , Hall hall) {
+		super(date, price , hall);
 	}
 
 }

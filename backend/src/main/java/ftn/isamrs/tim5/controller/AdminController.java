@@ -72,9 +72,11 @@ public class AdminController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection)
+    public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection, @RequestParam()
+            Long id)
     {
-        Performance performance = performanceService.savePerformance(projection);
+
+        Performance performance = performanceService.savePerformance(projection, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

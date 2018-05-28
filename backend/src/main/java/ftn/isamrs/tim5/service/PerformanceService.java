@@ -6,5 +6,5 @@ import ftn.isamrs.tim5.model.Account;
 
 public interface PerformanceService {
 
-    Performance savePerformance(PerformanceCreateDTO dto);
+    Performance savePerformance(PerformanceCreateDTO dto, Long id);
 }
