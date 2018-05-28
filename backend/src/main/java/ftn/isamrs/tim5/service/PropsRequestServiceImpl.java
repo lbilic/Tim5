@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.PropertyPermission;
 
 @Service
 public class PropsRequestServiceImpl implements PropsRequestService {
@@ -20,6 +21,11 @@ public class PropsRequestServiceImpl implements PropsRequestService {
     }
 
     @Override
+    public void deleteRequest(PropRequest request) {
+        propsRequestRepository.delete(request);
+    }
+
+    @Override
     public List<PropRequest> getAllByAdminId(Long id) {
         return propsRequestRepository.findAllByAdminId(id);
     }
@@ -29,4 +35,6 @@ public class PropsRequestServiceImpl implements PropsRequestService {
     public PropRequest saveRequest(PropRequest request) {
         return propsRequestRepository.save(request);
     }
+
+
 }

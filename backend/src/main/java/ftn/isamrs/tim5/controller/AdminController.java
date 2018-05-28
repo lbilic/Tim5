@@ -156,12 +156,12 @@ public class AdminController {
 
         Props prop = request.getProps();
 
+
+
+        propsRequestService.deleteRequest(request);
+
         propsService.saveProp(prop);
-
         
-        //obrisati zahteve
-        //zakljucati
-
         return new ResponseEntity(HttpStatus.OK);
 
     }
