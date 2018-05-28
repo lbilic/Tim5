@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add new Props for Cinema or Theater</h1>
+  <h1>Sell Props for Cinema or Theater</h1>
   <form [formGroup]="form" (ngSubmit)="register()">
     <div class="form-group">
       <label for="name">Name</label>
@@ -56,21 +56,7 @@
       </ng-template>
     </div>
 
-   <label for="amount">Amount</label>
-    <input
-      formControlName="amount"
-      id="amount"
-      placeholder="Amount..."
-      type="number"
-      class="form-control">
-    <div *ngIf="amount.touched && amount.invalid" class="alert alert-danger">
-      <div id="amountRequiredError" *ngIf="amount.errors.required;">
-        The amount is required!
-      </div>
-    </div>
-
-
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Send request for sale</button>
 
   </form>
 </div>

@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Price</th>
+    <th scope="col">Description</th>
+    <th scope="col">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of props">
+    <td>{{i.id}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.price}}</td>
+    <td>{{i.description}}</td>
+    <td>{{i.amount}}</td>
+    <td> <button (click)="Reserve(i)"  class="btn btn-success" >Reserve</button> </td>
+  </tr>
+
+
+  </tbody>
+</table>

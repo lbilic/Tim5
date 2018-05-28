@@ -21,14 +21,30 @@ public class Props {
 
     @ManyToOne()
 	Cineter cineter;
+
+    @Column(nullable = false)
+	int amount;
+
+    @ManyToOne
+	Account account;
 	
 	public Props() {}
 
-	public Props(String name, float price, String descripiton) {
+	public Props(String name, float price, String descripiton, int amount) {
 		super();
 		this.name = name;
 		this.price = price;
+
 		this.description = descripiton;
+		this.amount = amount;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	public String getName() {
@@ -71,4 +87,12 @@ public class Props {
     public void setCineter(Cineter cineter) {
         this.cineter = cineter;
     }
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 }

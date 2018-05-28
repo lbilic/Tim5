@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+  <tr>
+    //ZNAM DA OVO OVAKO VEROVATNO NE MOZE
+    <th scope="col">ID</th>
+    <th scope="col">Account_id</th>
+    <th scope="col">Prop name</th>
+    <th scope="col">Prop Description</th>
+    <th scope="col">Prop Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of requests">
+    <td>{{i.id}}</td>
+    <td>{{i.account_id}}</td>
+    <td>{{i.prop.name}}</td>
+    <td>{{i.prop.description}}</td>
+    <td>{{i.prop.price}}</td>
+    <td> <button (click)="AcceptRequest(i)"  class="btn btn-success" >Accept</button> </td>
+    <td> <button (click)="DeleteRequest(i)"  class="btn btn-success" >Deny</button> </td>
+  </tr>
+
+
+  </tbody>
+</table>

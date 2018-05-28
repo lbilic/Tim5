@@ -43,8 +43,11 @@ public class Account {
     @Column
     private String activationId;
 
-    //@Column(nullable = false)
-    //private String number;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<Props> props;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<BoughtProps> boughtProps;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private List<AccountAuthority> accountAuthorities;
@@ -68,6 +71,8 @@ public class Account {
     public Account() {
         this.accountAuthorities = new ArrayList<>();
         this.confirmed = false;
+        this.props = new ArrayList<Props>();
+        this.boughtProps = new ArrayList<BoughtProps>();
     }
 
     public Account(String username, String password) {
@@ -140,4 +145,20 @@ public class Account {
     public String getActivationId() { return activationId; }
 
     public void setActivationId(String activationID) { this.activationId = activationID; }
+
+    public List<Props> getProps() {
+        return props;
+    }
+
+    public void setProps(List<Props> props) {
+        this.props = props;
+    }
+
+    public List<BoughtProps> getBoughtProps() {
+        return boughtProps;
+    }
+
+    public void setBoughtProps(List<BoughtProps> boughtProps) {
+        this.boughtProps = boughtProps;
+    }
 }

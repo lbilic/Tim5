@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -39,5 +41,15 @@ public class AdminServiceImpl implements AdminService {
         cineter.getCineterAdmin().add(admin);
         cineterRepository.save(cineter);
         return theaterAdminRepository.save(admin);
+    }
+
+    @Override
+    public CineterAdmin saveTheaterAdmin(CineterAdmin admin) {
+        return theaterAdminRepository.save(admin);
+    }
+
+    @Override
+    public List<CineterAdmin> findFanZoneAdmins(Long id) {
+        return theaterAdminRepository.findFanZoneAdmins(id);
     }
 }

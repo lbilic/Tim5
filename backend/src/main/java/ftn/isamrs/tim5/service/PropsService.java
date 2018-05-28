@@ -13,4 +13,7 @@ public interface PropsService {
     Props findPropById(Long id);
     Props saveProp(Props props);
     Boolean deleteProp(Long id);
+    Props sellProp(Long id);
+    Props saveSoldProps(PropsCreateDTO props, Account account, Long id);
+
 }

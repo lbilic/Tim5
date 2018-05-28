@@ -1,25 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {Props} from "../../models/props";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PropsService} from "../../services/props/props.service";
 import {PropsCreate} from "../../models/propsCreate";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
-  selector: 'app-props-detail',
-  templateUrl: './props-detail.component.html',
-  styleUrls: ['./props-detail.component.css']
+  selector: 'app-sell-props',
+  templateUrl: './sell-props.component.html',
+  styleUrls: ['./sell-props.component.css']
 })
-export class PropsDetailComponent implements OnInit {
+export class SellPropsComponent implements OnInit {
 
-  id : number;
-  prop: Props;
   form : FormGroup;
-
+  id : number;
 
   constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService)
   {
-    this.prop = new Props(0, '', 0, '', 0);
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -33,21 +29,10 @@ export class PropsDetailComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ]],
-      amount: ['', [
-        Validators.required,
-        Validators.min(1)
-      ]]
     });
 
     this.route.params.subscribe((param: Params) => {
       this.id = param['id'];
-      this.getProp();
-    });
-  }
-
-  getProp(){
-    this.propsService.findProp(this.id).subscribe(data =>{
-      this.prop = data as Props;
     });
   }
 
@@ -66,19 +51,16 @@ export class PropsDetailComponent implements OnInit {
     return this.form.get('description');
   }
 
-  get amount()
-  {
-    return this.form.get('amount');
+  ngOnInit() {
   }
 
-  ngOnInit(){
-
-  }
-
-  change(){
-    this.propsService.changeProps(this.prop).subscribe(data =>{
-
+  register(i) {
+    let props = new PropsCreate(this.name.value, this.price.value, this.description.value, 1);
+    this.propsService.sellProp(this.id, props).subscribe(data => {
+      console.log(data);
     });
+
   }
+
 
 }
