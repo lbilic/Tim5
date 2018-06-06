@@ -19,15 +19,17 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     private PerformanceRepository performanceRepository;
 
-/*
+
     @Autowired
     private ShowRepository showRepository;
-*/
+
     @Override
     @Transactional
-    public Performance savePerformance(PerformanceCreateDTO dto) {
+    public Performance savePerformance(PerformanceCreateDTO dto, Long id) {
         System.out.println(dto);
         Performance performance = ConvertDTOToModel.convertPerformanceCreateDTOtoPerformance(dto);
+
+        performance.setShow(showRepository.findById(id).get());
 
         /*ShowCreateDTO showDTO = dto.getShow();
 

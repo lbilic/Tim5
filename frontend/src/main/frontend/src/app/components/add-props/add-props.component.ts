@@ -27,6 +27,10 @@ export class AddPropsComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ]],
+      amount: ['', [
+        Validators.required,
+        Validators.min(1)
+      ]]
     });
   }
 
@@ -45,15 +49,21 @@ export class AddPropsComponent implements OnInit {
     return this.form.get('description');
   }
 
+  get amount()
+  {
+    return this.form.get('amount');
+  }
+
   ngOnInit() {
   }
 
   register() {
-    let props = new PropsCreate(this.name.value, this.price.value, this.description.value);
+    let props = new PropsCreate(this.name.value, this.price.value, this.description.value, this.amount.value);
     this.propsService.registerProps(props).subscribe(data => {
       console.log(data);
     });
 
-  }}
+  }
+}
 
 

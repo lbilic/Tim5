@@ -3,6 +3,7 @@ package ftn.isamrs.tim5.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "PSBase")
@@ -20,20 +21,39 @@ public abstract class PSBase {
 
     @Column(nullable = false)
     float price;
-/*
+
+    @Column(nullable = false)
+    @ElementCollection
+    List<Integer> seatLayout;
+    //0 0 1 0 0 0 0 0 0 0 0
+
     @OneToOne
-    Hall hall;*/
+    Hall hall;
 
     // dodati show
+    @ManyToOne
+    Show show;
+
+    @Column(nullable = false)
+    @ElementCollection
+    List<Integer> fastReservationIndex; // 2 3 5
+
+
 
     public PSBase () {}
 
-    public PSBase(Date date, float price/*, Hall hall, Show show*/) {
+    public PSBase(Date date, float price, Hall hall, Show show) {
         super();
         this.date = date;
         this.price = price;
         //this.hall = hall;
         //this.show = show;
+    }
+
+    public PSBase(Date date, float price, Hall hall) {
+        this.date = date;
+        this.price = price;
+        this.hall = hall;
     }
 
     public Date getDate() {
@@ -52,13 +72,13 @@ public abstract class PSBase {
         this.price = price;
     }
 
-   /* public Hall getHall() {
+    public Hall getHall() {
         return hall;
     }
 
     public void setHall(Hall hall) {
         this.hall = hall;
-    }*/
+    }
 
     public Long getId() {
         return id;
@@ -68,4 +88,27 @@ public abstract class PSBase {
         this.id = id;
     }
 
+    public List<Integer> getSeatLayout() {
+        return seatLayout;
+    }
+
+    public void setSeatLayout(List<Integer> seatLayout) {
+        this.seatLayout = seatLayout;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
+    }
+
+    public List<Integer> getFastReservationIndex() {
+        return fastReservationIndex;
+    }
+
+    public void setFastReservationIndex(List<Integer> fastReservationIndex) {
+        this.fastReservationIndex = fastReservationIndex;
+    }
 }

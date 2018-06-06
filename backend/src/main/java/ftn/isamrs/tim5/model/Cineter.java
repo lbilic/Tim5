@@ -31,6 +31,9 @@ public class Cineter {
 	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
 	List<Props> props;
 
+	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
+	List<Hall> halls;
+
 	@Column
     boolean isTheater;
 
@@ -118,5 +121,13 @@ public class Cineter {
 
 	public void setProps(List<Props> props) {
 		this.props = props;
+	}
+
+	public List<Hall> getHalls() {
+		return halls;
+	}
+
+	public void setHalls(List<Hall> halls) {
+		this.halls = halls;
 	}
 }

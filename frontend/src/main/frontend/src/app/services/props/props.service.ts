@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PropsCreate} from "../../models/propsCreate";
 import {Props} from "../../models/props";
+import {Cineter} from "../../models/cineter";
 
 @Injectable()
 export class PropsService {
@@ -28,4 +29,17 @@ export class PropsService {
   deleteProp(prop){
     return this.http.post('http://localhost:8080/api/props/delete_prop', prop);
   }
+
+  getAllPropsById(id){
+    return this.http.get('http://localhost:8080/api/props/user_view_props?id=' + id);
+  }
+
+  reserveProp(id){
+    return this.http.get('http://localhost:8080/api/props/reserve_props?id='+id);
+  }
+
+  sellProp(id, prop){
+    return this.http.post('http://localhost:8080/api/props/send_props_request?id='+id, prop);
+  }
+
 }

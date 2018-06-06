@@ -15,20 +15,16 @@ public class MovieScreening extends PSBase {
     @Column(nullable = false)
     String type; // 2D/3D
 
-
 	public MovieScreening() {}
 
-	public MovieScreening(Date date, float price, /*Hall hall, */String type) {
-		super(date, price/*, hall*/);
+	public MovieScreening(Date date, float price, Hall hall, String type) {
+		super(date, price, hall);
 		this.type = type;
 	}
 
 	public String getType() { return type; }
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	
 
 }

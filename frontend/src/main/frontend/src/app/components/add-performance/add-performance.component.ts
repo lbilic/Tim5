@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddPerformanceService} from "../../services/performance/add-performance.service";
 import {PerformanceCreate} from "../../models/performanceCreate";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 import {HallCreate} from "../../models/hallCreate";
 import {HallService} from "../../services/hall/hall.service";
 
@@ -15,6 +15,7 @@ export class AddPerformanceComponent implements OnInit {
 
   form : FormGroup;
   returnURL: string = '';
+  show_id : number;
   halls: Array<HallCreate>;
   selected_index : number;
 
@@ -31,6 +32,10 @@ export class AddPerformanceComponent implements OnInit {
         Validators.minLength(3)
       ]],
 
+    });
+
+    this.route.params.subscribe((param: Params) => {
+      this.show_id = param['id'];
     });
 
     //this.selected_index = 0;
@@ -57,7 +62,7 @@ export class AddPerformanceComponent implements OnInit {
 
   register() {
     this.performanceService.registerPerformance(new PerformanceCreate(this.date.value,
-      this.price.value, /*this.halls[this.selected_index]*/)).subscribe(data => {
+      this.price.value, /*this.halls[this.selected_index]*/), this.show_id).subscribe(data => {
       this.router.navigateByUrl(this.returnURL);
     });
   }

@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface PropsRepository extends JpaRepository<Props, Long>{
 
-    @Query(value = "SELECT * FROM Props p WHERE p.cineter_id = :pera", nativeQuery = true)
-    List<Props> findAllByCineterId(@Param("pera") Long id);
+    @Query(value = "SELECT * FROM Props p WHERE p.cineter_id = :cinId", nativeQuery = true)
+    List<Props> findAllByCineterId(@Param("cinId") Long id);
 
-    @Query(value = "SELECT * FROM Props p where p.id = :propId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Props p WHERE p.id = :propId", nativeQuery = true)
     Props findPropById(@Param("propId") Long id);
 
 }

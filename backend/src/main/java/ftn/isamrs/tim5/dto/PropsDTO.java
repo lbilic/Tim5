@@ -7,18 +7,29 @@ public class PropsDTO {
     private String name;
     private float price;
     private String description;
+    private int amount;
 
 
     public PropsDTO() {
     }
 
-    public PropsDTO(Long id, String name, float price, String description) {
+
+    public PropsDTO(Long id, String name, float price, String description, int amount) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.amount = amount;
+
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public Long getId() {
         return id;
@@ -59,6 +70,7 @@ public class PropsDTO {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
+                ", amount=" + amount +
                 '}';
     }
 }

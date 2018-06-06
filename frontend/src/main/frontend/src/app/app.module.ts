@@ -56,6 +56,9 @@ import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
 import { CineterDetailsComponent } from './components/cineter-details/cineter-details.component';
 import { FriendsService } from "./services/friends/friends.service";
+import { UserViewPropsComponent } from './components/user-view-props/user-view-props.component';
+import { SellPropsComponent } from './components/sell-props/sell-props.component';
+import { RequestsComponent } from './components/requests/requests.component'
 
 @NgModule({
   exports: [RouterModule],
@@ -78,7 +81,10 @@ import { FriendsService } from "./services/friends/friends.service";
     ListShowsComponent,
     PropsDetailComponent,
     CineterDetailsComponent,
-    ReserveSeatsComponent
+    ReserveSeatsComponent,
+    UserViewPropsComponent,
+    SellPropsComponent,
+    RequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -145,8 +151,11 @@ import { FriendsService } from "./services/friends/friends.service";
         component: AddPropsComponent
       },
       {
-        path: 'add_performance',
-        component: AddPerformanceComponent
+        path:'add_performance',
+        component:AddPerformanceComponent
+      },{
+        path:'add_performance/:id',
+        component:AddPerformanceComponent
       },
       {
         path: 'profile',
@@ -163,7 +172,20 @@ import { FriendsService } from "./services/friends/friends.service";
       {
         path: 'reserve/:id',
         component: ReserveSeatsComponent
+      },
+      {
+        path:'user_view_props/:id',
+        component: UserViewPropsComponent
+      },
+      {
+        path: 'sell_prop/:id',
+        component: SellPropsComponent
+      },
+      {
+        path: 'get_all_requests',
+        component: RequestsComponent
       }
+
       ],
 
     )

@@ -56,25 +56,19 @@
       </ng-template>
     </div>
 
-    <label for="cineterId">Cineter Id</label>
+   <label for="amount">Amount</label>
     <input
-      formControlName="cineterId"
-      id="cineterId"
-      placeholder="Cineter Id..."
-      type="text"
+      formControlName="amount"
+      id="amount"
+      placeholder="Amount..."
+      type="number"
       class="form-control">
-    <div *ngIf="cineterId.touched && cineterId.invalid" class="alert alert-danger">
-      <div id="cineterIdRequiredError" *ngIf="cineterId.errors.required; else cineterIdMinLength">
-        The Cineter Id is required!
+    <div *ngIf="amount.touched && amount.invalid" class="alert alert-danger">
+      <div id="amountRequiredError" *ngIf="amount.errors.required;">
+        The amount is required!
       </div>
-      <ng-template #cineterIdMinLength>
-        <ng-container >
-          <div id="cineterIdMinimumLengthError" *ngIf="cineterId.errors.minlength">
-            Minimum length is {{cineterId.errors.minlength.requiredLength}} characters.
-          </div>
-        </ng-container>
-      </ng-template>
     </div>
+
 
     <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
 

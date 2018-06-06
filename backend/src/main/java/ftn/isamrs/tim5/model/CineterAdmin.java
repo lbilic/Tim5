@@ -1,6 +1,7 @@
 package ftn.isamrs.tim5.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="Cineter_Admin")
@@ -14,6 +15,17 @@ public class CineterAdmin extends Account {
 
     @Column
     private Boolean changedPassword;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<PropRequest> propRequests;
+
+    public List<PropRequest> getPropRequests() {
+        return propRequests;
+    }
+
+    public void setPropRequests(List<PropRequest> propRequests) {
+        this.propRequests = propRequests;
+    }
 
     public CineterAdmin() {
     }

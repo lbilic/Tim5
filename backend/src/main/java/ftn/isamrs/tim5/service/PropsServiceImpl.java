@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.PropsCreateDTO;
 import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.model.Cineter;
 import ftn.isamrs.tim5.model.CineterAdmin;
 import ftn.isamrs.tim5.repository.AccountRepository;
 import ftn.isamrs.tim5.repository.CineterRepository;
@@ -32,12 +33,14 @@ public class PropsServiceImpl implements PropsService{
         Props props = ConvertDTOToModel.convertPropsDTOtoProps(dto);
         CineterAdmin admin = (CineterAdmin)account;
         props.setCineter(admin.getCineter());
+        props.setAccount(admin);
         admin.getCineter().getProps().add(props);
         props = propsRepository.save(props);
         accountRepository.save(admin);
         cineterRepository.save(admin.getCineter());
         return props;
     }
+
 
     @Override
     public Props saveProp(Props prop){
@@ -59,5 +62,32 @@ public class PropsServiceImpl implements PropsService{
         propsRepository.delete(props);
         return true;
     }
+
+
+
+    @Override
+    public Props sellProp(Long id) {
+        Props prop = findPropById(id);
+        prop.setAmount(prop.getAmount() - 1);
+        return propsRepository.save(prop);
+
+    }
+
+    @Override
+    public Props saveSoldProps(PropsCreateDTO props, Account account, Long id) {
+        Props prop = ConvertDTOToModel.convertPropsDTOtoProps(props);
+        prop.setAccount(account);
+        Cineter cineter = new Cineter();
+        //Cineter cineter = cineterRepository.findById(id);
+        prop.setCineter(cineter);
+        cineter.getProps().add(prop);
+
+        //dodati da brise zahteve jer je ovde prihvatio props na prodaju, pa treba obrisati zahteve kod svih admina
+        cineterRepository.save(cineter);
+
+        return prop;
+
+    }
+
 
 }

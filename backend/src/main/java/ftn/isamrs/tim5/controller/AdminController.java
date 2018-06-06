@@ -11,6 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/api/admin")
@@ -41,6 +44,9 @@ public class AdminController {
     @Autowired
     MovieScreeningService movieScreeningService;
 
+    @Autowired
+    PropsRequestService propsRequestService;
+
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -66,9 +72,11 @@ public class AdminController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection)
+    public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection, @RequestParam()
+            Long id)
     {
-        Performance performance = performanceService.savePerformance(projection);
+
+        Performance performance = performanceService.savePerformance(projection, id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -118,7 +126,47 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/get_all_requests",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllRequests(@RequestHeader("Authentication-Token")String token){
 
+        String username = jwtUtils.getUsernameFromToken(token);
+
+        CineterAdmin account = (CineterAdmin)accountService.findByUsername(username);
+
+        Long id = account.getId();
+
+        List<PropRequest> requests = propsRequestService.getAllByAdminId(id);
+
+        List<PropsRequestDTO> dto = new ArrayList<>();
+
+        for (PropRequest request : requests)
+            dto.add(new PropsRequestDTO(request));
+
+        return new ResponseEntity(dto, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/accept_request",
+                    method = RequestMethod.GET,
+                    consumes = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity accept_request(@RequestParam("id") Long id){
+
+        PropRequest request = propsRequestService.findRequestById(id);
+
+        Props prop = request.getProps();
+
+
+
+        propsRequestService.deleteRequest(request);
+
+        propsService.saveProp(prop);
+        
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
 
 
 }

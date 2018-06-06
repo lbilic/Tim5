@@ -19,7 +19,7 @@ export class PropsDetailComponent implements OnInit {
 
   constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService)
   {
-    this.prop = new Props(0, '', 0, '');
+    this.prop = new Props(0, '', 0, '', 0);
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -33,6 +33,10 @@ export class PropsDetailComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ]],
+      amount: ['', [
+        Validators.required,
+        Validators.min(1)
+      ]]
     });
 
     this.route.params.subscribe((param: Params) => {
@@ -60,6 +64,11 @@ export class PropsDetailComponent implements OnInit {
   get description()
   {
     return this.form.get('description');
+  }
+
+  get amount()
+  {
+    return this.form.get('amount');
   }
 
   ngOnInit(){
