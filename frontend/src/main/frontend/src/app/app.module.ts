@@ -37,6 +37,7 @@ import {JwtService} from './services/jwt.service';
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {RegistrationComponent} from './components/registration/registration.component';
+import {ReserveSeatsComponent} from './components/reserve-seats/reserve-seats.component';
 
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
@@ -54,7 +55,7 @@ import { ListShowsComponent } from './components/list-shows/list-shows.component
 import { TabsModule } from 'ngx-bootstrap';
 import { PropsDetailComponent } from './components/props-detail/props-detail.component';
 import { CineterDetailsComponent } from './components/cineter-details/cineter-details.component';
-import { FriendsService } from "./services/friends/friends.service"
+import { FriendsService } from "./services/friends/friends.service";
 
 @NgModule({
   exports: [RouterModule],
@@ -76,7 +77,8 @@ import { FriendsService } from "./services/friends/friends.service"
     ShowCinetersComponent,
     ListShowsComponent,
     PropsDetailComponent,
-    CineterDetailsComponent
+    CineterDetailsComponent,
+    ReserveSeatsComponent
   ],
   imports: [
     BrowserModule,
@@ -126,37 +128,41 @@ import { FriendsService } from "./services/friends/friends.service"
         component: PropsDetailComponent
       },
       {
-        path:'cineters',
-        component:ShowCinetersComponent
+        path: 'cineters',
+        component: ShowCinetersComponent
       },
 
       {
-        path:'shows',
-        component:ListShowsComponent
+        path: 'shows',
+        component: ListShowsComponent
       },
       {
         path: 'change_password',
         component: ChangePasswordComponent
       },
       {
-        path:'add_props',
+        path: 'add_props',
         component: AddPropsComponent
       },
       {
-        path:'add_performance',
-        component:AddPerformanceComponent
+        path: 'add_performance',
+        component: AddPerformanceComponent
       },
       {
-        path:'profile',
+        path: 'profile',
         component: ProfileComponent
       },
       {
-        path:'profil',
-        component:ProfilComponent
+        path: 'profil',
+        component: ProfilComponent
       },
       {
-        path:'cineters/:id',
+        path: 'cineters/:id',
         component: CineterDetailsComponent
+      },
+      {
+        path: 'reserve/:id',
+        component: ReserveSeatsComponent
       }
       ],
 
