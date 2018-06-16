@@ -12,5 +12,7 @@ public interface ShowService {
 
     void delete(ShowCreateDTO dto, Account user);
 
-    public List<Show> findAll();
+    List<Show> findAll();
+
+    Show findById(Long id);
 }

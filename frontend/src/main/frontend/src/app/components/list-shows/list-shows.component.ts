@@ -17,7 +17,8 @@ export class ListShowsComponent implements OnInit {
   constructor(private showService: ShowService, jwtutils :JwtService) {
     console.log(jwtutils.decodeToken());
     this.showService.getAllShows().subscribe(data =>{
-      this.shows = data as Array<Show>;
+      this.shows = (data as Array<Show>).filter(item => !item.movie);
+      console.log(this.shows);
     });
   }
 

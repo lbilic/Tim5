@@ -10,7 +10,7 @@ import {Props} from "../../models/props";
 })
 export class UserViewPropsComponent implements OnInit {
 
-  props : Array<Props> = new Array<Props>();
+  props : Array<Props> = [];
   id : number;
   prop : Props;
 

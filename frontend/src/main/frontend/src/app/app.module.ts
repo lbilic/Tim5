@@ -58,7 +58,8 @@ import { CineterDetailsComponent } from './components/cineter-details/cineter-de
 import { FriendsService } from "./services/friends/friends.service";
 import { UserViewPropsComponent } from './components/user-view-props/user-view-props.component';
 import { SellPropsComponent } from './components/sell-props/sell-props.component';
-import { RequestsComponent } from './components/requests/requests.component'
+import { RequestsComponent } from './components/requests/requests.component';
+import { ListMoviesComponent } from './components/list-movies/list-movies.component'
 
 @NgModule({
   exports: [RouterModule],
@@ -84,7 +85,8 @@ import { RequestsComponent } from './components/requests/requests.component'
     ReserveSeatsComponent,
     UserViewPropsComponent,
     SellPropsComponent,
-    RequestsComponent
+    RequestsComponent,
+    ListMoviesComponent
   ],
   imports: [
     BrowserModule,
@@ -101,6 +103,10 @@ import { RequestsComponent } from './components/requests/requests.component'
     ModalModule.forRoot(),
     CoreModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: HomePageComponent
+      },
       {
         path: 'add_cinetar',
         component: AddCinetarComponent
@@ -141,6 +147,10 @@ import { RequestsComponent } from './components/requests/requests.component'
       {
         path: 'shows',
         component: ListShowsComponent
+      },
+      {
+        path: 'movies',
+        component: ListMoviesComponent
       },
       {
         path: 'change_password',

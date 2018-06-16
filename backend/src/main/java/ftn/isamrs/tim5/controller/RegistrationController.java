@@ -101,9 +101,9 @@ public class RegistrationController {
         account.getAccountAuthorities().add(accountAuthority);
         try {
             emailService.sendActivationMail(account);
-        } catch (InterruptedException e) {
+        } /*catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (MessagingException e) {
+        }*/ catch (MessagingException e) {
             e.printStackTrace();
         } catch (Exception e){
             e.printStackTrace();

@@ -1,0 +1,37 @@
+<div class="movie-list">
+  <div *ngFor="let i of movies" class="movie">
+    <div class="col-sm-6 friend-content">
+      <table>
+        <td rowspan=2>
+          <!--img src={{i.image}} class="user-image" *ngIf="i.image"-->
+          <img src="../../../assets/images/userprofile.png" class="user-image">
+        </td>
+        <td>
+          <tr>
+            {{i.name}}
+          </tr>
+        </td>
+        <td rowspan=2>
+          <button type="button" (click)="Reserve(i)" class="btn btn-primary" style="background-color:#ffa75a">Reserve</button>
+        </td>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of movies">
+    <td>{{i.id}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.description}}</td>
+  </tr>
+  </tbody>
+</table-->

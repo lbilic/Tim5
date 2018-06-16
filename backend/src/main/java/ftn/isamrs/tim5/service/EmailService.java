@@ -26,7 +26,7 @@ public class EmailService {
     private static final String EMAIL_USERNAME = "spring.mail.username";
 
     @Async
-    public void sendActivationMail(Account account) throws MailException, InterruptedException, MessagingException {
+    public void sendActivationMail(Account account) throws MailException, MessagingException {
         String activationString = generateActivationString();
         account.setActivationId(activationString);
 

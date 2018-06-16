@@ -1,0 +1,18 @@
+.user-image {
+  width:64px;
+  height:64px;
+}
+
+.friend-content{
+  margin: 10px;
+}
+
+.movie {
+  padding: 20px;
+  display: inline-block;
+}
+
+table, td {
+  border-spacing: 5px 12px;
+  padding: 2px;
+}

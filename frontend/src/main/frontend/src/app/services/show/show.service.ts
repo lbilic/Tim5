@@ -15,5 +15,8 @@ export class ShowService {
   getAllShows(){
     return this.http.get('http://localhost:8080/api/show/get_all');
   }
+  getShowById(id){
+    return this.http.get('http://localhost:8080/api/show/get_show?id=' + id);
+  }
 
 }

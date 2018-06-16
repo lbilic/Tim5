@@ -1,0 +1,19 @@
+#left, #right {
+  background: #ccc;
+  padding: 20px;
+}
+
+.center-div
+{
+  justify-content: center;
+  display: flex;
+  padding: 40px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}

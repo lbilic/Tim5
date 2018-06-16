@@ -22,7 +22,7 @@ export class ProfilComponent implements OnInit {
   requests: Array<any>;
   toasterConfig: ToasterConfig;
 
-  constructor(private fb: FormBuilder, private router: Router, 
+  constructor(private fb: FormBuilder, private router: Router,
               private friendsService: FriendsService, private toasterService: ToasterService) {
     this.form = this.fb.group({
       username: ['']
@@ -65,7 +65,7 @@ export class ProfilComponent implements OnInit {
           this.toasterService.pop('error', 'Error', 'Something unexpected happened! \nSee information about error in console.');
           throw error;
         }
-      });;
+    });
   }
 
   accept(username : String) {

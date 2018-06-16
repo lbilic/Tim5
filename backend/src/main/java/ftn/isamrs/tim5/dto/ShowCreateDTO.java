@@ -24,6 +24,7 @@ public class ShowCreateDTO implements Serializable{
         this.id = show.getId();
         this.name=show.getName();
         this.description=show.getDescription();
+        this.isMovie = show.isMovie();
     }
 
     public String getName() {
@@ -48,5 +49,5 @@ public class ShowCreateDTO implements Serializable{
 
     public boolean isMovie() { return isMovie; }
 
-    public void setMovie(boolean movie) { isMovie = movie; }
+    public void setMovie(boolean isMovie) { this.isMovie = isMovie; }
 }
