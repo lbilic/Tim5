@@ -8,12 +8,14 @@ import { UsernameUniqueValidator } from "./validators/username-unique.validator"
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
       PasswordValidator,
       UsernameUniqueValidator,
   ],
-  declarations: []
+  declarations: [],
+  exports: [
+  ]
 })
 export class SharedModule { }

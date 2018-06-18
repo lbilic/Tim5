@@ -8,6 +8,8 @@ import {SharedModule} from "./shared/shared.module";
 import {AnonymusGuard} from "./core/guards/anonymus.guard";
 import {CoreModule} from "./core/core.module";
 import {ToasterModule} from "angular5-toaster/dist";
+import {DatepickerModule} from "ngx-bootstrap";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 // error handler
 import {AppErrorHandler} from "./core/error-handlers/app-error-handler";
 // interceptor
@@ -97,6 +99,8 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
     HttpModule,
     ToasterModule,
     SharedModule,
+    DatepickerModule,
+    NgbModule.forRoot(),
     TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
