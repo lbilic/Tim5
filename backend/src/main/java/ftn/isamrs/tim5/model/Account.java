@@ -52,6 +52,11 @@ public class Account {
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     private List<AccountAuthority> accountAuthorities;
 
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<MovieReservation> movieReservations;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    private List<ShowReservation> showReservations;
 
     public Account(String username, String password, int version, boolean deleted, String name,
                    String lastName, String email, String activationId, /*String number,*/ boolean confirmed) {
@@ -161,4 +166,12 @@ public class Account {
     public void setBoughtProps(List<BoughtProps> boughtProps) {
         this.boughtProps = boughtProps;
     }
+
+    public List<MovieReservation> getMovieReservations() { return movieReservations; }
+
+    public void setMovieReservations(List<MovieReservation> movieReservations) { this.movieReservations = movieReservations; }
+
+    public List<ShowReservation> getShowReservations() { return showReservations; }
+
+    public void setShowReservations(List<ShowReservation> showReservations) { this.showReservations = showReservations; }
 }

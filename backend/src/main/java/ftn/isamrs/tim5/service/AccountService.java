@@ -1,6 +1,8 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.model.MovieReservation;
+import ftn.isamrs.tim5.model.ShowReservation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -25,4 +27,8 @@ public interface AccountService {
     void remove(Long id);
 
     boolean isUsernameTaken(String username);
+
+    List<MovieReservation> findAllMovieReservations(long id);
+
+    List<ShowReservation> findAllShowReservations(long id);
 }

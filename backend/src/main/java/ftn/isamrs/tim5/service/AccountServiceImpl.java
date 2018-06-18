@@ -1,6 +1,8 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.model.MovieReservation;
+import ftn.isamrs.tim5.model.ShowReservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,5 +81,15 @@ public class AccountServiceImpl implements AccountService {
     public boolean isUsernameTaken(String username) {
         Account account = this.accountRepository.findByUsername(username);
         return account != null;
+    }
+
+    @Override
+    public List<MovieReservation> findAllMovieReservations(long id) {
+        return this.findOne(id).getMovieReservations();
+    }
+
+    @Override
+    public List<ShowReservation> findAllShowReservations(long id) {
+        return this.findOne(id).getShowReservations();
     }
 }

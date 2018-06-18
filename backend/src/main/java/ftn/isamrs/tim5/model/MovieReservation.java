@@ -10,10 +10,10 @@ public class MovieReservation {
     private Long id;
 
     @ManyToOne
-    MovieScreening screening;
+    private MovieScreening screening;
 
     @Column
-    float total_price;
+    private float total_price;
 
     public MovieReservation() {}
 
