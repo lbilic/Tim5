@@ -1,18 +1,89 @@
-.user-image {
-  width:64px;
-  height:64px;
+.movies-showing .movie-details .movie-info,
+.all-movies.movies-showing .movie-details .movie-info {
+	padding-left: 15px;
 }
 
-.friend-content{
-  margin: 10px;
+.movies-showing .movie-details .movie-info {
+	display: table-cell;
+	margin-top: 0;
 }
 
-.movie {
-  padding: 20px;
-  display: inline-block;
+.movies-showing .movie-details .movie-info .info ul .lbl,
+	.all-movies.movies-showing .movie-details .movie-info .info ul .lbl {
+		width: auto;
+  }
+
+a { color: #003365; text-decoration: none; transition: all 0.3s ease; border-radius: 2px; }
+a:hover { color: #2d2d2d; text-decoration: none; }
+a:focus { outline: none; text-decoration: none; }
+strong { font-size: 700; }
+
+/* MOVIE */
+.movie-poster { position: relative; height: 420px; background-position: center top; background-repeat: no-repeat; background-size: cover; overflow: hidden; } 
+
+.movie-info ul { display: table; width: 100%; margin: 0; padding: 0; list-style: none; }
+.movie-info ul li { display: table-cell; padding: 3px 0; vertical-align:middle}
+.movie-info ul .lbl { width: 240px; white-space: nowrap; font-weight: 700; text-transform: uppercase; }
+.movie-info .push-top { margin-top: 16px; }
+
+/* MOVIE - SCHEDULE */
+.schedule { font-size: 15px; line-height: 15px; }
+.schedule a:hover { border: 0; }
+
+.schedule-shows { position: relative; margin-top: 16px; padding: 24px 0 1px 0; background: #ccc;}
+
+.schedule-format { display: table; width: 100%; margin-bottom: 24px; }
+.schedule-format .format { display: table-cell; width: 176px; text-align: right; border-right: 1px solid #5d5d5d; font-family: "Roboto condensed", "Arial Narrow", Arial, sans-serif; font-size: 18px; color: #fff; text-transform: uppercase; padding: 4px 0; vertical-align: top; line-height: 34px; }
+.schedule-format .format span { margin: 0 24px 0 12px; font-size: 17px; vertical-align: middle; cursor: pointer; color: #ccc; }
+.schedule-format .format span:hover { color: #fff; }
+.schedule-format .shows { display: table-cell; padding: 0 0 0 24px; vertical-align: top; }
+.schedule-format .shows a, .schedule-format .shows span { position: relative; display: block; float: left; font-size: 14px; line-height: 14px; font-weight: 700; color: #ffffff; background: #144270; padding: 8px 12px; margin: 6px; }
+.schedule-format .shows a:hover { background: #003365; }
+.schedule-format .shows span { background: #929292; color: #ffffff; }
+
+.schedule .schedule-format .shows a, .schedule .schedule-format .shows span {
+    border: 1px solid rgba(255,255,255,0.3);
 }
 
-table, td {
-  border-spacing: 5px 12px;
-  padding: 2px;
+
+.schedule-format .shows .time {
+    display: inline-block;
+    float: left;
+}
+
+
+.schedule-shows .shows .price {
+    font-size: 11px;
+    display: block;
+    clear: both;
+    float: left;
+    text-align: center;
+    width: 84%;
+    color: #202020;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #202020;
+    margin: 3px 6px 8px 6px;
+    cursor:default;
+}
+
+.movies-showing .movie { padding: 48px 0; border-top: 1px dotted #333; }
+.movies-showing .movie:first-child { border-top: 0; }
+.movies-showing .movie-details { display: table; width: 90%; }
+.movies-showing .movie-details > div { display: table-cell; vertical-align: top; }
+.movies-showing .movie-details .movie-poster { width: 200px; height: auto; }
+.movies-showing .movie-details .movie-info { padding-left: 40px; }
+.movies-showing .movie-details .movie-info .title { display: block; color: #2d2d2d; font-family: "Roboto condensed", "Arial Narrow", Arial, sans-serif; font-size: 26px; text-transform: uppercase; letter-spacing: -1px; line-height: 26px; }
+
+.movies-showing .movie-details .movie-info .title:hover { color: #003365; }
+.movies-showing .movie-details .movie-info .info { float: left; width: 80%; margin-top: 16px; }
+.movies-showing .movie-details .movie-info .info ul { font-size: 15px; }
+.movies-showing .movie-details .movie-info .info ul .lbl { width: 120px; }
+
+.movies-showing .schedule-shows { display: none; background: #aaaaaa; padding: 16px 24px 1px 24px; margin-top: 16px; }
+.movies-showing .schedule-shows.showed { display: block;}
+.movies-showing .schedule-shows > div { display: block; margin-bottom: 16px; }
+
+.dateofprojection {
+  float: right;
 }

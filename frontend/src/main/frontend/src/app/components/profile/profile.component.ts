@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Account} from "../../models/account";
 import {Login} from "../../models/login";
 import {ProfileDisplay} from "../../models/profile-display";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -14,9 +14,11 @@ import {Router} from "@angular/router";
 export class ProfileComponent implements OnInit {
 
   form: FormGroup;
+  returnURL: string = '';
   private account: ProfileDisplay;
 
-  constructor(private fb : FormBuilder, private accountService: AccountService, private router: Router) {
+  constructor(private fb : FormBuilder, private accountService: AccountService, private router: Router, 
+    private route: ActivatedRoute) {
 
     this.account = new ProfileDisplay('', '', '', '');
 
@@ -45,6 +47,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/profil';
   }
 
   get name()
@@ -70,6 +73,7 @@ export class ProfileComponent implements OnInit {
   changeProfile() {
     let acc = new ProfileDisplay(this.name.value, this.lastname.value, this.email.value, this.username.value);
     this.accountService.changeProfile(acc).subscribe(data => {
+      this.router.navigateByUrl(this.returnURL);
     });
 
 }}

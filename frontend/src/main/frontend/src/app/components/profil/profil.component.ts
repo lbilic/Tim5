@@ -5,6 +5,7 @@ import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { FriendsService } from "../../services/friends/friends.service"
 import { Account } from "../../models/account";
 import { ToasterConfig, ToasterService } from "angular5-toaster/dist";
+import {AccountService} from "../../services/account/account.service";
 import { AppError } from "../../shared/errors/app-error";
 import { BadRequestError } from "../../shared/errors/bad-request-error";
 import { NotFoundError } from "../../shared/errors/not-found-error";
@@ -21,15 +22,21 @@ export class ProfilComponent implements OnInit {
   form: FormGroup;
   requests: Array<any>;
   toasterConfig: ToasterConfig;
+  account: Account;
 
   constructor(private fb: FormBuilder, private router: Router,
-              private friendsService: FriendsService, private toasterService: ToasterService) {
+              private friendsService: FriendsService, private toasterService: ToasterService,
+              private accountService: AccountService) {
     this.form = this.fb.group({
       username: ['']
     });
     this.updateFriends();
     this.updateRequests();
     this.toasterConfig = new ToasterConfig({timeout: 4000});
+    accountService.getCurrentUser().subscribe(data => {
+      this.account = data as Account;
+      console.log(this.account);
+    });
    }
 
   ngOnInit() {
