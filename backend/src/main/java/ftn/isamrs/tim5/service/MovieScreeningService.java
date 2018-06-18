@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface MovieScreeningService {
-    MovieScreening saveMovieScreening(MovieScreeningCreateDTO dto);
+    MovieScreening saveMovieScreening(MovieScreeningCreateDTO dto, Long id);
 }

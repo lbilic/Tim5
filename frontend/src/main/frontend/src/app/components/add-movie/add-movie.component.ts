@@ -4,14 +4,14 @@ import {ShowService} from "../../services/show/show.service";
 import {ShowCreate} from "../../models/showCreate";
 
 @Component({
-  selector: 'app-add-show',
-  templateUrl: './add-show.component.html',
-  styleUrls: ['./add-show.component.css']
+  selector: 'app-add-movie',
+  templateUrl: './add-movie.component.html',
+  styleUrls: ['./add-movie.component.css']
 })
-export class AddShowComponent implements OnInit {
+export class AddMovieComponent implements OnInit {
 
   form : FormGroup;
-  bool : boolean;
+  bool : boolean = true;
 
   constructor(private fb: FormBuilder, private show: ShowService) {
     this.form = this.fb.group({
@@ -25,9 +25,6 @@ export class AddShowComponent implements OnInit {
       ]],
 
     });
-
-    this.bool = false;
-
   }
   get name(){
     return this.form.get('name');

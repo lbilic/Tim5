@@ -11,6 +11,7 @@ public class Hall {
     @GeneratedValue(strategy = GenerationType.TABLE)
     Long id;
 
+    // number of hall
     @Column(nullable = false)
     int number;
 
@@ -25,6 +26,27 @@ public class Hall {
 
     Hall() {
     }
+/*
+    public Hall(int number, int rows, int columns, Cineter cineter) {
+        this.number = number;
+        this.rows = rows;
+        this.columns = columns;
+        this.cineter = cineter;
+    }
+
+    public Hall(int number, int rows, int columns) {
+        this.number = number;
+        this.rows = rows;
+        this.columns = columns;
+    }*/
+
+    public int getRows() { return rows; }
+
+    public void setRows(int rows) { this.rows = rows; }
+
+    public int getColumns() { return columns; }
+
+    public void setColumns(int columns) { this.columns = columns; }
 
     public Hall(int number) {
         this.number = number;

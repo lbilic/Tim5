@@ -32,6 +32,7 @@ export class ShowCinetersComponent implements OnInit {
     });
   }
 
+
   ShowProps(i){
     this.router.navigate([`/user_view_props/${i.id}`])
   }

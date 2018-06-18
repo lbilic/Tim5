@@ -1,6 +1,7 @@
 export class HallCreate{
 
-  constructor(public number :number, public seatLayout : string){
+  constructor(public number :number, public rows :number,
+              public columns :number){
 
   }
 }

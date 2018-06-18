@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ShowCreate} from "../../models/showCreate";
+import {Show} from "../../models/show";
+
 
 @Injectable()
 export class ShowService {
@@ -18,5 +20,15 @@ export class ShowService {
   getShowById(id){
     return this.http.get('http://localhost:8080/api/show/get_show?id=' + id);
   }
+
+  deleteShow(show){
+    return this.http.post('http://localhost:8080/api/show/delete_show', show);
+  }
+
+  updateShow(show: Show){
+    return this.http.post('http://localhost:8080/api/show/update_show', show);
+  }
+
+
 
 }

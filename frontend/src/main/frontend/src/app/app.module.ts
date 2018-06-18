@@ -49,6 +49,8 @@ import {AddPropsComponent} from "./components/add-props/add-props.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddPerformanceComponent } from './components/add-performance/add-performance.component';
 import {AddPerformanceService} from "./services/performance/add-performance.service";
+import {MovieScreeningService} from "./services/movie-screening/movie-screening.service";
+import {HallService} from "./services/hall/hall.service";
 import { ProfilComponent } from './components/profil/profil.component';
 import { ShowCinetersComponent } from './components/show-cineters/show-cineters.component';
 import { ListShowsComponent } from './components/list-shows/list-shows.component';
@@ -59,7 +61,10 @@ import { FriendsService } from "./services/friends/friends.service";
 import { UserViewPropsComponent } from './components/user-view-props/user-view-props.component';
 import { SellPropsComponent } from './components/sell-props/sell-props.component';
 import { RequestsComponent } from './components/requests/requests.component';
-import { ListMoviesComponent } from './components/list-movies/list-movies.component'
+import { ListMoviesComponent } from './components/list-movies/list-movies.component';
+import { ChangeShowComponent } from './components/change-show/change-show.component'
+import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-movie-screening.component";
+import { AddMovieComponent } from './components/add-movie/add-movie.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -77,6 +82,7 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
     AddPropsComponent,
     ProfileComponent,
     AddPerformanceComponent,
+    AddMovieScreeningComponent,
     ProfilComponent,
     ShowCinetersComponent,
     ListShowsComponent,
@@ -86,7 +92,9 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
     UserViewPropsComponent,
     SellPropsComponent,
     RequestsComponent,
-    ListMoviesComponent
+    ListMoviesComponent,
+    ChangeShowComponent,
+    AddMovieComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +122,10 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
       {
         path: 'add_show',
         component: AddShowComponent
+      },
+      {
+        path: 'add_movie',
+        component: AddMovieComponent
       },
       {
         path: 'add_cineter_admin',
@@ -145,7 +157,7 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
       },
 
       {
-        path: 'shows',
+        path: 'admin_shows',
         component: ListShowsComponent
       },
       {
@@ -168,6 +180,11 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
         component:AddPerformanceComponent
       },
       {
+        path: 'add_movie_screening/:id',
+        component: AddMovieScreeningComponent
+      },
+
+      {
         path: 'profile',
         component: ProfileComponent
       },
@@ -179,6 +196,12 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
         path: 'cineters/:id',
         component: CineterDetailsComponent
       },
+
+      {
+        path: 'shows/:id',
+        component: ChangeShowComponent
+      },
+
       {
         path: 'reserve/:id',
         component: ReserveSeatsComponent
@@ -216,7 +239,7 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
-    AuthService, FriendsService],
+    MovieScreeningService, AuthService, FriendsService, HallService],
   bootstrap: [AppComponent]
 })
 

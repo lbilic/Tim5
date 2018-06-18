@@ -10,7 +10,12 @@ public interface ShowService {
 
     Show save(ShowCreateDTO showCreateDTO, Account user);
 
+    // check?
     void delete(ShowCreateDTO dto, Account user);
+
+    void deleteShow (ShowCreateDTO dto);
+
+    Show updateShow (ShowCreateDTO dto);
 
     List<Show> findAll();
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add new show</h1>
+  <h1>Add new movie</h1>
   <form [formGroup]="form" (ngSubmit)="register()">
     <div class="form-group">
       <label for="name">Name</label>
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
 
   </form>
 </div>

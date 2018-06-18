@@ -27,11 +27,11 @@ public abstract class PSBase {
     List<Integer> seatLayout;
     //0 0 1 0 0 0 0 0 0 0 0
 
-    @OneToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     Hall hall;
 
     // dodati show
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     Show show;
 
     @Column(nullable = false)
@@ -46,8 +46,8 @@ public abstract class PSBase {
         super();
         this.date = date;
         this.price = price;
-        //this.hall = hall;
-        //this.show = show;
+        this.hall = hall;
+        this.show = show;
     }
 
     public PSBase(Date date, float price, Hall hall) {
