@@ -11,6 +11,14 @@
     <td>{{i.id}}</td>
     <td>{{i.name}}</td>
     <td>{{i.description}}</td>
+
+    <td> <button (click)="Update(i)"  class="btn btn-success" >Change</button> </td>
+    <td> <button (click)="Delete(i)"  class="btn btn-success" >Delete</button> </td>
+    <td *ngIf="i.movie"> <button (click)="AddProjection(i)"  class="btn btn-success" >
+      Add projection</button> </td>
+    <td *ngIf="!i.movie"> <button (click)="AddPerformance(i)"  class="btn btn-success" >
+      Add performance</button> </td>
+
   </tr>
   </tbody>
 </table>

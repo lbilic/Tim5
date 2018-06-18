@@ -21,7 +21,7 @@ export class AddPerformanceComponent implements OnInit {
 
   constructor(private fb : FormBuilder,
               private performanceService: AddPerformanceService, private router: Router,
-              private route: ActivatedRoute)
+              private route: ActivatedRoute, private hallService: HallService)
   {
     this.form = this.fb.group({
       date: ['', [
@@ -38,11 +38,16 @@ export class AddPerformanceComponent implements OnInit {
       this.show_id = param['id'];
     });
 
-    //this.selected_index = 0;
-/*
-    this.hallService.getAllHalls().subscribe(data => {
+
+    this.hallService.getAllHalls(this.show_id).subscribe((data:any) => {
+      //this.halls = (data as Array<HallCreate>).filter(item => item.show == );
       this.halls = data as Array<HallCreate>;
-    });*/
+      console.log(this.halls);
+    });
+
+    this.selected_index = 0;
+
+
   }
 
   get date()
@@ -56,18 +61,20 @@ export class AddPerformanceComponent implements OnInit {
   }
 
 
+
+
   ngOnInit() {
     this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   register() {
     this.performanceService.registerPerformance(new PerformanceCreate(this.date.value,
-      this.price.value, /*this.halls[this.selected_index]*/), this.show_id).subscribe(data => {
+      this.price.value, this.halls[this.selected_index]), this.show_id).subscribe(data => {
       this.router.navigateByUrl(this.returnURL);
     });
   }
-   /* onChange(value){
+    onChange(value){
       this.selected_index = value;
     }
-*/
+
 }

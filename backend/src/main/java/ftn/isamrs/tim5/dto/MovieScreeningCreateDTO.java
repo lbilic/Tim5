@@ -1,6 +1,7 @@
 package ftn.isamrs.tim5.dto;
 
 import ftn.isamrs.tim5.model.Hall;
+import ftn.isamrs.tim5.model.MovieScreening;
 
 import java.util.Date;
 import java.sql.Time;
@@ -10,19 +11,26 @@ public class MovieScreeningCreateDTO {
     private Date date;
     private Time time;
     private float price;
-    private Hall hall;
+    private HallCreateDTO hall;
     private String type;
     private ShowCreateDTO show;
 
     public MovieScreeningCreateDTO(){}
 
-    public MovieScreeningCreateDTO(Date date, Time time, float price, Hall hall, String type/*, ShowCreateDTO show*/) {
+   /* public MovieScreeningCreateDTO(Date date, float price, String type, HallCreateDTO hall/) {
         this.date = date;
-        this.time = time;
         this.price = price;
         this.hall = hall;
         this.type = type;
         //this.show = show;
+    }*/
+
+    public MovieScreeningCreateDTO (MovieScreening ms){
+        this.date = ms.getDate();
+        this.hall = new HallCreateDTO(ms.getHall());
+        this.price= ms.getPrice();
+        this.type= ms.getType();
+
     }
 
     public Date getDate() { return date; }
@@ -43,11 +51,11 @@ public class MovieScreeningCreateDTO {
         this.price = price;
     }
 
-    public Hall getHall() {
+    public HallCreateDTO getHall() {
         return hall;
     }
 
-    public void setHall(Hall hall) {
+    public void setHall(HallCreateDTO hall) {
         this.hall = hall;
     }
 

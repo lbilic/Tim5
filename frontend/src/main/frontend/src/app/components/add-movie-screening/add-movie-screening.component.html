@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add new Performance</h1>
+  <h1>Add new Movie screening</h1>
   <form [formGroup]="form" (ngSubmit)="register()">
     <div class="form-group">
       <label>Date</label>
@@ -24,18 +24,19 @@
       </div>
     </div>
 
-    <!--
-
-
-    <div ngForm="let i of fastReservationIndex">
-      <app-add-performance [tralala]="{{i.ime_showa}}">
-      </app-add-performance>
+    <div class="form-group">
+      <label>Type</label>
+      <input
+        formControlName="type"
+        id="type"
+        placeholder="Type..."
+        type="text"
+        class="form-control">
     </div>
-  -->
 
     <br/>
     <select style="margin: 20px" (change)="onChange($event.target.selectedIndex)">
-      <option *ngFor="let h of halls" [ngValue]="item" > Hala: {{h.number}}, {{h.columns}}</option>
+      <option *ngFor="let h of halls" [ngValue]="item" > Hala: {{h.number}}</option>
     </select>
 
     <br/>

@@ -3,6 +3,7 @@ import {Cineter} from "../../models/cineter";
 import {ActivatedRoute, Params} from "@angular/router";
 import {CineterService} from "../../services/cineter/cineter.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cineter-details',
@@ -13,7 +14,11 @@ export class CineterDetailsComponent implements OnInit {
   cineter : Cineter;
   id : number;
   form : FormGroup;
-  constructor(private fb: FormBuilder, private route : ActivatedRoute, private cineterService: CineterService) {
+  returnURL: string = '';
+
+
+  constructor(private fb: FormBuilder, private route : ActivatedRoute,
+              private cineterService: CineterService, private router: Router) {
     this.route.params.subscribe((param: Params) => {
       this.id = param['id'];
       this.getCineter();
@@ -37,6 +42,8 @@ export class CineterDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/cineters';
+
   }
 
 
@@ -72,7 +79,7 @@ export class CineterDetailsComponent implements OnInit {
     delete this.cineter['theater'];
     console.log(this.cineter);
     this.cineterService.updateCineter(this.cineter).subscribe(data =>{
-
+      this.router.navigateByUrl(this.returnURL);
     });
   }
 }

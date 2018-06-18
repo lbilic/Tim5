@@ -66,8 +66,6 @@ public class CineterController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateCineter(@RequestBody CineterCreateDTO dto){
 
-        System.out.println(dto);
-
         Cineter cineter = cineterService.updateCineter(dto);
 
         if(cineter == null) return new ResponseEntity(HttpStatus.NOT_FOUND);

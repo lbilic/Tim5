@@ -34,9 +34,7 @@
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item" routerLink="/add_show">Add a new show</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/add_projection">Add a new projection</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/add_performance">Add a new performance</a></li>
-              <li role="menuitem"><a class="dropdown-item" routerLink="/shows">View all shows</a></li>
+              <li role="menuitem"><a class="dropdown-item" routerLink="/admin_shows">View all shows</a></li>
             </ul>
         </li>
         <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">

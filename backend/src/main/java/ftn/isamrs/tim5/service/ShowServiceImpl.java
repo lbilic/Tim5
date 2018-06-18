@@ -25,10 +25,34 @@ public class ShowServiceImpl implements ShowService{
         show.setCineter(((CineterAdmin)user).getCineter());
         return showRepository.save(show);
     }
-
     @Override
     public void delete(ShowCreateDTO dto, Account user) {
         showRepository.findByNameAndCineterId(dto.getName(), ((CineterAdmin)user).getCineter().getId());
+    }
+
+
+    @Override
+    public void deleteShow(ShowCreateDTO dto) {
+        Optional<Show> show = showRepository.findById(dto.getId());
+        if(!show.isPresent()) return;
+        showRepository.delete(show.get());
+    }
+
+    @Override
+    public Show updateShow(ShowCreateDTO dto){
+        Optional<Show> s = this.showRepository.findById(dto.getId());
+
+        if(!s.isPresent()) return null;
+
+        Show show = s.get();
+
+        show.setName(dto.getName());
+        show.setDescription(dto.getDescription());
+        show.setMovie(dto.isMovie());
+
+        show = showRepository.save(show);
+
+        return show;
     }
 
     @Override

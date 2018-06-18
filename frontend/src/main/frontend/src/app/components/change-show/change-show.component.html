@@ -9,7 +9,7 @@
         placeholder="Name..."
         type="text"
         class="form-control"
-        [(ngModel)]="cineter.name">
+        [(ngModel)]="show.name">
       <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
         <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
           The name is required!
@@ -25,41 +25,28 @@
     </div>
 
     <div class="form-group">
-      <label for="address">Address</label>
+      <label for="description">Description</label>
       <input
-        formControlName="address"
-        id="address"
-        placeholder="Address..."
+        formControlName="description"
+        id="description"
+        placeholder="Description..."
         type="text"
         class="form-control"
-        [(ngModel)]="cineter.address" >
-      <div *ngIf="address.touched && address.invalid" class="alert alert-danger">
-        <div id="addressRequiredError" *ngIf="address.errors.required;">
-          The address is required!
+        [(ngModel)]="show.description">
+      <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+        <div id="descriptionRequiredError" *ngIf="description.errors.required; else descriptionMinLength">
+          The description is required!
         </div>
 
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="city">City</label>
-      <input
-        formControlName="city"
-        id="city"
-        placeholder="City..."
-        type="text"
-        class="form-control"
-        [(ngModel)]="cineter.city" >
-      <div *ngIf="city.touched && city.invalid" class="alert alert-danger">
-        <div id="cityRequiredError" *ngIf="city.errors.required;">
-          The city is required!
-        </div>
+        <ng-template #descriptionMinLength>
+          <ng-container *ngIf="description.errors.minlength">
+            <div id="descriptionMinimumLengthError">
+              Minimum length is {{description.errors.minlength.requiredLength}} characters.
+            </div>
+          </ng-container>
+        </ng-template>
 
       </div>
-    </div>
-
-    <div class="checkbox">
-      <label><input type="checkbox" [checked]="cineter.isTheater" (change)="clicked()">Is theater</label>
     </div>
 
     <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Change</button>

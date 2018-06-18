@@ -17,7 +17,7 @@ public class MovieScreening extends PSBase {
 
 	public MovieScreening() {}
 
-	public MovieScreening(Date date, float price, Hall hall, String type) {
+	public MovieScreening(Date date, float price, String type, Hall hall) {
 		super(date, price, hall);
 		this.type = type;
 	}
