@@ -19,7 +19,7 @@ export class PropsDetailComponent implements OnInit {
 
   constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService)
   {
-    this.prop = new Props(0, '', 0, '', 0);
+    this.prop = new Props(0, '', 0, '', 0, 0);
     this.form = this.fb.group({
       name: ['', [
         Validators.required,

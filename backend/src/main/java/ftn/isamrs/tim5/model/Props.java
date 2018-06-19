@@ -27,6 +27,11 @@ public class Props {
 
     @ManyToOne
 	Account account;
+
+
+	@Version
+	@Column(nullable = false, columnDefinition = "integer default 0")
+	private int version;
 	
 	public Props() {}
 
@@ -94,5 +99,13 @@ public class Props {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }

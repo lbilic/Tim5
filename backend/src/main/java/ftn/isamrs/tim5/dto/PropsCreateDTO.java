@@ -10,21 +10,8 @@ public class PropsCreateDTO implements Serializable {
     private float price;
     private String description;
     private int amount;
+    private int version;
 
-    public PropsCreateDTO(String name, float price, String description, int amount) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.amount = amount;
-    }
-
-    public PropsCreateDTO(Long id, String name, float price, String description, int amount) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.amount = amount;
-    }
 
     public PropsCreateDTO() {
     }
@@ -37,7 +24,7 @@ public class PropsCreateDTO implements Serializable {
         price = prop.getPrice();
         description = prop.getDescription();
         amount = prop.getAmount();
-
+        version = prop.getVersion();
 
     }
 
@@ -79,6 +66,14 @@ public class PropsCreateDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     @Override

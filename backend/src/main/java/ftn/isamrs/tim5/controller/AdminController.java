@@ -5,6 +5,7 @@ import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
+import org.hibernate.JDBCException;
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -141,7 +142,6 @@ public class AdminController {
         Long id = account.getId();
 
         List<PropRequest> requests = propsRequestService.getAllByAdminId(id);
-
         List<PropsRequestDTO> dto = new ArrayList<>();
 
         for (PropRequest request : requests)
@@ -154,7 +154,6 @@ public class AdminController {
     @Transactional
     @RequestMapping(value = "/accept_request",
                     method = RequestMethod.GET,
-                    consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity accept_request(@RequestParam("id") Long id){
 
@@ -162,18 +161,61 @@ public class AdminController {
         try {
             PropRequest request = propsRequestService.findRequestById(id);
 
+            if(request == null) throw new NullPointerException();
+
+            List<CineterAdmin> admins = request.getAdminAccounts();
+
+            for (CineterAdmin admin:
+                 admins) {
+                if(admin.getPropRequests().contains(request))
+                    admin.getPropRequests().remove(request);
+                adminService.saveTheaterAdmin(admin);
+            }
+
+
+
             Props prop = request.getProps();
-
-
             propsRequestService.deleteRequest(request);
 
             propsService.saveProp(prop);
 
             return new ResponseEntity(HttpStatus.OK);
         }
-        catch (OptimisticEntityLockException e){ return new ResponseEntity(HttpStatus.CONFLICT);
+        catch (OptimisticEntityLockException | NullPointerException | JDBCException e)
+        { return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
 
+    @Transactional
+    @RequestMapping(value = "/deny_request",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deny_request(@RequestParam("id") Long id){
 
-}
+
+        try {
+            PropRequest request = propsRequestService.findRequestById(id);
+            List<CineterAdmin> admins = request.getAdminAccounts();
+
+            for (CineterAdmin admin:
+                    admins) {
+                if(admin.getPropRequests().contains(request))
+                    admin.getPropRequests().remove(request);
+                adminService.saveTheaterAdmin(admin);
+            }
+
+            Props prop = request.getProps();
+            propsRequestService.deleteRequest(request);
+            propsService.deleteProp(prop.getId());
+
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        catch (OptimisticEntityLockException | NullPointerException | JDBCException e){
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+
+    }
+
+
+
+    }

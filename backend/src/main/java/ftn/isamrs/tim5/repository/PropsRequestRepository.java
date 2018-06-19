@@ -9,11 +9,15 @@ import java.util.List;
 
 public interface PropsRequestRepository extends JpaRepository<PropRequest, Long> {
 
-    @Query(value = "SELECT * FROM PropRequest p WHERE p.adminAccounts_id = :AdminId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Prop_Request p WHERE p.id = (SELECT prop_request_id FROM Prop_request_admin_accounts pr" +
+            " WHERE pr.admin_accounts_id = :AdminId)", nativeQuery = true)
     List<PropRequest> findAllByAdminId(@Param("AdminId") Long id);
 
-    @Query(value = "SELECT * FROM PropRequest WHERE p.id = :reqId", nativeQuery = true)
+    @Query(value = "SELECT * FROM Prop_Request p WHERE p.id = :reqId", nativeQuery = true)
     PropRequest findRequestById(@Param("reqId") Long id);
+
+    @Query(value = "SELECT * FROM Prop_Request", nativeQuery = true)
+    List<PropRequest> getAll();
 
 
 

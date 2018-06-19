@@ -15,7 +15,11 @@
     <td>{{i.price}}</td>
     <td>{{i.description}}</td>
     <td>{{i.amount}}</td>
-    <td> <button (click)="Reserve(i)"  class="btn btn-success" >Reserve</button> </td>
+    <td *ngIf="i.role == 2">
+      <button (click)="Bid(i)"  class="btn btn-success" >Bid</button> </td>
+
+    <td *ngIf="i.role == 3"> <button (click)="Reserve(i)"  class="btn btn-success" >Reserve</button> </td>
+
   </tr>
 
 

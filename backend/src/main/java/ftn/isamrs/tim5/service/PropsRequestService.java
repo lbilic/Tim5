@@ -15,4 +15,6 @@ public interface PropsRequestService {
 
     void deleteRequest(PropRequest request);
 
+    List<PropRequest> getAll();
+
 }

@@ -43,6 +43,7 @@ public class PropsServiceImpl implements PropsService{
 
 
     @Override
+    @Transactional
     public Props saveProp(Props prop){
         prop = propsRepository.save(prop);
         return prop;
@@ -57,6 +58,7 @@ public class PropsServiceImpl implements PropsService{
     public Props findPropById(Long id) {return propsRepository.findPropById(id);}
 
     @Override
+    @Transactional
     public Boolean deleteProp(Long id) {
         Props props = propsRepository.findPropById(id);
         propsRepository.delete(props);
@@ -66,6 +68,7 @@ public class PropsServiceImpl implements PropsService{
 
 
     @Override
+    @Transactional
     public Props sellProp(Long id) {
         Props prop = findPropById(id);
         prop.setAmount(prop.getAmount() - 1);
@@ -87,6 +90,16 @@ public class PropsServiceImpl implements PropsService{
 
         return prop;
 
+    }
+
+    @Override
+    public List<Props> findMyProps(Long id) {
+        return propsRepository.findMyProps(id);
+    }
+
+    @Override
+    public List<Props> findBoughtProps(Long id) {
+        return propsRepository.findBoughtProps(id);
     }
 
 

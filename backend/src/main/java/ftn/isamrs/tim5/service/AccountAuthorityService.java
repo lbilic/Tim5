@@ -7,4 +7,8 @@ public interface AccountAuthorityService {
     AccountAuthority save(AccountAuthority accountAuthority);
 
     void remove(Long id);
+
+    int AuthorityByAccId(Long id);
+
+
 }

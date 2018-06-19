@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">You bid</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of bids">
+    <td>{{i.id}}</td>
+    <td>{{i.prop.name}}</td>
+    <td>{{i.prop.description}}</td>
+    <td>{{i.price}}</td>
+  </tr>
+
+
+  </tbody>
+</table>

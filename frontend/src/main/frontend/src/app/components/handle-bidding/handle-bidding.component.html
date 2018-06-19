@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Price</th>
+    <th scope="col">Bidder</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of bids">
+    <td>{{i.id}}</td>
+    <td>{{i.price}}</td>
+    <td>{{i.bidder.name}}</td>
+    <td> <button (click)="Accept(i.id, i.prop.id)" class="btn btn-success" >Change</button> </td>
+  </tr>
+
+
+  </tbody>
+</table>

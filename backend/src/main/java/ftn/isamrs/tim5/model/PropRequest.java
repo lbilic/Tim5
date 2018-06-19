@@ -17,11 +17,16 @@ public class PropRequest {
     @OneToOne
     Account userAccount;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.DETACH)
     List<CineterAdmin> adminAccounts;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne()
     Props props;
+
+
+    @Version
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    private int version;
 
     public PropRequest() {
     }
@@ -62,5 +67,13 @@ public class PropRequest {
 
     public void setProps(Props props) {
         this.props = props;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

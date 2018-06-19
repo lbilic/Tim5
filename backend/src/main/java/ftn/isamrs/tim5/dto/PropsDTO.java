@@ -8,19 +8,20 @@ public class PropsDTO {
     private float price;
     private String description;
     private int amount;
+    private int version;
 
 
     public PropsDTO() {
     }
 
 
-    public PropsDTO(Long id, String name, float price, String description, int amount) {
+    public PropsDTO(Long id, String name, float price, String description, int amount, int version) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.amount = amount;
-
+        this.version = version;
     }
 
     public int getAmount() {
@@ -63,6 +64,14 @@ public class PropsDTO {
         this.description = description;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
         return "PropsDTO{" +
@@ -71,6 +80,7 @@ public class PropsDTO {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
+                ", version=" + version +
                 '}';
     }
 }

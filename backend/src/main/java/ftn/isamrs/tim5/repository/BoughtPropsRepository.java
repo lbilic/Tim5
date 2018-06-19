@@ -10,7 +10,7 @@ import java.util.List;
 public interface BoughtPropsRepository extends JpaRepository<BoughtProps, Long> {
 
     @Query(value = "SELECT * FROM Bought_Props p WHERE p.id = :propId", nativeQuery = true)
-    BoughtProps findBoughtPropById(@Param("propId") Long id);
+    List<BoughtProps> findBoughtPropById(@Param("propId") Long id);
 
     @Query(value = "SELECT * FROM Bought_Props p WHERE p.account_id = :accId", nativeQuery = true)
     List<BoughtProps> findAllByUserId(@Param("accId") Long id);

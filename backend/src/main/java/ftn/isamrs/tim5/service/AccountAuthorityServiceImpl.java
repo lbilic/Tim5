@@ -24,4 +24,9 @@ public class AccountAuthorityServiceImpl implements AccountAuthorityService {
     public void remove(Long id){
         this.accountAuthorityRepository.deleteById(id);
     }
+
+    @Override
+    public int AuthorityByAccId(Long id) {
+        return this.accountAuthorityRepository.AuthorityByAccId(id);
+    }
 }

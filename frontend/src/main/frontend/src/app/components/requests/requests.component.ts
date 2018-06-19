@@ -16,6 +16,7 @@ export class RequestsComponent implements OnInit {
   constructor(private adminService: AdminService, jwtutils :JwtService, private router: Router) {
     console.log(jwtutils.decodeToken());
     this.adminService.getAllRequests().subscribe(data =>{
+      console.log(data);
       this.requests = data as Array<PropsRequest>;
     });
   }
@@ -25,14 +26,16 @@ export class RequestsComponent implements OnInit {
   }
 
   DeleteRequest(request){//je l' ovo ok?
-    this.adminService.deleteRequest().subscribe(data => {
+    this.adminService.deleteRequest(request.id).subscribe(data => {
       let index = this.requests.indexOf(request);
       this.requests.splice(index, 1);
     });
   }
 
   AcceptRequest(request) {
-    this.adminService.acceptRequest(request.getId());
+    this.adminService.acceptRequest(request.id).subscribe(data =>{
+
+    });
   }
 
 }

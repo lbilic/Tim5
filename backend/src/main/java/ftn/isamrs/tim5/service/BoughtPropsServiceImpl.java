@@ -19,7 +19,7 @@ public class BoughtPropsServiceImpl implements BoughtPropsService {
     private AccountRepository accountRepository;
 
     @Override
-    public BoughtProps findBoughtPropById(Long id) {
+    public List<BoughtProps> findBoughtPropById(Long id) {
         return boughtPropsRepository.findBoughtPropById(id);
     }
 

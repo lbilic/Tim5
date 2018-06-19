@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BoughtPropsService {
 
-    BoughtProps findBoughtPropById(Long id);
+    List<BoughtProps> findBoughtPropById(Long id);
     List<BoughtProps> findAllByUserId(Long id);
     BoughtProps saveBoughtProp(BoughtProps boughtProps, Account account);
 

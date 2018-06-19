@@ -36,5 +36,8 @@ public class PropsRequestServiceImpl implements PropsRequestService {
         return propsRequestRepository.save(request);
     }
 
+    @Override
+    public List<PropRequest> getAll() { return propsRequestRepository.getAll(); }
+
 
 }

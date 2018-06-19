@@ -62,7 +62,12 @@ import { CineterDetailsComponent } from './components/cineter-details/cineter-de
 import { FriendsService } from "./services/friends/friends.service";
 import { UserViewPropsComponent } from './components/user-view-props/user-view-props.component';
 import { SellPropsComponent } from './components/sell-props/sell-props.component';
-import { RequestsComponent } from './components/requests/requests.component';
+import { RequestsComponent } from './components/requests/requests.component'
+import { MyPropsComponent } from './components/my-props/my-props.component';
+import { BoughtPropsComponent } from './components/bought-props/bought-props.component';
+import { HandleBiddingComponent } from './components/handle-bidding/handle-bidding.component';
+import { BidModalComponent } from './components/bid-modal/bid-modal.component';
+import { MyBiddingsComponent } from './components/my-biddings/my-biddings.component';
 import { ListMoviesComponent } from './components/list-movies/list-movies.component';
 import { ChangeShowComponent } from './components/change-show/change-show.component'
 import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-movie-screening.component";
@@ -94,6 +99,11 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
     UserViewPropsComponent,
     SellPropsComponent,
     RequestsComponent,
+    MyPropsComponent,
+    BoughtPropsComponent,
+    HandleBiddingComponent,
+    BidModalComponent,
+    MyBiddingsComponent,
     ListMoviesComponent,
     ChangeShowComponent,
     AddMovieComponent
@@ -221,6 +231,22 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
       {
         path: 'get_all_requests',
         component: RequestsComponent
+      },
+      {
+        path: 'my_props',
+        component: MyPropsComponent
+      },
+      {
+        path: 'bought_props',
+        component: BoughtPropsComponent
+      },
+      {
+        path: 'bids_for_my_prop',
+        component: HandleBiddingComponent
+      },
+      {
+        path: 'my_biddings',
+        component: MyBiddingsComponent
       }
 
       ],
@@ -244,7 +270,8 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
     MovieScreeningService, AuthService, FriendsService, HallService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BidModalComponent]
 })
 
 export class AppModule {

@@ -1,4 +1,7 @@
+import {Account} from "./account";
+import {Props} from "./props";
+
 export class PropsRequest{
 
-  constructor(){}
+  constructor(public id: number, public account: Account, public props : Props){}
 }

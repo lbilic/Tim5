@@ -12,6 +12,9 @@ public class BoughtProps {
     private Long id;
 
     @Column(nullable = false)
+    Long propId;
+
+    @Column(nullable = false)
     String name;
 
     @Column(nullable = false)
@@ -23,10 +26,13 @@ public class BoughtProps {
     @ManyToOne
     Account account;
 
+    //dodati verziju kako bi transakcije radile
+
     public BoughtProps() {}
 
-    public BoughtProps(String name, String description, int amount) {
+    public BoughtProps(Long propId, String name, String description, int amount) {
         super();
+        this.propId = propId;
         this.name = name;
         this.description = description;
         this.amount = amount;
@@ -70,5 +76,13 @@ public class BoughtProps {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Long getPropId() {
+        return propId;
+    }
+
+    public void setPropId(Long propId) {
+        this.propId = propId;
     }
 }

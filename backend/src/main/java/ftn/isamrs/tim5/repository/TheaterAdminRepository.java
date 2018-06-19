@@ -9,7 +9,14 @@ import java.util.List;
 
 public interface TheaterAdminRepository extends JpaRepository<CineterAdmin, Long> {
 
-    @Query(value = "SELECT * FROM Cineter_Admin ca WHERE ca.cineter_id = :CinId and ca.is_fan_zone = true", nativeQuery = true)
-    List<CineterAdmin> findFanZoneAdmins(@Param("CinId") Long id);
 
+    //Ili da ne bude native query nego da bude hibernate ili da odradim inner join sa account jer on pravi objekat
+    // a nema sve jer gleda samo cineter_admin tabelu jer je native query
+    //@Query(value = "SELECT * FROM Cineter_Admin ca WHERE ca.cineter_id = :CinId and ca.is_fan_zone = true", nativeQuery = true)
+    //List<CineterAdmin> findFanZoneAdmins(@Param("CinId") Long id);
+
+
+    @Query(value = "SELECT * from Cineter_Admin ca INNER JOIN ACCOUNT A ON ca.id = a.id WHERE ca.cineter_id=:CinId " +
+            "and ca.is_fan_zone = true", nativeQuery = true)
+    List<CineterAdmin> findFanZoneAdmins(@Param("CinId") Long id);
 }

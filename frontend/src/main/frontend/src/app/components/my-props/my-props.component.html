@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Price</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of props">
+    <td>{{i.id}}</td>
+    <td>{{i.name}}</td>
+    <td>{{i.price}}</td>
+    <td>{{i.description}}</td>
+    <td> <button (click)="ChangeProp(i)"  class="btn btn-success" >Change</button> </td>
+    <td> <button (click)="DeleteProp(i)"  class="btn btn-success" >Delete</button> </td>
+  </tr>
+
+  </tbody>
+</table>

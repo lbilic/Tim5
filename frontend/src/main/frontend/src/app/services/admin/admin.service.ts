@@ -19,8 +19,8 @@ export class AdminService {
     return this.http.get('http://localhost:8080/api/admin/accept_request?id=' + id);
   }
 
-  deleteRequest(){
-    return this.http.get('http://localhost:8080/api/admin/delete_request')
+  deleteRequest(id){
+    return this.http.get('http://localhost:8080/api/admin/deny_request?id=' + id);
   }
 
 }
