@@ -20,16 +20,16 @@ public class Show {
 	@Column(nullable = false)
     String description;
 
-	@Column(nullable = false)
+	@Column
 	String director;
 
-	@Column(nullable = false)
+	@Column
 	String runtime;
 
-	@Column(nullable = false)
+	@Column
 	String genre;
 
-	@Column(nullable = false)
+	@Column
 	String stars;
 
 	@Column (nullable = false, columnDefinition = "BOOL DEFAULT FALSE")

@@ -24,7 +24,8 @@
       Add show</button> </td>
     <td *ngIf="!i.isTheater"> <button (click)="AddMovie(i)"  class="btn btn-success" >
       Add movie</button> </td>
-    <td *ngIf="!i.isRated"> <button (click)="Rate(i.id)" class="btn btn-success">Rate</button> </td>
+
+    <td *ngIf="i.canRate"> <button (click)="Rate(i.id)" class="btn btn-success">Rate</button> </td>
     <td> <button (click)="ShowProps(i)"  class="btn btn-success" >Props</button> </td>
     <td> <button (click)="SellProps(i)"  class="btn btn-success" >Sell props</button> </td>
   </tr>

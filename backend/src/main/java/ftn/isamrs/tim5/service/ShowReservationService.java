@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface ShowReservationService {
     List<ShowReservation> findAll();
+
+    List<ShowReservation> findMyReservations(Long id, Long cineterId);
 }

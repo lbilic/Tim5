@@ -1,7 +1,6 @@
 insert into authority (id, name) values (1, 'ADMIN')
 insert into authority (id, name) values (2, 'USER')
 insert into authority (id, name) values (3, 'FAN_ADMIN')
-insert into authority (id, name) values (4, 'CINETER_ADMIN')
 
 INSERT INTO ACCOUNT (ID, USERNAME, PASSWORD, CONFIRMED, EMAIL, LAST_NAME, ACTIVATION_ID, NAME) VALUES (789, 'aa', '$2a$10$9AG/inYS7fWOHPhxQCtd0Og2gVYnbhwFBUsHaAOek5QAKSQtWItRC', TRUE, 'aa', 'aa', 'HSAHA','aa')
 INSERT INTO ACCOUNT (ID, USERNAME, PASSWORD, CONFIRMED, EMAIL, LAST_NAME, ACTIVATION_ID, NAME) VALUES (790, 'pera', '$2a$10$9AG/inYS7fWOHPhxQCtd0Og2gVYnbhwFBUsHaAOek5QAKSQtWItRC', TRUE, 'aa', 'aa', 'HSAHA','aa')
@@ -32,18 +31,10 @@ INSERT INTO CINETER_ADMIN(ID, CINETER_ID, CHANGED_PASSWORD, IS_FAN_ZONE) VALUES 
 INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (54, 789, 3)
 INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (56, 790, 2)
 INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (57, 792, 2)
-INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (59, 794, 4)
 
 INSERT INTO SHOW (ID, DESCRIPTION, IS_MOVIE, NAME, CINETER_ID) VALUES (25, 'Životna komedija',false, 'CABARES CABAREI', 21)
 INSERT INTO SHOW (ID, DESCRIPTION, IS_MOVIE, NAME, CINETER_ID) VALUES (22, 'Reditelj:	David Leitch',true, 'Deadpool 2', 11)
 INSERT INTO SHOW (ID, DESCRIPTION, IS_MOVIE, NAME, CINETER_ID) VALUES (250, 'Rat između dobra i zla se nastavlja!',true, 'Osvetnici:Rat beskraja', 10)
-
-INSERT INTO SHOW (ID, DESCRIPTION, DIRECTOR, GENRE, IS_MOVIE, NAME, RUNTIME, STARS, CINETER_ID) VALUES (25, 'Socijalno angažovana crna komedija koja na izvrnut i ekscentričan način progovara o punktu naše svakodnevice – siromaštvu','Aleksandar Janković', 'Komedija', false, 'Amateri', '100 min', 'Milena Predić, Marko Janjić, Srđan Bjelogrlić', 21)
-INSERT INTO SHOW (ID, DESCRIPTION, DIRECTOR, GENRE, IS_MOVIE, NAME, RUNTIME, STARS, CINETER_ID) VALUES (25, 'Socijalno angažovana crna komedija koja na izvrnut i ekscentričan način progovara o punktu naše svakodnevice – siromaštvu','Aleksandar Janković', 'Komedija', false, 'Amateri', '100 min', 'Milena Predić, Marko Janjić, Srđan Bjelogrlić', 21)
-
-INSERT INTO SHOW (ID, DESCRIPTION, DIRECTOR, GENRE, IS_MOVIE, NAME, RUNTIME, STARS, CINETER_ID) VALUES (22, 'Foul-mouthed mutant mercenary Deadpool brings together a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal Cable.','David Leitch', 'Action, Adventure, Comedy', true, 'Deadpool 2','119 min', 'Ryan Reynolds, Josh Brolin, Morena Baccarin', 11)
-
-INSERT INTO SHOW (ID, DESCRIPTION, DIRECTOR, GENRE, IS_MOVIE, NAME, RUNTIME, STARS, CINETER_ID) VALUES (250, 'The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.','Anthony Russo, Joe Russo','Action, Adventure, Fantasy ', true, 'Avengers: Infinity War', '149 min',' Robert Downey Jr., Chris Hemsworth, Mark Ruffalo', 10)
 
 INSERT INTO PSBASE (ID, DATE, FAST_RESERVATION_SEATS, PRICE, HALL_ID, SHOW_ID) VALUES (10, '2018-07-20 16:00:00', 'A2,B5,C6', 100, 15, 22)
 INSERT INTO MOVIE_SCREENING (TYPE, ID) VALUES ('3D', 10)
@@ -66,7 +57,6 @@ INSERT INTO PERFORMANCE (ID) VALUES (21)
 
 INSERT INTO PSBASE (ID, DATE, FAST_RESERVATION_SEATS, PRICE, HALL_ID, SHOW_ID) VALUES (22, '2018-07-20 21:00:00', 'A5,B4,C3,D2,E1', 300, 21, 25)
 INSERT INTO PERFORMANCE (ID) VALUES (22)
-
 
 INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) VALUES (7891, 'opis props1', 'Props1', 10, 200, 10, 789)
 INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) VALUES (7896, 'opis props2', 'Props2', 10, 300, 10, 789)

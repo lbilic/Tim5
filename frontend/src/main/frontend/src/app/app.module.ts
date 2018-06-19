@@ -74,12 +74,10 @@ import { ChangeShowComponent } from './components/change-show/change-show.compon
 import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-movie-screening.component";
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import {AgmCoreModule} from "@agm/core";
-import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
-import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
-import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
-import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
 import {RateService} from "./services/rate/rate.service";
 import { RateModalComponent } from './components/rate-modal/rate-modal.component';
+import {ListProjectionsComponent} from "./components/list-projections/list-projections.component";
+import {ListPerformancesComponent} from "./components/list-performances/list-performances.component";
 
 @NgModule({
   exports: [RouterModule],
