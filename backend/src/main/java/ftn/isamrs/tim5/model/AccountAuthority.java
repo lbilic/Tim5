@@ -1,5 +1,8 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +14,11 @@ public class AccountAuthority {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonBackReference
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonManagedReference
     private Authority authority;
 
     public AccountAuthority() { }

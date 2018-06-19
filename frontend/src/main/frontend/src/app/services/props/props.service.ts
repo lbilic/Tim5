@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {PropsCreate} from "../../models/propsCreate";
 import {Props} from "../../models/props";
 import {Cineter} from "../../models/cineter";
@@ -67,7 +67,7 @@ export class PropsService {
   }
 
   deleteUserProp(id){
-    return this.http.get('http://localhost:8080/api/props/delete_user_prop?id='+id);
+    return this.http.get('http://localhost:8080/api/props/delete_user_prop?id='+id, {headers: new HttpHeaders({"Accepts" : "text/plain"})});
   }
 
 }

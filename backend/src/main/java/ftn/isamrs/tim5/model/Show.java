@@ -1,6 +1,8 @@
 package ftn.isamrs.tim5.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,8 @@ public class Show {
 	@OneToMany(fetch = FetchType.LAZY)
     List<Performance> performances;
 
-	@ManyToOne()
+	@ManyToOne
+	@JsonBackReference
 	Cineter cineter;
 
 	@Version

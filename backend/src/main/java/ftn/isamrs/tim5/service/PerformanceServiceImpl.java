@@ -67,4 +67,9 @@ public class PerformanceServiceImpl implements PerformanceService {
         return performances;
     }
 
+    @Override
+    public List<Performance> findAll() {
+        return this.performanceRepository.findAll();
+    }
+
 }

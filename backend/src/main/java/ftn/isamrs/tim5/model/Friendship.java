@@ -1,5 +1,6 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ftn.isamrs.tim5.model.enumeration.FriendshipStatus;
 
 import javax.persistence.*;

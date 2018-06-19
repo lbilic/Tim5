@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Cineter} from "../../models/cineter";
 import {ActivatedRoute, Params} from "@angular/router";
 import {CineterService} from "../../services/cineter/cineter.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AgmMap} from "@agm/core";
+import {JwtService} from "../../core/services/jwt.service";
 
 @Component({
   selector: 'app-cineter-details',
@@ -15,10 +17,13 @@ export class CineterDetailsComponent implements OnInit {
   id : number;
   form : FormGroup;
   returnURL: string = '';
-
+  @ViewChild(AgmMap) map: AgmMap;
+  latitude: number;
+  longitude: number;
 
   constructor(private fb: FormBuilder, private route : ActivatedRoute,
-              private cineterService: CineterService, private router: Router) {
+              private cineterService: CineterService, private router: Router, private jwtService : JwtService) {
+    this.cineter = new Cineter(0, '', '', '', false);
     this.route.params.subscribe((param: Params) => {
       this.id = param['id'];
       this.getCineter();
@@ -62,7 +67,19 @@ export class CineterDetailsComponent implements OnInit {
   private getCineter() {
     this.cineterService.getCineterById(this.id).subscribe(data => {
       this.cineter = data as Cineter;
-      console.log(this.cineter);
+
+      this.getMap();
+
+    });
+  }
+
+  getMap(){
+    this.cineterService.getLocation(this.cineter.city, this.cineter.address).subscribe(response =>{
+      if (response.status != 'OK') return;
+      this.latitude = response.results[0].geometry.location.lat;
+      this.longitude = response.results[0].geometry.location.lng;
+      this.map.triggerResize();
+
     });
   }
 

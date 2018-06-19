@@ -1,5 +1,7 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Where;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -50,6 +52,7 @@ public class Account {
     private List<BoughtProps> boughtProps;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonManagedReference
     private List<AccountAuthority> accountAuthorities;
 
     @OneToMany(cascade = CascadeType.REMOVE)
@@ -62,7 +65,7 @@ public class Account {
     private List<Review> reviews;
 
     public Account(String username, String password, int version, boolean deleted, String name,
-                   String lastName, String email, String activationId, /*String number,*/ boolean confirmed) {
+                   String lastName, String email, String activationId, boolean confirmed) {
         this.username = username;
         this.version = version;
         this.deleted = deleted;
@@ -78,6 +81,8 @@ public class Account {
 
     public Account() {
         this.accountAuthorities = new ArrayList<>();
+        this.showReservations = new ArrayList<>();
+        this.movieReservations = new ArrayList<>();
         this.confirmed = false;
         this.props = new ArrayList<Props>();
         this.boughtProps = new ArrayList<BoughtProps>();
@@ -88,6 +93,8 @@ public class Account {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.password = encoder.encode(password);
         this.accountAuthorities = new ArrayList<>();
+        this.showReservations = new ArrayList<>();
+        this.movieReservations = new ArrayList<>();
     }
 
     public String getName() {

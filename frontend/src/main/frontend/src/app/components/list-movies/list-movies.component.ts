@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ShowService} from "../../services/show/show.service";
 import {Show} from "../../models/show";
 import {Router} from "@angular/router";
+import {MovieScreeningCreate} from "../../models/movieScreeningCreate";
 
 @Component({
   selector: 'app-list-movies',
@@ -11,14 +12,19 @@ import {Router} from "@angular/router";
 export class ListMoviesComponent implements OnInit {
 
   movies : Array<Show>;
+  projections: Array<MovieScreeningCreate>;
 
   constructor(private showService: ShowService, private router: Router) {
     this.showService.getAllShows().subscribe(data =>{
       this.movies = (data as Array<Show>).filter(item => item.movie);
-      //this.movies = this.movies.filter(item => item.isMovie == false);
-      console.log(this.movies);
+      //this.movies = this.movies.filter(item => item.id);
+      //console.log(this.movies);
     });
 
+    this.showService.getPerformances("movie").subscribe(data => {
+      this.projections = data as Array<MovieScreeningCreate>;
+      console.log(this.projections);
+    });
   }
 
   ngOnInit() {

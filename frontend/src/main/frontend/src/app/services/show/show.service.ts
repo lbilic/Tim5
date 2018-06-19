@@ -29,9 +29,8 @@ export class ShowService {
     return this.http.post('http://localhost:8080/api/show/update_show', show);
   }
 
-  getPerformances(id){
-    return this.http.get('http://localhost:8080/api/show/get_performances?id=' + id);
-
+  getPerformances(type){
+    return this.http.get('http://localhost:8080/api/show/get_performances?type=' + type);
   }
 
 

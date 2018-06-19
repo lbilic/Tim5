@@ -11,4 +11,7 @@ public interface MovieScreeningRepository extends JpaRepository<MovieScreening, 
 
     @Query(value = "SELECT * FROM psbase pb LEFT OUTER JOIN MOVIE_SCREENING ms ON pb.id = ms.id WHERE pb.show_id = :showId", nativeQuery = true)
     List<MovieScreening> findByShowId (@Param("showId") Long id);
+
+    List<MovieScreening> findAll();
+
 }

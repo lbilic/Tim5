@@ -15,7 +15,7 @@ public class ShowReservationServiceImpl implements ShowReservationService {
     private ShowReservationRepository showReservationRepository;
 
     @Override
-    public List<Show> findAll() {
+    public List<ShowReservation> findAll() {
         return this.showReservationRepository.findAll();
     }
 

@@ -24,6 +24,7 @@ import {ShowService} from "./services/show/show.service";
 import {AdminService} from "./services/admin/admin.service";
 import {AddCinetarServiceService} from "./services/cineter/add-cinetar-service.service"
 import {AccountService} from "./services/account/account.service";
+import {ReservationService} from "./services/reservation/reservation.service";
 
 //Services
 import {AuthService} from "./services/auth.service"
@@ -72,6 +73,9 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
 import { ChangeShowComponent } from './components/change-show/change-show.component'
 import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-movie-screening.component";
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
+import {AgmCoreModule} from "@agm/core";
+import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
+import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
 import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
 import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
 import {RateService} from "./services/rate/rate.service";
@@ -123,6 +127,9 @@ import { RateModalComponent } from './components/rate-modal/rate-modal.component
     FormsModule,
     HttpModule,
     ToasterModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBtEDXxVtj8B6Pe_w5S0C7rx8p8rMgaVPU'
+    }),
     SharedModule,
     DatepickerModule,
     NgbModule.forRoot(),
@@ -286,7 +293,7 @@ import { RateModalComponent } from './components/rate-modal/rate-modal.component
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
-    MovieScreeningService, AuthService, FriendsService, HallService, RateService],
+    MovieScreeningService, AuthService, FriendsService, HallService, RateService, ReservationService],
   bootstrap: [AppComponent],
   entryComponents: [BidModalComponent]
 })

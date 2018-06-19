@@ -1,5 +1,7 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
 public class CineterAdmin extends Account {
 
     @ManyToOne
+    @JsonBackReference
     Cineter cineter;
 
     @Column
@@ -28,6 +31,14 @@ public class CineterAdmin extends Account {
     }
 
     public CineterAdmin() {
+    }
+
+    public CineterAdmin(String username, String password, Cineter cineter, Boolean isFanZone, Boolean changedPassword) {
+        super(username, password);
+        this.cineter = cineter;
+        this.isFanZone = isFanZone;
+        this.changedPassword = changedPassword;
+
     }
 
     public Cineter getCineter() {

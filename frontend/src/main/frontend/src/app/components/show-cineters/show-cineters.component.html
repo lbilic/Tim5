@@ -16,7 +16,8 @@
     <td>{{i.city}}</td>
     <td>{{i.isTheater}}</td>
 
-    <td> <button (click)="ChangeCineter(i)"  class="btn btn-success" >Change</button> </td>
+
+    <td> <button (click)="ChangeCineter(i)"  class="btn btn-success" >{{changeText}}</button> </td>
     <td> <button (click)="DeleteCineter(i)"  class="btn btn-success" >Delete</button> </td>
 
     <td *ngIf="i.isTheater"> <button (click)="AddShow(i)"  class="btn btn-success" >

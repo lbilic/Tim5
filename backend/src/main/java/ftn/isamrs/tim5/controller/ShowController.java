@@ -57,14 +57,15 @@ public class ShowController {
     @RequestMapping(value = "/get_performances",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getPerformances(@RequestParam("id") Long id) {
+    public ResponseEntity getPerformances(@RequestParam("type") String type) {
 
-        Show show = showService.findById(id);
+        //Show show = showService.findById(id);
 
         //ako je film dodaj movie screenings
-        if (show.getIsMovie()){
+        if (type.equalsIgnoreCase("movie")){
 
-            List<MovieScreening> movieScreenings = movieScreeningService.findAllByShowId(id);
+            //List<MovieScreening> movieScreenings = movieScreeningService.findAllByShowId(id);
+            List<MovieScreening> movieScreenings = movieScreeningService.findAll();
             ArrayList<MovieScreeningCreateDTO> dtos = new ArrayList<>();
             for (MovieScreening ms : movieScreenings)
                 dtos.add(new MovieScreeningCreateDTO(ms));
@@ -73,7 +74,8 @@ public class ShowController {
         }
         // inace trazi performances
         else {
-            List<Performance> performances = performanceService.findAllByShowId(id);
+            //List<Performance> performances = performanceService.findAllByShowId(id);
+            List<Performance> performances = performanceService.findAll();
             ArrayList<PerformanceCreateDTO> dtos = new ArrayList<>();
             for (Performance p : performances)
                 dtos.add(new PerformanceCreateDTO(p));

@@ -88,7 +88,7 @@ public class AppUserController {
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
 
             Long id = account.getId();
-            TokenDTO userToken = new TokenDTO(jwtUtils.generateToken(details, id));
+            TokenDTO userToken = new TokenDTO(jwtUtils.generateToken(details, id, account.getAccountAuthorities()));
             return new ResponseEntity<>(userToken, HttpStatus.OK);
         } catch(ForbiddenException ex) {
             return new ResponseEntity(HttpStatus.FORBIDDEN);
@@ -245,7 +245,7 @@ public class AppUserController {
     @RequestMapping(value = "/api/get_friends",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getAllShows(@RequestHeader("Authentication-Token") String token) {
+    public ResponseEntity getAllFriends(@RequestHeader("Authentication-Token") String token) {
         String username = jwtUtils.getUsernameFromToken(token);
         List<Friendship> friendships = friendshipService.findAllBySender(username);
         ArrayList<AccountDTO> dtos = new ArrayList<>();

@@ -73,4 +73,9 @@ public class MovieScreeningServiceImpl implements MovieScreeningService {
         return movieScreenings;
     }
 
+    @Override
+    public List<MovieScreening> findAll() {
+        return this.movieScreeningRepository.findAll();
+    }
+
 }

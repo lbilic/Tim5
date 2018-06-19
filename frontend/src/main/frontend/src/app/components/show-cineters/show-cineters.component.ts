@@ -14,15 +14,13 @@ import {RateModalComponent} from "../rate-modal/rate-modal.component";
 export class ShowCinetersComponent implements OnInit {
 
   cineters : Array<Cineter>;
+  changeText : string;
   modalRef : BsModalRef;
+  constructor(private modalService : BsModalService, private rateService : RateService,private cineterService: CineterService,private jwtService :JwtService, private router: Router) {
+    this.changeText =
+      this.jwtService.hasRole('ADMIN')  ? "Change" : "Details";
 
-  constructor(private rateService : RateService, private cineterService: CineterService, jwtutils :JwtService,
-              private router: Router, private modalService : BsModalService) {
-    this.cineterService.getAllCineters().subscribe(data =>{
-      this.cineters = data as Array<Cineter>;
 
-      for(let i of this.cineters) this.canRate(i);
-    });
   }
 
   ngOnInit() {
