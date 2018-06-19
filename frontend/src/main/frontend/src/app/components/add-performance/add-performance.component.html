@@ -11,11 +11,29 @@
         class="form-control">
     </div>
 
+    <div class="form-group">
+      <label>Time</label>
+      <input
+        formControlName="time"
+        id="time"
+        placeholder="Time..."
+        type="text"
+        class="form-control">
+      <div *ngIf="time.touched && time.invalid" class="alert alert-danger">
+        <div id="timeRequiredError" *ngIf="time.errors.required;">
+          The time is required!
+        </div>
+        <div id="timePatern" *ngIf="time.errors.pattern;">
+          Pattern doesn't match! It should be hh:mm
+        </div>
+      </div>
+    </div>
+
     <label>Price</label>
     <input
       formControlName="price"
       id="price"
-      placeholder="price..."
+      placeholder="Price..."
       type="number"
       class="form-control">
     <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
@@ -24,18 +42,28 @@
       </div>
     </div>
 
-    <!--
+    <br/>
 
-
-    <div ngForm="let i of fastReservationIndex">
-      <app-add-performance [tralala]="{{i.ime_showa}}">
-      </app-add-performance>
+    <div class="form-group">
+      <label>Seats for fast reservation</label>
+      <input
+        formControlName="fastSeats"
+        id="fastSeats"
+        placeholder="Seats[A1,A2,B1,B2]..."
+        type="text"
+        class="form-control">
     </div>
-  -->
+    <div *ngIf="fastSeats.touched && fastSeats.invalid" class="alert alert-danger">
+      <div id="fastSeatsRequired" *ngIf="fastSeats.errors.required;">
+        This field is required!
+      </div><div id="fastSeatsPattern" *ngIf="fastSeats.errors.pattern;">
+      Pattern doesn't match! It should be A1,A2,A3
+    </div>
+    </div>
 
     <br/>
     <select style="margin: 20px" (change)="onChange($event.target.selectedIndex)">
-      <option *ngFor="let h of halls" [ngValue]="item" > Hala: {{h.number}}, {{h.columns}}</option>
+      <option *ngFor="let h of halls" [ngValue]="item" > Hall: {{h.number}}, Number of seats: {{h.columns*h.rows}}</option>
     </select>
 
     <br/>

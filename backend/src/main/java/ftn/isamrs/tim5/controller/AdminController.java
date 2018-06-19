@@ -1,6 +1,7 @@
 package ftn.isamrs.tim5.controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.security.JWTUtils;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,10 +78,11 @@ public class AdminController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createPerformance(@RequestBody PerformanceCreateDTO projection,
-                                            @RequestParam() Long id)
+                                            @RequestParam() Long id,
+                                            @RequestParam() String time)
     {
 
-        Performance performance = performanceService.savePerformance(projection, id);
+        Performance performance = performanceService.savePerformance(projection, id, time);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -88,9 +91,10 @@ public class AdminController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity createMovieScreening(@RequestBody MovieScreeningCreateDTO dto,
-                                               @RequestParam() Long id)
+                                               @RequestParam() Long id,
+                                               @RequestParam() String time)
     {
-        MovieScreening movieScreening = movieScreeningService.saveMovieScreening(dto, id);
+        MovieScreening movieScreening = movieScreeningService.saveMovieScreening(dto, id, time);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

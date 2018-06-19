@@ -50,4 +50,14 @@ export class ListShowsComponent implements OnInit {
     this.router.navigate([`/add_performance/${i.id}`]);
 
   }
+
+  ListProjections(i){
+    this.router.navigate([`/projections/${i.id}`]);
+
+  }
+
+  ListPerformances(i){
+    this.router.navigate([`/performances/${i.id}`]);
+
+  }
 }

@@ -8,9 +8,9 @@ export class AddPerformanceService {
   constructor(private http : HttpClient) {
   }
 
-  registerPerformance(performance : PerformanceCreate, id)
+  registerPerformance(performance : PerformanceCreate, id, time)
   {
-    return this.http.post('http://localhost:8080/api/admin/create_performance?id='+id, performance);
+    return this.http.post('http://localhost:8080/api/admin/create_performance?id='+id+'&time='+time, performance);
   }
 
 

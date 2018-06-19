@@ -2,7 +2,6 @@ package ftn.isamrs.tim5.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -24,8 +23,8 @@ public abstract class PSBase {
 
     @Column(nullable = false)
     @ElementCollection
-    List<Integer> seatLayout;
-    //0 0 1 0 0 0 0 0 0 0 0
+    List<String> reservedSeats;
+    //A1, A2, A3
 
     @ManyToOne(cascade=CascadeType.ALL)
     Hall hall;
@@ -35,8 +34,7 @@ public abstract class PSBase {
     Show show;
 
     @Column(nullable = false)
-    @ElementCollection
-    List<Integer> fastReservationIndex; // 2 3 5
+    String fastReservationSeats; // "A1" "A2"
 
 
 
@@ -80,20 +78,18 @@ public abstract class PSBase {
         this.hall = hall;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public List<Integer> getSeatLayout() {
-        return seatLayout;
+    public List<String> getReservedSeats() {
+        return reservedSeats;
     }
 
-    public void setSeatLayout(List<Integer> seatLayout) {
-        this.seatLayout = seatLayout;
+    public void setReservedSeats(List<String> reservedSeats) {
+        this.reservedSeats = reservedSeats;
     }
 
     public Show getShow() {
@@ -104,11 +100,10 @@ public abstract class PSBase {
         this.show = show;
     }
 
-    public List<Integer> getFastReservationIndex() {
-        return fastReservationIndex;
+    public String getFastReservationSeats() {
+        return fastReservationSeats;
     }
 
-    public void setFastReservationIndex(List<Integer> fastReservationIndex) {
-        this.fastReservationIndex = fastReservationIndex;
-    }
+    public void setFastReservationSeats(String fastReservationSeats) {
+        this.fastReservationSeats = fastReservationSeats; }
 }
