@@ -1,5 +1,7 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class Authority {
     private String name;
 
     @OneToMany(mappedBy = "authority", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonBackReference
     private List<AccountAuthority> accountAuthorities;
 
     public Authority() { this.accountAuthorities = new ArrayList<>(); }

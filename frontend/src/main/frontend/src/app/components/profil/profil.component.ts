@@ -104,13 +104,10 @@ export class ProfilComponent implements OnInit {
   updateReservations() {
     this.reservationService.getAllMovieReservations().subscribe(data => {
       this.movieReservations = data as Array<any>;
-      this.reservations = data as Array<any>;
     });
 
     this.reservationService.getAllShowReservations().subscribe(data => {
       this.showReservations = data as Array<any>;
-      this.reservations.concat(data as Array<any>);
-      console.log(this.reservations);
     });
   }
 

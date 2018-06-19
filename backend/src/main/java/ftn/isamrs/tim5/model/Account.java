@@ -1,5 +1,7 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Where;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -50,6 +52,7 @@ public class Account {
     private List<BoughtProps> boughtProps;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @JsonManagedReference
     private List<AccountAuthority> accountAuthorities;
 
     @OneToMany(cascade = CascadeType.REMOVE)
@@ -59,7 +62,7 @@ public class Account {
     private List<ShowReservation> showReservations;
 
     public Account(String username, String password, int version, boolean deleted, String name,
-                   String lastName, String email, String activationId, List<MovieReservation> mr, boolean confirmed) {
+                   String lastName, String email, String activationId, boolean confirmed) {
         this.username = username;
         this.version = version;
         this.deleted = deleted;
@@ -71,7 +74,6 @@ public class Account {
         //this.number = number;
         this.confirmed = confirmed;
         this.activationId = activationId;
-        this.movieReservations = mr;
     }
 
     public Account() {

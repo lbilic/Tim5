@@ -1,4 +1,6 @@
 package ftn.isamrs.tim5.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,15 +25,18 @@ public class Cineter {
 	List<Review> review;
 
 	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
 	List<Show> shows;
 
 	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
     List<CineterAdmin> cineterAdmin;
 
 	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
 	List<Props> props;
 
 	@OneToMany(mappedBy = "cineter", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
 	List<Hall> halls;
 
 	@Column
