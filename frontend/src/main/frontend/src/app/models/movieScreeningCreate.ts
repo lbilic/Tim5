@@ -1,7 +1,5 @@
-import {HallCreate} from "./hallCreate";
-
 export class MovieScreeningCreate{
 
-  constructor (public date: Date, public price : number, public type: string,
-               public hall: HallCreate){}
+  constructor (public id : number, public date: Date, public price : number, public type: string,
+               public hall: number, public fastReservationSeats : string){}
 }

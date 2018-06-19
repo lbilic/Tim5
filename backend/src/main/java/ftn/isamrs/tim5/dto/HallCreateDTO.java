@@ -60,4 +60,12 @@ public class HallCreateDTO implements Serializable {
     public CineterCreateDTO getCineter() { return cineter; }
 
     public void setCineter(CineterCreateDTO cineter) { this.cineter = cineter; }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

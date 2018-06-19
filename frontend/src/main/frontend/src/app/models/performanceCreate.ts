@@ -2,6 +2,6 @@ import {HallCreate} from "./hallCreate";
 
 export class PerformanceCreate{
 
-  constructor (public date: Date, public price : number,
-                public hall: HallCreate){}
+  constructor (public id: number, public date: Date, public price : number,
+                public hall: number, public fastReservationSeats : string){}
 }

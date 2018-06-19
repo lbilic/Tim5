@@ -1,36 +1,27 @@
 package ftn.isamrs.tim5.dto;
 
-import ftn.isamrs.tim5.model.Show;
-import ftn.isamrs.tim5.model.Hall;
 import ftn.isamrs.tim5.model.Performance;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.sql.Time;
 
 public class PerformanceCreateDTO implements Serializable {
 
+    private Long id;
     private Date date;
-    private Time time;
     private float price;
-    private HallCreateDTO hall;
+    private Long hall;
     private ShowCreateDTO show;
+    private String fastReservationSeats;
 
     public PerformanceCreateDTO(){}
 
-    public PerformanceCreateDTO(Date date, Time time, float price, HallCreateDTO hall, ShowCreateDTO show) {
-        this.date = date;
-        this.time = time;
-        this.price = price;
-        this.hall = hall;
-        this.show = show;
-    }
 
     public PerformanceCreateDTO (Performance p){
+        this.id = p.getId();
         this.date= p.getDate();
-        this.hall= new HallCreateDTO(p.getHall());
+        this.hall= p.getHall().getId();
         this.price=p.getPrice();
-        this.show = new ShowCreateDTO(p.getShow());
+        this.fastReservationSeats = p.getFastReservationSeats();
     }
 
     public Date getDate() { return date; }
@@ -38,10 +29,6 @@ public class PerformanceCreateDTO implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public Time getTime() { return time; }
-
-    public void setTime(Time time) { this.time = time; }
 
     public float getPrice() {
         return price;
@@ -51,14 +38,6 @@ public class PerformanceCreateDTO implements Serializable {
         this.price = price;
     }
 
-    public HallCreateDTO getHall() {
-        return hall;
-    }
-
-    public void setHall(HallCreateDTO hall) {
-        this.hall = hall;
-    }
-
     public ShowCreateDTO getShow() {
         return show;
     }
@@ -66,4 +45,20 @@ public class PerformanceCreateDTO implements Serializable {
     public void setShow(ShowCreateDTO show) {
         this.show = show;
     }
+
+    public Long getHall() { return hall; }
+
+    public void setHall(Long hall) { this.hall = hall; }
+
+    public String getFastReservationSeats() {
+        return fastReservationSeats;
+    }
+
+    public void setFastReservationSeats(String fastReservationSeats) {
+        this.fastReservationSeats = fastReservationSeats;
+    }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 }

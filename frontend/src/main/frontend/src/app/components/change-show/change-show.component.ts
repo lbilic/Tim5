@@ -61,14 +61,6 @@ export class ChangeShowComponent implements OnInit {
     });
   }
 
-  /*
-  clicked()
-  {
-    this.show.movie = !this.show.movie;
-
-    console.log(this.show.movie);
-  }*/
-
   private change()
   {
     console.log(this.show);

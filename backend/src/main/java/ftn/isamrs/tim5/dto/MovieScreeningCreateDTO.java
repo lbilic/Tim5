@@ -3,19 +3,23 @@ package ftn.isamrs.tim5.dto;
 import ftn.isamrs.tim5.model.Hall;
 import ftn.isamrs.tim5.model.MovieScreening;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Time;
+import java.util.List;
 
 public class MovieScreeningCreateDTO {
 
+    private Long id;
     private Date date;
-    private Time time;
     private float price;
-    private HallCreateDTO hall;
+    private Long hall;
     private String type;
     private ShowCreateDTO show;
+    private String fastReservationSeats;
 
-    public MovieScreeningCreateDTO(){}
+    public MovieScreeningCreateDTO(){
+    }
 
    /* public MovieScreeningCreateDTO(Date date, float price, String type, HallCreateDTO hall/) {
         this.date = date;
@@ -26,11 +30,12 @@ public class MovieScreeningCreateDTO {
     }*/
 
     public MovieScreeningCreateDTO (MovieScreening ms){
+        this.id = ms.getId();
         this.date = ms.getDate();
-        this.hall = new HallCreateDTO(ms.getHall());
+        this.hall = ms.getHall().getId();
         this.price= ms.getPrice();
         this.type= ms.getType();
-
+        this.fastReservationSeats = ms.getFastReservationSeats();
     }
 
     public Date getDate() { return date; }
@@ -38,10 +43,6 @@ public class MovieScreeningCreateDTO {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public Time getTime() { return time; }
-
-    public void setTime(Time time) { this.time = time; }
 
     public float getPrice() {
         return price;
@@ -51,11 +52,11 @@ public class MovieScreeningCreateDTO {
         this.price = price;
     }
 
-    public HallCreateDTO getHall() {
+    public Long getHall() {
         return hall;
     }
 
-    public void setHall(HallCreateDTO hall) {
+    public void setHall(Long hall) {
         this.hall = hall;
     }
 
@@ -69,5 +70,35 @@ public class MovieScreeningCreateDTO {
 
     public void setShow(ShowCreateDTO show) {
         this.show = show;
+    }
+
+    public String getFastReservationSeats() {
+        return fastReservationSeats;
+    }
+
+    public void setFastReservationSeats(String fastReservationSeats) {
+        this.fastReservationSeats = fastReservationSeats;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+
+
+        return "MovieScreeningCreateDTO{" +
+                "date=" + date +
+                ", price=" + price +
+                ", hall=" + hall +
+                ", type='" + type + '\'' +
+                ", show=" + show +
+                ", fastReservationSeats=" + this.fastReservationSeats +
+                '}';
     }
 }

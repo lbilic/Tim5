@@ -25,6 +25,12 @@ export class AddMovieScreeningComponent implements OnInit {
   {
     this.form = this.fb.group({
       date: ['', [
+        Validators.required
+      ]],
+
+      time: ['', [
+        Validators.required,
+        Validators.pattern('([01]?[0-9]|2[0-3]):[0-5][0-9]')
       ]],
 
       price: ['', [
@@ -34,6 +40,10 @@ export class AddMovieScreeningComponent implements OnInit {
 
       type: ['', [
       ]],
+      fastSeats:['', [
+        Validators.required,
+        Validators.pattern('^(,?[A-Z][1-9][0-9]?)*$')
+      ]]
 
     });
 
@@ -54,6 +64,11 @@ export class AddMovieScreeningComponent implements OnInit {
     return this.form.get('date');
   }
 
+  get time()
+  {
+    return this.form.get('time');
+  }
+
   get price()
   {
     return this.form.get('price');
@@ -63,14 +78,20 @@ export class AddMovieScreeningComponent implements OnInit {
     return this.form.get('type');
   }
 
+  get fastSeats()
+  {
+    return this.form.get('fastSeats');
+  }
+
 
   ngOnInit() {
     this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   register() {
-    this.movieScreeningService.registerMovieScreening(new MovieScreeningCreate(this.date.value,
-      this.price.value, this.type.value, this.halls[this.selected_index]), this.show_id).subscribe(data => {
+    this.movieScreeningService.registerMovieScreening(new MovieScreeningCreate(null, this.date.value,
+      this.price.value, this.type.value, this.halls[this.selected_index].id, this.fastSeats.value),
+      this.show_id, this.time.value).subscribe(data => {
       this.router.navigateByUrl(this.returnURL);
     });
   }

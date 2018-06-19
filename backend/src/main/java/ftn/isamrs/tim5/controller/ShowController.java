@@ -1,9 +1,18 @@
 package ftn.isamrs.tim5.controller;
 
+import ftn.isamrs.tim5.dto.MovieScreeningCreateDTO;
+import ftn.isamrs.tim5.dto.PerformanceCreateDTO;
 import ftn.isamrs.tim5.dto.ShowCreateDTO;
+
+import ftn.isamrs.tim5.model.MovieScreening;
+import ftn.isamrs.tim5.model.Performance;
 import ftn.isamrs.tim5.model.Show;
+
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.ShowService;
+import ftn.isamrs.tim5.service.MovieScreeningService;
+import ftn.isamrs.tim5.service.PerformanceService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +31,12 @@ public class ShowController {
     ShowService showService;
 
     @Autowired
+    PerformanceService performanceService;
+
+    @Autowired
+    MovieScreeningService movieScreeningService;
+
+    @Autowired
     JWTUtils jwtUtils;
 
     @RequestMapping(value = "/get_all",
@@ -35,6 +50,35 @@ public class ShowController {
             dtos.add(new ShowCreateDTO(show));
 
         return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get_performances",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getPerformances(@RequestParam("id") Long id) {
+
+        Show show = showService.findById(id);
+
+        //ako je film dodaj movie screenings
+        if (show.isMovie()){
+
+            List<MovieScreening> movieScreenings = movieScreeningService.findAllByShowId(id);
+            ArrayList<MovieScreeningCreateDTO> dtos = new ArrayList<>();
+            for (MovieScreening ms : movieScreenings)
+                dtos.add(new MovieScreeningCreateDTO(ms));
+
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+        // inace trazi performances
+        else {
+            List<Performance> performances = performanceService.findAllByShowId(id);
+            ArrayList<PerformanceCreateDTO> dtos = new ArrayList<>();
+            for (Performance p : performances)
+                dtos.add(new PerformanceCreateDTO(p));
+
+            return new ResponseEntity<>(dtos, HttpStatus.OK);
+        }
+
     }
 
     @RequestMapping(value = "get_show",

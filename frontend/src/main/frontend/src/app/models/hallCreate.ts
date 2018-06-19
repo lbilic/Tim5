@@ -1,6 +1,6 @@
 export class HallCreate{
 
-  constructor(public number :number, public rows :number,
+  constructor(public id : number, public number :number, public rows :number,
               public columns :number){
 
   }

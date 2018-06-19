@@ -72,6 +72,8 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
 import { ChangeShowComponent } from './components/change-show/change-show.component'
 import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-movie-screening.component";
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
+import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
+import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -106,7 +108,9 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
     MyBiddingsComponent,
     ListMoviesComponent,
     ChangeShowComponent,
-    AddMovieComponent
+    AddMovieComponent,
+    ListProjectionsComponent,
+    ListPerformancesComponent
   ],
   imports: [
     BrowserModule,
@@ -196,6 +200,16 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
       {
         path: 'add_movie_screening/:id',
         component: AddMovieScreeningComponent
+      },
+
+      {
+        path: 'projections/:id',
+        component: ListProjectionsComponent
+      },
+
+      {
+        path: 'performances/:id',
+        component: ListPerformancesComponent
       },
 
       {

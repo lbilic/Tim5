@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th>Fast reservation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of moviescreenings">
+    <td>{{i.id}}</td>
+    <td><div *ngFor="let seat of i.fastReservationSeats.split(',')">
+      <button class="btn btn-warning">{{seat}}</button>
+    </div></td>
+
+  </tr>
+  </tbody>
+</table>

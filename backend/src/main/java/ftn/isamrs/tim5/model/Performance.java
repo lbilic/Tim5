@@ -9,10 +9,6 @@ import java.util.Date;
 @Table(name = "Performance")
 public class Performance extends PSBase {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long id;
-
 	public Performance() { }
 
 	public Performance(Date date, float price , Hall hall) {
