@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(login)
       .subscribe((successfullyLoggedIn) => {
         if(successfullyLoggedIn) {
-
           this.accountService.getCurrentUser().subscribe(data =>{
 
               let user = data as CineterAdminCreate;

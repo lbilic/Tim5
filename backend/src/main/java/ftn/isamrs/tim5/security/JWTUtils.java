@@ -1,5 +1,6 @@
 package ftn.isamrs.tim5.security;
 
+import ftn.isamrs.tim5.model.AccountAuthority;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -68,11 +69,16 @@ public class JWTUtils {
                 && !isTokenExpired(token);
     }
 
-    public String generateToken(UserDetails userDetails, Long id) {
+    public String generateToken(UserDetails userDetails, Long id, List<AccountAuthority> accountAuthorities) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", userDetails.getUsername());
         claims.put("created", new Date(System.currentTimeMillis()));
         List<String> roles = new ArrayList<>();
+        for(AccountAuthority aa : accountAuthorities)
+            for(AccountAuthority aa1 : aa.getAuthority().getAccountAuthorities()) {
+                roles.add(aa1.getAuthority().getName());
+                System.out.println(aa1.getAuthority().getName());
+            }
         claims.put("roles", roles);
         claims.put("id", id);
         return Jwts.builder().setClaims(claims)

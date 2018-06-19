@@ -88,7 +88,7 @@ public class AppUserController {
             UserDetails details = userDetailsService.loadUserByUsername(loginDTO.getUsername());
 
             Long id = account.getId();
-            TokenDTO userToken = new TokenDTO(jwtUtils.generateToken(details, id));
+            TokenDTO userToken = new TokenDTO(jwtUtils.generateToken(details, id, account.getAccountAuthorities()));
             return new ResponseEntity<>(userToken, HttpStatus.OK);
         } catch(ForbiddenException ex) {
             return new ResponseEntity(HttpStatus.FORBIDDEN);

@@ -27,6 +27,7 @@ export class AuthService {
       .map((token: JwtToken) => {
         if(token.value) {
           this.jwtService.setToken(token.value);
+          console.log(this.jwtService.getRolesFromToken());
           return true;
         }
         else return false;
