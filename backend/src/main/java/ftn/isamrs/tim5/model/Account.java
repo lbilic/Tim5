@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ftn.isamrs.tim5.model.enumeration.AccountLevel;
 import org.hibernate.annotations.Where;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -63,9 +64,15 @@ public class Account {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "account")
     private List<Review> reviews;
+    
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    private int points;
+
+    @Column
+    AccountLevel accountLevel;
 
     public Account(String username, String password, int version, boolean deleted, String name,
-                   String lastName, String email, String activationId, boolean confirmed) {
+                   String lastName, String email, String activationId, boolean confirmed, int points) {
         this.username = username;
         this.version = version;
         this.deleted = deleted;
@@ -77,6 +84,8 @@ public class Account {
         //this.number = number;
         this.confirmed = confirmed;
         this.activationId = activationId;
+        this.points = points;
+        accountLevel = AccountLevel.SILVER;
     }
 
     public Account() {
@@ -192,4 +201,21 @@ public class Account {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+    
+    public int getPoints() { return this.points; }
+
+    public void setPoints(int points) { this.points = points; }
+
+    public void updateLevel(List<Integer> scale) {
+        if(this.points > scale.get(3))
+            this.setAccountLevel(AccountLevel.DIAMOND);
+        else if (this.points > scale.get(2))
+            this.setAccountLevel(AccountLevel.PLATINUM);
+        else if (this.points > scale.get(1))
+            this.setAccountLevel(AccountLevel.GOLD);
+    }
+
+    public AccountLevel getAccountLevel() { return accountLevel; }
+
+    public void setAccountLevel(AccountLevel accountLevel) { this.accountLevel = accountLevel; }
 }

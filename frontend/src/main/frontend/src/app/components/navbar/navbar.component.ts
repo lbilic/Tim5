@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 // service
-import { JwtService } from "../../core/services/jwt.service";
-import { AuthService } from "../../core/services/auth.service";
+import { JwtService } from "../../services/jwt.service";
+import { AuthService } from "../../services/auth.service";
 import { BsModalService } from "ngx-bootstrap";
 
 @Component({

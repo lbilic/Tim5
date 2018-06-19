@@ -80,6 +80,11 @@
                   <span class="fa fa-expeditedssl"></span> Change password
                 </a>
               </li>
+            <li *ngIf="jwtService.hasRole('ADMIN')">
+              <a routerLink="/admin_panel" >
+                <span class="fa fa-sliders"></span> Control panel
+              </a>
+            </li>
             <li *ngIf="jwtService.tokenExist()">
               <a (click)="logout()">
                 <span class="fa fa-sign-out"></span> Sign out

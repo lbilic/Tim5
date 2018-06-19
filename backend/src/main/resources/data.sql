@@ -1,6 +1,7 @@
 insert into authority (id, name) values (1, 'ADMIN')
 insert into authority (id, name) values (2, 'USER')
 insert into authority (id, name) values (3, 'FAN_ADMIN')
+insert into system(id) values (1)
 
 INSERT INTO ACCOUNT (ID, USERNAME, PASSWORD, CONFIRMED, EMAIL, LAST_NAME, ACTIVATION_ID, NAME) VALUES (789, 'aa', '$2a$10$9AG/inYS7fWOHPhxQCtd0Og2gVYnbhwFBUsHaAOek5QAKSQtWItRC', TRUE, 'aa', 'aa', 'HSAHA','aa')
 INSERT INTO ACCOUNT (ID, USERNAME, PASSWORD, CONFIRMED, EMAIL, LAST_NAME, ACTIVATION_ID, NAME) VALUES (790, 'pera', '$2a$10$9AG/inYS7fWOHPhxQCtd0Og2gVYnbhwFBUsHaAOek5QAKSQtWItRC', TRUE, 'aa', 'aa', 'HSAHA','aa')
@@ -31,6 +32,7 @@ INSERT INTO CINETER_ADMIN(ID, CINETER_ID, CHANGED_PASSWORD, IS_FAN_ZONE) VALUES 
 INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (54, 789, 3)
 INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (56, 790, 2)
 INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (57, 792, 2)
+INSERT INTO ACCOUNT_AUTHORITY(ID, ACCOUNT_ID, AUTHORITY_ID) VALUES (58, 794, 1)
 
 INSERT INTO SHOW (ID, DESCRIPTION, IS_MOVIE, NAME, CINETER_ID) VALUES (25, 'Životna komedija',false, 'CABARES CABAREI', 21)
 INSERT INTO SHOW (ID, DESCRIPTION, IS_MOVIE, NAME, CINETER_ID) VALUES (22, 'Reditelj:	David Leitch',true, 'Deadpool 2', 11)
@@ -67,6 +69,3 @@ INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) 
 insert into showreservation(id, performance_id, total_price) values (900, 22, 200)
 insert into moviereservation(id, screening_id, total_price) values (901, 13, 200)
 insert into account_movie_reservations(account_id, movie_reservations_id) values(789, 901)
-
-/*insert into account(id, show_reservations_id) values (789, 901)
-insert into account(id, movie_reservations_id) values (789, 900)*/
