@@ -11,4 +11,6 @@ public interface PerformanceRepository extends JpaRepository<Performance, Long> 
 
     @Query(value = "SELECT * FROM psbase pb LEFT OUTER JOIN performance p ON pb.id = p.id WHERE pb.show_id = :showId", nativeQuery = true)
     List<Performance> findByShowId (@Param("showId") Long id);
+
+    List<Performance> findAll();
 }

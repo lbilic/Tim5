@@ -1,6 +1,6 @@
 package ftn.isamrs.tim5.service;
 
-import ftn.isamrs.tim5.model.Show;
+import ftn.isamrs.tim5.model.ShowReservation;
 import ftn.isamrs.tim5.repository.ShowReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ShowReservationServiceImpl implements ShowReservationService {
     private ShowReservationRepository showReservationRepository;
 
     @Override
-    public List<Show> findAll() {
+    public List<ShowReservation> findAll() {
         return this.showReservationRepository.findAll();
     }
 }

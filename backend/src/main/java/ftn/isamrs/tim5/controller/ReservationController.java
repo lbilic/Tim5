@@ -41,7 +41,7 @@ public class ReservationController {
     @Autowired
     private JWTUtils jwtUtils;
 
-    @RequestMapping(value = "get_all_movie_reservation",
+    @RequestMapping(value = "/get_all_movie_reservations",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllMovieReservations(@RequestHeader("Authentication-Token")String token){
@@ -59,7 +59,7 @@ public class ReservationController {
         return new ResponseEntity(dtos, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "get_all_show_reservation",
+    @RequestMapping(value = "/get_all_show_reservations",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAllShowReservations(@RequestHeader("Authentication-Token")String token){

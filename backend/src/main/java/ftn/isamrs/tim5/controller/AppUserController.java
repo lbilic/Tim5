@@ -245,7 +245,7 @@ public class AppUserController {
     @RequestMapping(value = "/api/get_friends",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getAllShows(@RequestHeader("Authentication-Token") String token) {
+    public ResponseEntity getAllFriends(@RequestHeader("Authentication-Token") String token) {
         String username = jwtUtils.getUsernameFromToken(token);
         List<Friendship> friendships = friendshipService.findAllBySender(username);
         ArrayList<AccountDTO> dtos = new ArrayList<>();

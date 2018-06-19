@@ -24,6 +24,7 @@ import {ShowService} from "./services/show/show.service";
 import {AdminService} from "./services/admin/admin.service";
 import {AddCinetarServiceService} from "./services/cineter/add-cinetar-service.service"
 import {AccountService} from "./services/account/account.service";
+import {ReservationService} from "./services/reservation/reservation.service";
 
 //Services
 import {AuthService} from "./services/auth.service"
@@ -283,7 +284,7 @@ import { ListPerformancesComponent } from './components/list-performances/list-p
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
-    MovieScreeningService, AuthService, FriendsService, HallService],
+    MovieScreeningService, AuthService, FriendsService, HallService, ReservationService],
   bootstrap: [AppComponent],
   entryComponents: [BidModalComponent]
 })

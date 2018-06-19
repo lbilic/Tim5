@@ -48,5 +48,4 @@ export class AccountService {
     return this.http.post('http://localhost:8080/api/profile', account);
   }
 
-
 }

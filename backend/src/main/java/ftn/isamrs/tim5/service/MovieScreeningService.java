@@ -9,6 +9,6 @@ import java.util.List;
 @Service
 public interface MovieScreeningService {
     MovieScreening saveMovieScreening(MovieScreeningCreateDTO dto, Long id, String time);
-
     List<MovieScreening> findAllByShowId (Long id);
+    List<MovieScreening> findAll();
 }

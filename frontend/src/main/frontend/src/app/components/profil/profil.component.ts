@@ -6,6 +6,7 @@ import { FriendsService } from "../../services/friends/friends.service"
 import { Account } from "../../models/account";
 import { ToasterConfig, ToasterService } from "angular5-toaster/dist";
 import {AccountService} from "../../services/account/account.service";
+import {ReservationService} from "../../services/reservation/reservation.service";
 import { AppError } from "../../shared/errors/app-error";
 import { BadRequestError } from "../../shared/errors/bad-request-error";
 import { NotFoundError } from "../../shared/errors/not-found-error";
@@ -23,19 +24,22 @@ export class ProfilComponent implements OnInit {
   requests: Array<any>;
   toasterConfig: ToasterConfig;
   account: Account;
+  movieReservations: Array<any>;
+  showReservations: Array<any>;
+  reservations: Array<any>;
 
   constructor(private fb: FormBuilder, private router: Router,
               private friendsService: FriendsService, private toasterService: ToasterService,
-              private accountService: AccountService) {
+              private accountService: AccountService, private reservationService: ReservationService) {
     this.form = this.fb.group({
       username: ['']
     });
     this.updateFriends();
     this.updateRequests();
+    this.updateReservations();
     this.toasterConfig = new ToasterConfig({timeout: 4000});
     accountService.getCurrentUser().subscribe(data => {
       this.account = data as Account;
-      console.log(this.account);
     });
    }
 
@@ -94,6 +98,19 @@ export class ProfilComponent implements OnInit {
     this.friendsService.removeFriend(username).subscribe(data => {
       this.updateFriends();
       this.toasterService.pop('success', 'Friend removed',  username + ' removed from friends.');
+    });
+  }
+
+  updateReservations() {
+    this.reservationService.getAllMovieReservations().subscribe(data => {
+      this.movieReservations = data as Array<any>;
+      this.reservations = data as Array<any>;
+    });
+
+    this.reservationService.getAllShowReservations().subscribe(data => {
+      this.showReservations = data as Array<any>;
+      this.reservations.concat(data as Array<any>);
+      console.log(this.reservations);
     });
   }
 

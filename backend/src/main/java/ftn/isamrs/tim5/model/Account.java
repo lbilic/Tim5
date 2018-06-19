@@ -59,7 +59,7 @@ public class Account {
     private List<ShowReservation> showReservations;
 
     public Account(String username, String password, int version, boolean deleted, String name,
-                   String lastName, String email, String activationId, /*String number,*/ boolean confirmed) {
+                   String lastName, String email, String activationId, List<MovieReservation> mr, boolean confirmed) {
         this.username = username;
         this.version = version;
         this.deleted = deleted;
@@ -71,10 +71,13 @@ public class Account {
         //this.number = number;
         this.confirmed = confirmed;
         this.activationId = activationId;
+        this.movieReservations = mr;
     }
 
     public Account() {
         this.accountAuthorities = new ArrayList<>();
+        this.showReservations = new ArrayList<>();
+        this.movieReservations = new ArrayList<>();
         this.confirmed = false;
         this.props = new ArrayList<Props>();
         this.boughtProps = new ArrayList<BoughtProps>();
@@ -85,6 +88,8 @@ public class Account {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.password = encoder.encode(password);
         this.accountAuthorities = new ArrayList<>();
+        this.showReservations = new ArrayList<>();
+        this.movieReservations = new ArrayList<>();
     }
 
     public String getName() {

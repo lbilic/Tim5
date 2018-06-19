@@ -3,7 +3,7 @@ package ftn.isamrs.tim5.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="MovieReservation")
+@Table(name="moviereservation")
 public class MovieReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

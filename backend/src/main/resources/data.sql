@@ -62,3 +62,11 @@ INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) 
 INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) VALUES (7896, 'opis props2', 'Props2', 10, 300, 10, 789)
 INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) VALUES (4896, 'opis props3', 'Props3', 10, 1000, 21, 789)
 INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) VALUES (4898, 'opissss', 'Props4', 50, 1000, 10, 790)
+
+
+insert into showreservation(id, performance_id, total_price) values (900, 22, 200)
+insert into moviereservation(id, screening_id, total_price) values (901, 13, 200)
+insert into account_movie_reservations(account_id, movie_reservations_id) values(789, 901)
+
+/*insert into account(id, show_reservations_id) values (789, 901)
+insert into account(id, movie_reservations_id) values (789, 900)*/
