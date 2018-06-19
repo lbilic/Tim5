@@ -30,6 +30,14 @@ public class CineterAdmin extends Account {
     public CineterAdmin() {
     }
 
+    public CineterAdmin(String username, String password, Cineter cineter, Boolean isFanZone, Boolean changedPassword) {
+        super(username, password);
+        this.cineter = cineter;
+        this.isFanZone = isFanZone;
+        this.changedPassword = changedPassword;
+
+    }
+
     public Cineter getCineter() {
         return cineter;
     }

@@ -72,6 +72,7 @@ import { ListMoviesComponent } from './components/list-movies/list-movies.compon
 import { ChangeShowComponent } from './components/change-show/change-show.component'
 import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-movie-screening.component";
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
+import {AgmCoreModule} from "@agm/core";
 import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
 import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
 
@@ -120,6 +121,9 @@ import { ListPerformancesComponent } from './components/list-performances/list-p
     FormsModule,
     HttpModule,
     ToasterModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBtEDXxVtj8B6Pe_w5S0C7rx8p8rMgaVPU'
+    }),
     SharedModule,
     DatepickerModule,
     NgbModule.forRoot(),

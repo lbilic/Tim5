@@ -51,6 +51,15 @@ public class Cineter {
 	
 	public Cineter() {}
 
+	public Cineter(String name, String address, String city, List<Props> props, boolean isTheater, double score) {
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.props = props;
+		this.isTheater = isTheater;
+		this.score = score;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -117,15 +117,13 @@ public class PropsController
 
     @RequestMapping(value = "delete_prop",
                     method = RequestMethod.POST,
-                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    produces = MediaType.TEXT_PLAIN_VALUE,
                     consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity deleteProps(@RequestBody PropsCreateDTO props){
 
-        System.out.println(props);
+        Long cineterId = propsService.findPropById(props.getId()).getCineter().getId();
         propsService.deleteProp(props.getId());
-
-
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(cineterId, HttpStatus.OK);
 
     }
 
@@ -240,6 +238,8 @@ public class PropsController
         List<CineterAdmin> cineterAdmins = adminService.findFanZoneAdmins(id);
 
         Cineter cineter = cineterService.findById(id);
+        if(cineter == null && prop.getId() != null)
+            cineter = propsService.findPropById(prop.getId()).getCineter();
 
         request.setAdminAccounts(cineterAdmins);
         Props props = ConvertDTOToModel.convertPropsDTOtoProps(prop);
@@ -396,9 +396,6 @@ public class PropsController
 
         props = propsService.findPropById(prop_id);
 
-        if (props.getAmount() == 0) {
-            propsService.deleteProp(prop_id);
-        }
 
         boughtPropsService.saveBoughtProp(boughtProps, bid.getBidder());
 
@@ -410,6 +407,11 @@ public class PropsController
             biddingService.save(b);
             biddingService.deleteBids(b.getId());
         }
+
+        if (props.getAmount() == 0){
+            propsService.deleteProp(prop_id);
+        }
+
 
         return new ResponseEntity<>(HttpStatus.OK);
 

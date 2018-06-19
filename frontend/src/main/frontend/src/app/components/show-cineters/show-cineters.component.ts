@@ -11,8 +11,10 @@ import {Router} from "@angular/router";
 export class ShowCinetersComponent implements OnInit {
 
   cineters : Array<Cineter>;
-
-  constructor(private cineterService: CineterService, jwtutils :JwtService, private router: Router) {
+  changeText : string;
+  constructor(private cineterService: CineterService,private jwtService :JwtService, private router: Router) {
+    this.changeText =
+      this.jwtService.hasRole('ADMIN')  ? "Change" : "Details";
     this.cineterService.getAllCineters().subscribe(data =>{
       this.cineters = data as Array<Cineter>;
     });

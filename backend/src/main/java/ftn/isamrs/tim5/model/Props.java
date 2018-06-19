@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "Props")
@@ -28,21 +29,44 @@ public class Props {
     @ManyToOne
 	Account account;
 
-
 	@Version
 	@Column(nullable = false, columnDefinition = "integer default 0")
 	private int version;
-	
+
+/*	@Column(nullable = false)
+	Date date;
+*/
+
 	public Props() {}
 
-	public Props(String name, float price, String descripiton, int amount) {
+	public Props(String name, float price, String descripiton, int amount//, Date date
+	) {
 		super();
 		this.name = name;
 		this.price = price;
 
 		this.description = descripiton;
 		this.amount = amount;
+		//this.date = date;
 	}
+
+	public Props(String name, float price, String description, Cineter cineter, int amount, Account account, int version) {
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.cineter = cineter;
+		this.amount = amount;
+		this.account = account;
+		this.version = version;
+	}
+
+	/*	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}*/
 
 	public int getAmount() {
 		return amount;
