@@ -1,0 +1,36 @@
+<div class="modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Bid prop</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ng-container *ngIf="prop">
+        <div class="panel panel-default panel-table">
+          <div class="panel-body">
+            <table class="table table-striped table-bordered table-list">
+              <thead>
+              <tr>
+                <th>Cineter Name</th>
+                <th>Ocena</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td >{{name}}</td>
+                <td><input type="text" [(ngModel)]="rate"/></td>
+                <td>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-danger" (click)="Rate()">Send offer</button>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

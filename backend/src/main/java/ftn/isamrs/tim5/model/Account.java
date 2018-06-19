@@ -58,6 +58,9 @@ public class Account {
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<ShowReservation> showReservations;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "account")
+    private List<Review> reviews;
+
     public Account(String username, String password, int version, boolean deleted, String name,
                    String lastName, String email, String activationId, /*String number,*/ boolean confirmed) {
         this.username = username;
@@ -174,4 +177,12 @@ public class Account {
     public List<ShowReservation> getShowReservations() { return showReservations; }
 
     public void setShowReservations(List<ShowReservation> showReservations) { this.showReservations = showReservations; }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 }

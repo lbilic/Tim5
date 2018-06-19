@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface MovieReservationService {
     List<MovieReservation> findAll();
 
+    List<MovieReservation> findMyReservationsForCineter(Long id, Long cineterId);
 }

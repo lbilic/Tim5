@@ -9,22 +9,32 @@ public class ShowCreateDTO implements Serializable{
     private String name;
     private String description;
     private boolean isMovie;
+    private String director;
+    private String runtime;
+    private String genre;
+    private String stars;
+    private int version;
 
     public ShowCreateDTO() {
     }
-
-    public ShowCreateDTO(String name, String description, boolean isMovie) {
+/*
+    public ShowCreateDTO(String name, String description, boolean getIsMovie) {
         this.name = name;
         this.description = description;
-        this.isMovie = isMovie;
+        this.getIsMovie = getIsMovie;
     }
-
+*/
 
      public ShowCreateDTO (Show show){
         this.id = show.getId();
         this.name=show.getName();
         this.description=show.getDescription();
-        this.isMovie = show.isMovie();
+        this.isMovie = show.getIsMovie();
+        this.director = show.getDirector();
+        this.runtime = show.getRuntime();
+        this.genre=show.getGenre();
+        this.stars =show.getStars();
+        this.version = show.getVersion();
     }
 
     public String getName() {
@@ -47,7 +57,47 @@ public class ShowCreateDTO implements Serializable{
 
     public void setId(Long id) { this.id = id; }
 
-    public boolean isMovie() { return isMovie; }
+    public boolean getIsMovie() { return isMovie; }
 
-    public void setMovie(boolean isMovie) { this.isMovie = isMovie; }
+    public void setIsMovie(boolean isMovie) { this.isMovie = isMovie; }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getStars() {
+        return stars;
+    }
+
+    public void setStars(String stars) {
+        this.stars = stars;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }

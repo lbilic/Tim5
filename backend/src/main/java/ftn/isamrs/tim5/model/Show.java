@@ -18,35 +18,59 @@ public class Show {
 	@Column(nullable = false)
     String description;
 
+	@Column(nullable = false)
+	String director;
+
+	@Column(nullable = false)
+	String runtime;
+
+	@Column(nullable = false)
+	String genre;
+
+	@Column(nullable = false)
+	String stars;
+
 	@Column (nullable = false, columnDefinition = "BOOL DEFAULT FALSE")
 	boolean isMovie;
+
+	@OneToMany(mappedBy = "show")
+	List<Review> reviews;
 
 	@OneToMany(fetch = FetchType.LAZY)
     List<Performance> performances;
 
 	@ManyToOne()
 	Cineter cineter;
-	
+
+	@Version
+	@Column(nullable = false, columnDefinition = "integer default 0")
+	private int version;
+
 	public Show() {}
 
-	public Show(String name, String description, boolean isMovie, List<Performance> performances) {
+	/*
+	public Show(String name, String description, boolean getIsMovie, List<Performance> performances) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.performances = performances;
-		this.isMovie = isMovie;
+		this.getIsMovie = getIsMovie;
+
 	}
+*/
 
-
-	public Show(String name, String description, boolean isMovie) {
-		super();
+	public Show(String name, String description, String director,
+				String runtime, String genre, String stars, boolean isMovie) {
 		this.name = name;
 		this.description = description;
+		this.director = director;
+		this.runtime = runtime;
+		this.genre = genre;
+		this.stars = stars;
 		this.isMovie = isMovie;
 	}
 
-
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 
@@ -70,9 +94,9 @@ public class Show {
 		this.description = description;
 	}
 
-	public boolean isMovie() { return isMovie; }
+	public boolean getIsMovie() { return isMovie; }
 
-	public void setMovie(boolean movie) { isMovie = movie; }
+	public void setIsMovie(boolean movie) { isMovie = movie; }
 
 	public List<Performance> getPerformances() {
 		return performances;
@@ -88,5 +112,53 @@ public class Show {
 
 	public void setCineter(Cineter cineter) {
 		this.cineter = cineter;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getStars() {
+		return stars;
+	}
+
+	public void setStars(String stars) {
+		this.stars = stars;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 }

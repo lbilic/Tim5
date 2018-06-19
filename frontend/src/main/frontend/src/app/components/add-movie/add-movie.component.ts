@@ -11,7 +11,6 @@ import {ShowCreate} from "../../models/showCreate";
 export class AddMovieComponent implements OnInit {
 
   form : FormGroup;
-  bool : boolean = true;
 
   constructor(private fb: FormBuilder, private show: ShowService) {
     this.form = this.fb.group({
@@ -24,6 +23,22 @@ export class AddMovieComponent implements OnInit {
         Validators.minLength(5)
       ]],
 
+      stars: ['', [
+        Validators.required,
+      ]],
+
+      genre: ['', [
+        Validators.required,
+      ]],
+
+      director: ['', [
+        Validators.required,
+      ]],
+
+      runtime: ['', [
+        Validators.required,
+      ]],
+
     });
   }
   get name(){
@@ -33,6 +48,21 @@ export class AddMovieComponent implements OnInit {
   get description(){
     return this.form.get('description');
   }
+  get stars(){
+    return this.form.get('stars');
+  }
+
+  get genre(){
+    return this.form.get('genre');
+  }
+
+  get runtime(){
+    return this.form.get('runtime');
+  }
+
+  get director(){
+    return this.form.get('director');
+  }
 
 
   ngOnInit() {
@@ -40,7 +70,8 @@ export class AddMovieComponent implements OnInit {
 
   register(){
     this.show.registerShow(new ShowCreate(this.name.value,
-      this.description.value, this.bool)).subscribe((data) =>{
+      this.description.value, true, this.director.value, this.runtime.value,
+      this.genre.value, this.stars.value)).subscribe((data) =>{
       console.log(data);
     });
   }

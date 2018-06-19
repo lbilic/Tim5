@@ -20,7 +20,8 @@
             </ul>
         </li>
         <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
-            <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
+
+          <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
               Cinemas and theaters <span class="caret"></span>
             </button>
             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -32,7 +33,7 @@
             <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
               Shows and projections <span class="caret"></span>
             </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
               <li role="menuitem"><a class="dropdown-item" routerLink="/add_show">Add a new show</a></li>
               <li role="menuitem"><a class="dropdown-item" routerLink="/admin_shows">View all shows</a></li>
             </ul>

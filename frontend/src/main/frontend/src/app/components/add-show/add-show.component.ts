@@ -11,7 +11,6 @@ import {ShowCreate} from "../../models/showCreate";
 export class AddShowComponent implements OnInit {
 
   form : FormGroup;
-  bool : boolean;
 
   constructor(private fb: FormBuilder, private show: ShowService) {
     this.form = this.fb.group({
@@ -19,14 +18,31 @@ export class AddShowComponent implements OnInit {
         Validators.required,
         Validators.minLength(3)
       ]],
+
       description: ['', [
         Validators.required,
         Validators.minLength(5)
       ]],
 
-    });
+      stars: ['', [
+        Validators.required,
+      ]],
 
-    this.bool = false;
+      genre: ['', [
+        Validators.required,
+      ]],
+
+      director: ['', [
+        Validators.required,
+      ]],
+
+      runtime: ['', [
+        Validators.required,
+      ]],
+
+
+
+    });
 
   }
   get name(){
@@ -37,13 +53,30 @@ export class AddShowComponent implements OnInit {
     return this.form.get('description');
   }
 
+  get stars(){
+    return this.form.get('stars');
+  }
+
+  get genre(){
+    return this.form.get('genre');
+  }
+
+  get runtime(){
+    return this.form.get('runtime');
+  }
+
+  get director(){
+    return this.form.get('director');
+  }
+
 
   ngOnInit() {
   }
 
   register(){
     this.show.registerShow(new ShowCreate(this.name.value,
-      this.description.value, this.bool)).subscribe((data) =>{
+      this.description.value, false, this.director.value, this.runtime.value,
+      this.genre.value, this.stars.value)).subscribe((data) =>{
       console.log(data);
     });
   }

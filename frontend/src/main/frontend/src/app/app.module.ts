@@ -74,6 +74,8 @@ import {AddMovieScreeningComponent} from "./components/add-movie-screening/add-m
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import { ListProjectionsComponent } from './components/list-projections/list-projections.component';
 import { ListPerformancesComponent } from './components/list-performances/list-performances.component';
+import {RateService} from "./services/rate/rate.service";
+import { RateModalComponent } from './components/rate-modal/rate-modal.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -110,7 +112,8 @@ import { ListPerformancesComponent } from './components/list-performances/list-p
     ChangeShowComponent,
     AddMovieComponent,
     ListProjectionsComponent,
-    ListPerformancesComponent
+    ListPerformancesComponent,
+    RateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -283,7 +286,7 @@ import { ListPerformancesComponent } from './components/list-performances/list-p
     },
     HttpClientModule, CineterService, ShowService, AdminService, JwtService,
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
-    MovieScreeningService, AuthService, FriendsService, HallService],
+    MovieScreeningService, AuthService, FriendsService, HallService, RateService],
   bootstrap: [AppComponent],
   entryComponents: [BidModalComponent]
 })

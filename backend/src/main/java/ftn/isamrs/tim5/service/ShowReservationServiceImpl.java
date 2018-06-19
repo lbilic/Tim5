@@ -1,6 +1,7 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.model.Show;
+import ftn.isamrs.tim5.model.ShowReservation;
 import ftn.isamrs.tim5.repository.ShowReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,10 @@ public class ShowReservationServiceImpl implements ShowReservationService {
     @Override
     public List<Show> findAll() {
         return this.showReservationRepository.findAll();
+    }
+
+    @Override
+    public List<ShowReservation> findMyReservations(Long id, Long cineterId) {
+        return null;
     }
 }

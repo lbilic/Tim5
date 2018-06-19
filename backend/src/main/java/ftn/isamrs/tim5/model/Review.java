@@ -1,7 +1,6 @@
 package ftn.isamrs.tim5.model;
 
 
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,14 +14,18 @@ public class Review {
     private Long id;
 
     @Column
-    private String text;
-    @Column
     private int score;
     @Column
     private Date date;
 
+    @ManyToOne
+    private Account account;
+
     @ManyToOne()
     private Cineter cineter;
+
+    @ManyToOne()
+    private Show show;
 
     public Review() {
     }
@@ -33,14 +36,6 @@ public class Review {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public int getScore() {
@@ -65,5 +60,21 @@ public class Review {
 
     public void setCineter(Cineter cineter) {
         this.cineter = cineter;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
     }
 }

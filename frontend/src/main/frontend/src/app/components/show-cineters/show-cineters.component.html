@@ -19,6 +19,11 @@
     <td> <button (click)="ChangeCineter(i)"  class="btn btn-success" >Change</button> </td>
     <td> <button (click)="DeleteCineter(i)"  class="btn btn-success" >Delete</button> </td>
 
+    <td *ngIf="i.isTheater"> <button (click)="AddShow(i)"  class="btn btn-success" >
+      Add show</button> </td>
+    <td *ngIf="!i.isTheater"> <button (click)="AddMovie(i)"  class="btn btn-success" >
+      Add movie</button> </td>
+    <td *ngIf="!i.isRated"> <button (click)="Rate(i.id)" class="btn btn-success">Rate</button> </td>
     <td> <button (click)="ShowProps(i)"  class="btn btn-success" >Props</button> </td>
     <td> <button (click)="SellProps(i)"  class="btn btn-success" >Sell props</button> </td>
   </tr>

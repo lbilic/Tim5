@@ -3,7 +3,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {Show} from "../../models/show";
 import {ShowService} from "../../services/show/show.service";
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-//import * as $ from "jquery";
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-reserve-seats',
@@ -78,7 +78,7 @@ export class ReserveSeatsComponent implements OnInit {
   hasProjection(date: NgbDateStruct) {
     const d = new Date(date.year, date.month - 1, date.day);
     var sel = { day: d.getUTCDay(), month: d.getUTCMonth() + 1, year: d.getUTCFullYear()}
-    return// $.inArray(sel, this.projectionDates);
+    return $.inArray(sel, this.projectionDates);
   }
 
   pickDate(date: NgbDateStruct, event: MouseEvent) {

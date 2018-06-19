@@ -40,6 +40,8 @@ public class Cineter {
 	@Column
 	double score;
 
+	@OneToMany
+	private List<Review> reviews;
 
     public double getScore() {
         return score;
@@ -129,5 +131,13 @@ public class Cineter {
 
 	public void setHalls(List<Hall> halls) {
 		this.halls = halls;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 }

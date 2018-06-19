@@ -48,7 +48,7 @@ public class ShowServiceImpl implements ShowService{
 
         show.setName(dto.getName());
         show.setDescription(dto.getDescription());
-        show.setMovie(dto.isMovie());
+        show.setIsMovie(dto.getIsMovie());
 
         show = showRepository.save(show);
 

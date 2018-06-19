@@ -3,6 +3,9 @@ import {CineterService} from "../../services/cineter/cineter.service";
 import {Cineter} from "../../models/cineter";
 import { JwtService } from "../../core/services/jwt.service";
 import {Router} from "@angular/router";
+import {RateService} from "../../services/rate/rate.service";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {RateModalComponent} from "../rate-modal/rate-modal.component";
 @Component({
   selector: 'app-show-cineters',
   templateUrl: './show-cineters.component.html',
@@ -11,10 +14,14 @@ import {Router} from "@angular/router";
 export class ShowCinetersComponent implements OnInit {
 
   cineters : Array<Cineter>;
+  modalRef : BsModalRef;
 
-  constructor(private cineterService: CineterService, jwtutils :JwtService, private router: Router) {
+  constructor(private rateService : RateService, private cineterService: CineterService, jwtutils :JwtService,
+              private router: Router, private modalService : BsModalService) {
     this.cineterService.getAllCineters().subscribe(data =>{
       this.cineters = data as Array<Cineter>;
+
+      for(let i of this.cineters) this.canRate(i);
     });
   }
 
@@ -32,6 +39,13 @@ export class ShowCinetersComponent implements OnInit {
     });
   }
 
+  AddShow(i){
+    this.router.navigate([`/add_show`])
+  }
+
+  AddMovie(i){
+    this.router.navigate([`/add_movie`])
+  }
 
   ShowProps(i){
     this.router.navigate([`/user_view_props/${i.id}`])
@@ -41,5 +55,24 @@ export class ShowCinetersComponent implements OnInit {
     this.router.navigate([`/sell_prop/${i.id}`])
   }
 
+  canRate(i :Cineter){
+    this.rateService.canRate(i.id).subscribe(result =>{
+      console.log('dobro');
+      i.isRated = false;
+    }, error2 => {
+      console.log('lose');
+      i.isRated = true;
+    });
+  }
 
+
+  Rate(cineter : Cineter) {
+    this.modalRef = this.modalService.show(RateModalComponent);
+    this.modalRef.content.name = (cineter.name);
+    this.modalRef.content.id = cineter.id;
+    this.modalRef.content.rateSubmited.subscribe(result =>{
+      this.modalRef.hide();
+      location.reload();
+    })
+  }
 }
