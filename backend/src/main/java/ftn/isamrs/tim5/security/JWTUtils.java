@@ -77,7 +77,6 @@ public class JWTUtils {
         for(AccountAuthority aa : accountAuthorities)
             for(AccountAuthority aa1 : aa.getAuthority().getAccountAuthorities()) {
                 roles.add(aa1.getAuthority().getName());
-                System.out.println(aa1.getAuthority().getName());
             }
         claims.put("roles", roles);
         claims.put("id", id);
