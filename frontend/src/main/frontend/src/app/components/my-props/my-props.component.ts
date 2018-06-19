@@ -31,8 +31,9 @@ export class MyPropsComponent implements OnInit {
   }
 
   ChangeProp(prop: Props) {
-    this.DeleteProp(prop);
-    this.router.navigate([`/sell_prop/${prop.id}`]);
+    this.propsService.deleteUserProp(prop.id).subscribe(data => {
+      this.router.navigate([`/sell_prop/${prop.id}$${data }`]);
+    });
   }
 
 }

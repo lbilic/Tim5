@@ -28,7 +28,12 @@ export class SellPropsComponent implements OnInit {
       description: ['', [
         Validators.required,
         Validators.minLength(5)
-      ]],
+      ]]
+/*      date: ['', [
+        Validators.required,
+       // Validators.
+
+      ]]*/
     });
 
     this.route.params.subscribe((param: Params) => {

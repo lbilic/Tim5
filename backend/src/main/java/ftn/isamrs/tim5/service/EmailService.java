@@ -36,8 +36,20 @@ public class EmailService {
         helper.setFrom(env.getProperty(EMAIL_USERNAME));
         helper.setSubject("Account confirmation");
         helper.setText("<html><body>Dear " + account.getName() + ",\nYou can activate your account by clicking on the link below\n"
-                        + "<a href='http://localhost:8080/api/activate?activationId=" + activationString + "' id='id_link'> link </a></body></html>", true);
+                + "<a href='http://localhost:8080/api/activate?activationId=" + activationString + "' id='id_link'> link </a></body></html>", true);
         javaMailSender.send(message);
+    }
+
+    @Async
+    public void sendMail(String title, String text, String to) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setFrom(env.getProperty(EMAIL_USERNAME));
+        helper.setSubject(title);
+        helper.setTo(to);
+        helper.setText(text);
+        javaMailSender.send(message);
+
     }
 
     private String generateActivationString() {

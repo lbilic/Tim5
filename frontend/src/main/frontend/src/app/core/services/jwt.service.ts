@@ -20,6 +20,10 @@ export class JwtService {
     return this.jwtHelper.isTokenExpired(this.getToken());
   }
 
+  hasRole(role : string){
+    return this.decodeToken().roles.indexOf(role) != -1;
+  }
+
   getUsernameFromToken(): string {
     let tokenDecoded: Token = this.decodeToken();
     return tokenDecoded.sub;
