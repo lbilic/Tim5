@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SystemService {
     List<System> findAll();
+
+    System save(System system);
 }

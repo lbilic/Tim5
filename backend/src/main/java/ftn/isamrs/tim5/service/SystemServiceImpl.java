@@ -4,6 +4,7 @@ import ftn.isamrs.tim5.repository.SystemRepository;
 import ftn.isamrs.tim5.model.System;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,5 +17,11 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public List<System> findAll() {
         return this.systemRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public System save(System system) {
+        return this.systemRepository.save(system);
     }
 }

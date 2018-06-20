@@ -4,8 +4,10 @@ package ftn.isamrs.tim5.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
+import ftn.isamrs.tim5.model.System;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
+import ftn.isamrs.tim5.util.ConvertDTOToModel;
 import org.hibernate.JDBCException;
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class AdminController {
 
     @Autowired
     AccountService accountService;
+
+    @Autowired
+    SystemService systemService;
 
     @Autowired
     JWTUtils jwtUtils;
@@ -220,6 +225,30 @@ public class AdminController {
 
     }
 
+    @Transactional
+    @RequestMapping(value = "/update_scale",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity update_scale(@RequestBody ScaleDTO scale) {
+        System system = systemService.findAll().get(0);
 
+        system.setScale(scale.getScale());
+
+        systemService.save(system);
+
+        return new ResponseEntity<>(scale, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get_scale",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity get_scale() {
+        System system = systemService.findAll().get(0);
+
+        ScaleDTO scale = new ScaleDTO(system.getScale());
+
+        return new ResponseEntity<>(scale, HttpStatus.OK);
+    }
 
     }
