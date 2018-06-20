@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToasterConfig, ToasterService } from "angular5-toaster/dist";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
+import { Scale } from '../../models/scale';
+import {SystemService} from "../../services/system/system.service"
 
 @Component({
   selector: 'app-admin-panel',
@@ -16,15 +18,24 @@ export class AdminPanelComponent implements OnInit {
   goldValue: Number;
   platinumValue: Number;
   diamondValue: Number;
+  scale: Scale;
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
-              private toasterService: ToasterService) {
+              private toasterService: ToasterService, private systemService: SystemService) {
       this.form = this.fb.group({
         gold: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
         platinum: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
         diamond: ['', [Validators.required, Validators.pattern('^[0-9]*$')]]
       });
       this.toasterConfig = new ToasterConfig({timeout: 4000});
+      this.systemService.getScale().subscribe(data => {
+        this.scale = (data as Scale);
+        this.diamondValue = this.scale.scale.pop();
+        this.platinumValue = this.scale.scale.pop();
+        this.goldValue = this.scale.scale.pop();
+        this.form.setValue({gold: this.goldValue, platinum: this.platinumValue, diamond: this.diamondValue});
+        console.log(this.goldValue, this.platinumValue, this.diamondValue);
+      });
     }
 
   ngOnInit() {
@@ -44,7 +55,16 @@ export class AdminPanelComponent implements OnInit {
   }
 
   changeThresholds(){
-
+    let array = new Array<Number>();
+    array.push(this.gold.value);
+    array.push(this.platinum.value);
+    array.push(this.diamond.value);
+    let scale = new Scale(array);
+    console.log(array);
+    console.log(scale);
+    this.systemService.update(scale).subscribe(data => {
+      this.router.navigateByUrl(this.returnURL);
+    });
   }
   
 }

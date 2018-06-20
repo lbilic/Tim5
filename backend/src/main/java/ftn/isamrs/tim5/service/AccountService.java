@@ -31,4 +31,6 @@ public interface AccountService {
     List<MovieReservation> findAllMovieReservations(long id);
 
     List<ShowReservation> findAllShowReservations(long id);
+
+    String findEmailById(Long id);
 }

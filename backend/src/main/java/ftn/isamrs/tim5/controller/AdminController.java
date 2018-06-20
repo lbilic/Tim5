@@ -4,8 +4,10 @@ package ftn.isamrs.tim5.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
+import ftn.isamrs.tim5.model.System;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
+import ftn.isamrs.tim5.util.ConvertDTOToModel;
 import org.hibernate.JDBCException;
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,9 @@ public class AdminController {
     AccountService accountService;
 
     @Autowired
+    SystemService systemService;
+
+    @Autowired
     JWTUtils jwtUtils;
 
     @Autowired
@@ -51,6 +57,9 @@ public class AdminController {
 
     @Autowired
     PropsRequestService propsRequestService;
+
+    @Autowired
+    EmailService emailService;
 
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
@@ -159,13 +168,19 @@ public class AdminController {
     @RequestMapping(value = "/accept_request",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity accept_request(@RequestParam("id") Long id){
+    public ResponseEntity accept_request(@RequestParam("id") Long id) throws MessagingException {
 
 
         try {
             PropRequest request = propsRequestService.findRequestById(id);
+            String email = accountService.findEmailById(request.getUserAccount().getId());
+            emailService.sendMail("Congratulations! Your prop has been approved for sale!",
+                    "Hi! We are pleased to inform you that our costumers can now see your prop and bid for it!" +
+                            "We wish you high bidding! Best regards, Admin Team", email);
 
-            if(request == null) throw new NullPointerException();
+            if(request == null) {
+                throw new NullPointerException();
+            }
 
             List<CineterAdmin> admins = request.getAdminAccounts();
 
@@ -194,11 +209,17 @@ public class AdminController {
     @RequestMapping(value = "/deny_request",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deny_request(@RequestParam("id") Long id){
+    public ResponseEntity deny_request(@RequestParam("id") Long id) throws MessagingException {
 
 
         try {
             PropRequest request = propsRequestService.findRequestById(id);
+
+            String email = accountService.findEmailById(request.getUserAccount().getId());
+            emailService.sendMail("We are sorry. Your prop has been denied for sale!",
+                    "Hi. We are sorry to inform you that your prop did not meet our standards and was not approved for sale!" +
+                            "We wish you better luck next time! Best regards, Admin Team", email);
+
             List<CineterAdmin> admins = request.getAdminAccounts();
 
             for (CineterAdmin admin:
@@ -220,6 +241,30 @@ public class AdminController {
 
     }
 
+    @Transactional
+    @RequestMapping(value = "/update_scale",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity update_scale(@RequestBody ScaleDTO scale) {
+        System system = systemService.findAll().get(0);
 
+        system.setScale(scale.getScale());
+
+        systemService.save(system);
+
+        return new ResponseEntity<>(scale, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/get_scale",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity get_scale() {
+        System system = systemService.findAll().get(0);
+
+        ScaleDTO scale = new ScaleDTO(system.getScale());
+
+        return new ResponseEntity<>(scale, HttpStatus.OK);
+    }
 
     }

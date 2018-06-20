@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.net.ssl.HttpsURLConnection;
 import javax.persistence.PreUpdate;
 import javax.print.attribute.standard.Media;
@@ -57,6 +58,8 @@ public class PropsController
     @Autowired
     private BiddingService biddingService;
 
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private JWTUtils jwtUtils;
@@ -172,7 +175,7 @@ public class PropsController
                     produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity reserveProp(@RequestParam("id") Long id,
                                       @RequestParam("version") Integer version,
-                                      @RequestHeader(value = "Authentication-Token") String token){
+                                      @RequestHeader(value = "Authentication-Token") String token) throws MessagingException {
 
 
         try {
@@ -185,6 +188,13 @@ public class PropsController
             BoughtProps boughtProps2 = null;
 
             Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
+
+            String email = accountService.findEmailById(account.getId());
+            emailService.sendMail("Congratulations! You have successfully reserved a prop!",
+                    "Hi! We are pleased to inform you that you have successfully reserved the prop you wanted!" +
+                            "Feel free to stop by and pick it up any time! Just make sure" +
+                            "you have you ID with you. We hope to work with you again!" +
+                            "Best regards, Admin Team", email);
 
             List<BoughtProps> boughtProps1 = boughtPropsService.findBoughtPropById(id);
 
@@ -235,6 +245,7 @@ public class PropsController
         if(token == null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
         Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
         PropRequest request = new PropRequest();
+        prop.setId(null);
 
         List<CineterAdmin> cineterAdmins = adminService.findFanZoneAdmins(id);
 
@@ -294,12 +305,12 @@ public class PropsController
 
         Account account = accountService.findByUsername(username);
 
-        List<Props> propsList = this.propsService.findBoughtProps(account.getId());
+        List<BoughtProps> propsList = this.boughtPropsService.findAllByUserId(account.getId());
 
-        List<PropsCreateDTO> dto = new ArrayList<>();
+        List<BoughtPropDTO> dto = new ArrayList<>();
 
-        for (Props prop : propsList)
-            dto.add(new PropsCreateDTO(prop));
+        for (BoughtProps prop : propsList)
+            dto.add(new BoughtPropDTO(prop));
 
         return new ResponseEntity<>(dto, HttpStatus.OK);
 
@@ -371,7 +382,7 @@ public class PropsController
     @RequestMapping(value = "/accept_bid",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity accept_bid(@RequestParam("id") Long id, @RequestParam("prop_id") Long prop_id){
+    public ResponseEntity accept_bid(@RequestParam("id") Long id, @RequestParam("prop_id") Long prop_id) throws MessagingException {
 
         Bid bid = biddingService.getBidById(id);
 
@@ -402,9 +413,28 @@ public class PropsController
 
         List<Bid> bids = biddingService.getBidsByPropId(prop_id);
 
+        for(Bid b: bids){
+            String email = accountService.findEmailById(b.getBidder().getId());
+            if(b.getId().equals(id)){
+                emailService.sendMail("Congratulations! You won the bidding contest!",
+                        "Hi! We are pleased to inform you that you have won the bidding contest." +
+                                "The prop you placed you bid for is now waiting for you at our cinema!" +
+                                "Feel free to stop by and pick it up any time! Just don't forget to bring your ID with you." +
+                                "Best regards, Admin Team.", email);
+            }
+            else{
+                emailService.sendMail("You have lost the bidding contest.",
+                        "Hi. We are sorry to inform you that you have lost the bidding contest." +
+                                "We encourage you to check our website to see if there are any other" +
+                                "props that you would want to buy. We wish you more luck next time." +
+                                "Best regards, Admin Team.", email);
+            }
+        }
+
         for (Bid b :
                 bids) {
             b.setProp(null);
+
             biddingService.save(b);
             biddingService.deleteBids(b.getId());
         }
@@ -445,18 +475,18 @@ public class PropsController
                                            @RequestParam("id") Long id){
 
 
-
-
-
         List<Bid> bids = biddingService.getBidsByPropId(id);
 
         for (Bid b : bids){
             biddingService.deleteBids(b.getId());
         }
+        Props props = propsService.findPropById(id);
 
+        PropsCreateDTO dto  = new PropsCreateDTO(props);
         propsService.deleteProp(id);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return new ResponseEntity<>(dto,HttpStatus.OK);
 
 
     }

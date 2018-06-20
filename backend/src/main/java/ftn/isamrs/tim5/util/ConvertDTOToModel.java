@@ -1,7 +1,11 @@
 package ftn.isamrs.tim5.util;
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
+import ftn.isamrs.tim5.model.System;
+import javafx.scene.transform.Scale;
 import org.modelmapper.ModelMapper;
+
+import java.util.ArrayList;
 
 public class ConvertDTOToModel {
     public ConvertDTOToModel(){}
@@ -35,5 +39,7 @@ public class ConvertDTOToModel {
     public static MovieScreening convertMovieScreeningCreateDTOtoMovieScreening(MovieScreeningCreateDTO dto){ return mapper.map(dto, MovieScreening.class);}
 
     public static BoughtProps convertBoughtPropsDTOtoBoughtProps(BoughtPropDTO dto) {return mapper.map(dto, BoughtProps.class);}
+
+    public static System convertScaleDTOtoScale(ScaleDTO dto) {return mapper.map(dto, System.class);}
 
 }

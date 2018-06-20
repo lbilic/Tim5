@@ -1,4 +1,52 @@
-#left, #right {
+.all-cineters .cineter-details .cineter-info,
+.all-cineters.cineter .cineter-details .cineter-info {
+	padding-left: 15px;
+}
+
+.all-cineters .cineter-details .cineter-info {
+	display: table-cell;
+	margin-top: 0;
+}
+
+.all-cineters .cineter-details .cineter-info .info ul .lbl,
+	.all-cineters.cineter .cineter-details .cineter-info .info ul .lbl {
+		width: auto;
+  }
+
+a { color: #003365; text-decoration: none; transition: all 0.3s ease; border-radius: 2px; }
+a:hover { color: #2d2d2d; text-decoration: none; }
+a:focus { outline: none; text-decoration: none; }
+strong { font-size: 700; }
+
+/* cineter */
+.cineter-image { position: relative; height: 420px; background-position: center top; background-repeat: no-repeat; background-size: cover; overflow: hidden; } 
+
+.cineter-info ul { display: table; width: 100%; margin: 0; padding: 0; list-style: none; }
+.cineter-info ul li { display: table-cell; padding: 3px 0; vertical-align:middle; }
+.cineter-info ul .lbl { width: 240px; white-space: nowrap; font-weight: 700; text-transform: uppercase; }
+.cineter-info .push-top { margin-top: 16px; }
+
+.all-cineters .cineter { padding: 48px 0; border-top: 1px dotted #333; }
+.all-cineters .cineter:first-child { border-top: 0; }
+.all-cineters .cineter-details { display: table; width: 90%; }
+.all-cineters .cineter-details > div { display: table-cell; vertical-align: top; }
+.all-cineters .cineter-details .cineter-image { width: 200px; height: auto; }
+.all-cineters .cineter-details .cineter-info { padding-left: 40px; }
+.all-cineters .cineter-details .cineter-info .title { display: block; color: #2d2d2d; font-family: "Roboto condensed", "Arial Narrow", Arial, sans-serif; font-size: 26px; text-transform: uppercase; letter-spacing: -1px; line-height: 26px; }
+
+.all-cineters .cineter-details .cineter-info .title:hover { color: #003365; }
+.all-cineters .cineter-details .cineter-info .info { float: left; width: 80%; margin-top: 16px; }
+.all-cineters .cineter-details .cineter-info .info ul { font-size: 15px; }
+.all-cineters .cineter-details .cineter-info .info ul .lbl { width: 120px; }
+
+
+
+
+
+
+
+
+/*#left, #right {
   background: #ccc;
   padding: 20px;
 }
@@ -16,4 +64,4 @@
   left: 0;
   width: 100px;
   height: 100px;
-}
+}*/

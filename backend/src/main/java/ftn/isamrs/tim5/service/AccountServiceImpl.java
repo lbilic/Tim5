@@ -92,4 +92,9 @@ public class AccountServiceImpl implements AccountService {
     public List<ShowReservation> findAllShowReservations(long id) {
         return this.findOne(id).getShowReservations();
     }
+
+    @Override
+    public String findEmailById(Long id) {
+        return accountRepository.findEmailById(id);
+    }
 }

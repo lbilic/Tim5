@@ -4,6 +4,7 @@ import {Props} from "../../models/props";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PropsService} from "../../services/props/props.service";
 import {PropsCreate} from "../../models/propsCreate";
+import {ToasterConfig, ToasterService} from "angular5-toaster/dist";
 
 @Component({
   selector: 'app-props-detail',
@@ -15,10 +16,12 @@ export class PropsDetailComponent implements OnInit {
   id : number;
   prop: Props;
   form : FormGroup;
+  toasterConfig: ToasterConfig;
 
-
-  constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService)
+  constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService,
+              private toasterService: ToasterService)
   {
+    this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.prop = new Props(0, '', 0, '', 0, 0);
     this.form = this.fb.group({
       name: ['', [
@@ -79,6 +82,7 @@ export class PropsDetailComponent implements OnInit {
     this.propsService.changeProps(this.prop).subscribe(data =>{
 
     });
+    this.toasterService.pop('success', 'Success!','You have successfully changed this prop!');
   }
 
 }

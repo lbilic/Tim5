@@ -4,6 +4,7 @@ import {AdminService} from "../../services/admin/admin.service";
 import {CineterAdminCreate} from "../../models/cineterAdminCreate";
 import {CineterCreate} from "../../models/cineterCreate";
 import {CineterService} from "../../services/cineter/cineter.service";
+import {ToasterConfig, ToasterService} from "angular5-toaster/dist";
 
 @Component({
   selector: 'app-add-cineter-admin',
@@ -16,8 +17,11 @@ export class AddCineterAdminComponent implements OnInit {
   cineters: Array<CineterCreate>;
   selected_index : number;
   isFanZone;
+  toasterConfig: ToasterConfig;
 
-  constructor(private fb : FormBuilder, private adminService: AdminService, private cineterService : CineterService) {
+  constructor(private fb : FormBuilder, private adminService: AdminService, private cineterService : CineterService,
+              private toasterService: ToasterService) {
+    this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -92,6 +96,7 @@ export class AddCineterAdminComponent implements OnInit {
     this.adminService.registerCineterAdmin(admin).subscribe(data => {
       console.log(data);
     });
+    this.toasterService.pop('success', 'Success!','You have successfully added a new admin!');
   }
 
   onChange(value){

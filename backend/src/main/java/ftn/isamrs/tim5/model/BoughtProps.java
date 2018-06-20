@@ -26,7 +26,6 @@ public class BoughtProps {
     @ManyToOne
     Account account;
 
-    //dodati verziju kako bi transakcije radile
 
     public BoughtProps() {}
 

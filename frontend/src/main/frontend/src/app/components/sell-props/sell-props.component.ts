@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PropsService} from "../../services/props/props.service";
 import {PropsCreate} from "../../models/propsCreate";
 import {ActivatedRoute, Params} from "@angular/router";
+import {ToasterConfig, ToasterService} from "angular5-toaster/dist";
+import {Props} from "../../models/props";
 
 @Component({
   selector: 'app-sell-props',
@@ -12,10 +14,15 @@ import {ActivatedRoute, Params} from "@angular/router";
 export class SellPropsComponent implements OnInit {
 
   form : FormGroup;
-  id : number;
+  cineter_id : any;
+  toasterConfig: ToasterConfig;
+  prop : PropsCreate;
 
-  constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService)
+  constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService, private toasterService: ToasterService)
   {
+    this.prop = new PropsCreate('', 0, '', 1 , 0);
+
+    this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -37,7 +44,18 @@ export class SellPropsComponent implements OnInit {
     });
 
     this.route.params.subscribe((param: Params) => {
-      this.id = param['id'];
+      this.cineter_id = param['id'];
+      if(this.cineter_id.endsWith('$'))
+      {
+        this.cineter_id = this.cineter_id.substring(0, this.cineter_id.length - 1);
+        this.propsService.deleteUserProp(this.cineter_id).subscribe(data => {
+              console.log(data);
+              this.prop = data as PropsCreate;
+              this.cineter_id = this.prop.cineterId;
+        }, error2 => {
+
+        });
+      }
     });
   }
 
@@ -60,12 +78,13 @@ export class SellPropsComponent implements OnInit {
   }
 
   register(i) {
-    let props = new PropsCreate(this.name.value, this.price.value, this.description.value, 1);
-    this.propsService.sellProp(this.id, props).subscribe(data => {
-      console.log(data);
-    });
 
-  }
+    this.propsService.sellProp(this.cineter_id, this.prop).subscribe(data => {
+      this.toasterService.pop('success', 'Success!','Your prop has successfully been sent for approval!');
+
+      console.log(data);
+     });
+   }
 
 
 }
