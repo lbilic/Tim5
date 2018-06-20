@@ -10,4 +10,6 @@ public interface ShowReservationService {
     List<ShowReservation> findAll();
 
     List<ShowReservation> findMyReservations(Long id, Long cineterId);
+
+    List<ShowReservation> findShowReservationsByPerformance_Id(long id);
 }

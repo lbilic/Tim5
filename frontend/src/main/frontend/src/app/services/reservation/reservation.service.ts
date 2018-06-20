@@ -15,4 +15,8 @@ export class ReservationService {
     return this.http.get('http://localhost:8080/api/reservations/get_all_show_reservations');
   }
 
+  public getAll(id){
+    return this.http.get('http://localhost:8080/api/reservations/get?id='+id);
+  }
+
 }

@@ -90,14 +90,21 @@ public class ReservationController {
     public ResponseEntity getAllReservations(@RequestParam("id") Long id){
 
         List<MovieReservation> mr = this.movieReservationService.findMovieReservationsByScreening_Id(id);
-        List<MovieReservationDTO> dtos;
+        List<ShowReservation> sr = this.showReservationService.findShowReservationsByPerformance_Id(id);
         if(mr != null) {
-            // vrati rezervacije za taj film
-        } else {
-            //ShowReservation sr = this.showReservationService.getByPerformanceId(id);
-            // vrati rezervacije za taj show
-        }
+            List<MovieReservationDTO> dto = new ArrayList<>();
 
-        return new ResponseEntity(null, HttpStatus.OK);
+            for (MovieReservation m : mr) {
+                dto.add(new MovieReservationDTO(m));
+            }
+            return new ResponseEntity(dto, HttpStatus.OK);
+        } else {
+            List<ShowReservationDTO> dto = new ArrayList<>();
+
+            for (ShowReservation s : sr) {
+                dto.add(new ShowReservationDTO(s));
+            }
+            return new ResponseEntity(dto, HttpStatus.OK);
+        }
     }
 }
