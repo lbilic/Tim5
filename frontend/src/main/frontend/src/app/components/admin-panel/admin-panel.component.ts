@@ -42,4 +42,9 @@ export class AdminPanelComponent implements OnInit {
   get diamond() {
     return this.form.get('diamond');
   }
+
+  changeThresholds(){
+
+  }
+  
 }

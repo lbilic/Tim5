@@ -3,6 +3,7 @@ import {ShowService} from "../../services/show/show.service";
 import {Show} from "../../models/show";
 import {Router} from "@angular/router";
 import {MovieScreeningCreate} from "../../models/movieScreeningCreate";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-list-movies',
@@ -10,7 +11,7 @@ import {MovieScreeningCreate} from "../../models/movieScreeningCreate";
   styleUrls: ['./list-movies.component.css']
 })
 export class ListMoviesComponent implements OnInit {
-
+  
   movies : Array<Show>;
   projections: Array<MovieScreeningCreate>;
 
@@ -32,6 +33,10 @@ export class ListMoviesComponent implements OnInit {
 
   Reserve(i){
     this.router.navigate([`/reserve/${i.id}`])
+  }
+
+  getDate(i) {
+    return (moment().add(i, 'days').format("DD.MM."));
   }
 
 }

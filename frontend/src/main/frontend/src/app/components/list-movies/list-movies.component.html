@@ -1,117 +1,84 @@
 <div class="container">
-  <div id="all-movies-container" class="movies-showing">
-    <div *ngFor="let movie of movies" class="movie" id="movie_{{movie.id}}">
-      <div class="movie-details">
-        <div class="movie-poster">
-            <!--img src={{i.image}} class="user-image" *ngIf="i.image"-->
-            <img src="../../../assets/images/userprofile.png" alt={{movie.name}}>
-        </div>
-        <div class="movie-info">
-          <a href="." class="title"><span class="title-container">{{movie.name}}</span></a>
-          <div class="info">
-            <ul class="film-title">
-              <li class="lbl">
-                Name:
-              </li>
-              <li>
-                {{movie.name}}
-              </li>
-            </ul>
-            <ul class="director">
-              <li class="lbl">
-                Director:
-              </li>
-              <li>
-                {{movie.name}}
-              </li>
-            </ul>
-            <ul class="genre">
-                <li class="lbl">
-                  Genre:
-                </li>
-                <li>
-                  {{movie.name}}
-                </li>
-              </ul>
-              <ul class="Roles">
-                  <li class="lbl">
-                    Roles:
-                  </li>
-                  <li>
-                    {{movie.name}}
-                  </li>
-                </ul>
-                <ul class="Duration">
-                    <li class="lbl">
-                      Duration:
-                    </li>
-                    <li>
-                      {{movie.name}}
-                    </li>
-                  </ul>
-          </div>
-        </div>
-      </div>
-      <div class="schedule-shows showed">
-          <div class="dateofprojection">
-            DATUM
-          </div>
-          <div>
-            <div class="schedule-format">
-              <div class="shows">
-                <div class="time"> <!-- add ngfor-->
-                  <a role="button" onclick="Reserve(movie.projection)">00:00</a>
-                  <div class="price">
-                      200RSD
-                    </div>
+    <tabset [justified]="true">
+        <tab *ngFor="let i of [0,1,2,3,4,5,6]" heading="{{getDate(i)}}">
+          <div id="all-movies-container" class="movies-showing">
+            <div *ngFor="let movie of movies" class="movie" id="movie_{{movie.id}}">
+              <div class="movie-details">
+                <div class="movie-poster">
+                    <!--img src={{i.image}} class="user-image" *ngIf="i.image"-->
+                    <img src="../../../assets/images/userprofile.png" alt={{movie.name}}>
                 </div>
-                <div class="time"> <!-- add ngfor-->
-                  <a role="button" onclick="Reserve(movie.projection)">00:00</a>
-                  <div class="price">
-                      200RSD
-                    </div>
+                <div class="movie-info">
+                  <a href="." class="title"><span class="title-container">{{movie.name}}</span></a>
+                  <div class="info">
+                    <ul class="film-title">
+                      <li class="lbl">
+                        Name:
+                      </li>
+                      <li>
+                        {{movie.name}}
+                      </li>
+                    </ul>
+                    <ul class="director">
+                      <li class="lbl">
+                        Director:
+                      </li>
+                      <li>
+                        {{movie.name}}
+                      </li>
+                    </ul>
+                    <ul class="genre">
+                        <li class="lbl">
+                          Genre:
+                        </li>
+                        <li>
+                          {{movie.name}}
+                        </li>
+                      </ul>
+                      <ul class="Roles">
+                          <li class="lbl">
+                            Roles:
+                          </li>
+                          <li>
+                            {{movie.name}}
+                          </li>
+                        </ul>
+                        <ul class="Duration">
+                            <li class="lbl">
+                              Duration:
+                            </li>
+                            <li>
+                              {{movie.name}}
+                            </li>
+                          </ul>
+                  </div>
                 </div>
+              </div>
+              <div class="schedule-shows showed">
+                  <div class="dateofprojection">
+                    DATUM
+                  </div>
+                  <div>
+                    <div class="schedule-format">
+                      <div class="shows">
+                        <div class="time"> <!-- add ngfor-->
+                          <a role="button" onclick="Reserve(movie.projection)">00:00</a>
+                          <div class="price">
+                              200RSD
+                            </div>
+                        </div>
+                        <div class="time"> <!-- add ngfor-->
+                          <a role="button" onclick="Reserve(movie.projection)">00:00</a>
+                          <div class="price">
+                              200RSD
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
-      </div>
-    </div>
-  </div>
+        </tab>
+    </tabset>
 </div>
-<!--div class="movie-list">
-  <div *ngFor="let i of movies" class="movie">
-    <div class="col-sm-6 friend-content">
-      <table>
-        <td rowspan=2>
-          <!-+-img src={{i.image}} class="user-image" *ngIf="i.image"-+->
-          <img src="../../../assets/images/userprofile.png" class="user-image">
-        </td>
-        <td>
-          <tr>
-            {{i.name}}
-          </tr>
-        </td>
-        <td rowspan=2>
-          <button type="button" (click)="Reserve(i)" class="btn btn-primary" style="background-color:#ffa75a">Reserve</button>
-        </td>
-      </table>
-    </div>
-  </div>
-</div-->
-
-<!--table class="table">
-  <thead>
-  <tr>
-    <th scope="col">ID</th>
-    <th scope="col">Name</th>
-    <th scope="col">Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let i of movies">
-    <td>{{i.id}}</td>
-    <td>{{i.name}}</td>
-    <td>{{i.description}}</td>
-  </tr>
-  </tbody>
-</table-->
