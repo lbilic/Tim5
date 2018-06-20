@@ -14,6 +14,10 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Version
+    private int version;
+
     @Column(nullable = false)
     private String name;
 
@@ -28,6 +32,12 @@ public class Authority {
         this.accountAuthorities = new ArrayList<>();
     }
 
+    public Authority(int version, String name, List<AccountAuthority> accountAuthorities) {
+        this.version = version;
+        this.name = name;
+        this.accountAuthorities = accountAuthorities;
+    }
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -39,4 +49,12 @@ public class Authority {
     public List<AccountAuthority> getAccountAuthorities() { return accountAuthorities; }
 
     public void setAccountAuthorities(List<AccountAuthority> accountAuthorities) { this.accountAuthorities = accountAuthorities; }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 }

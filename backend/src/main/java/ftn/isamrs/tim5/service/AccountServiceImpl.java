@@ -84,16 +84,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<MovieReservation> findAllMovieReservations(long id) {
         return this.findOne(id).getMovieReservations();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ShowReservation> findAllShowReservations(long id) {
         return this.findOne(id).getShowReservations();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public String findEmailById(Long id) {
         return accountRepository.findEmailById(id);
     }

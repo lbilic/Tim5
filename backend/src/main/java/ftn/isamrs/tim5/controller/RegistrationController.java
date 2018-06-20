@@ -12,6 +12,7 @@ import ftn.isamrs.tim5.service.AuthorityService;
 import ftn.isamrs.tim5.service.EmailService;
 import ftn.isamrs.tim5.util.MessageConstants;
 import io.swagger.annotations.*;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,55 +66,58 @@ public class RegistrationController {
     public ResponseEntity registerAccount(
             @ApiParam(value = "The account object", required = true) @Valid @RequestBody AccountCreateDTO accountCreateDTO,
             @ApiParam(value = "The object that contains all errors from validation of DTO object") BindingResult errors) {
-
-        Boolean canRegister = false;
-        Boolean isAdmin = false;
-
-        for(GrantedAuthority authority : SecurityContextHolder.getContext().getAuthentication().getAuthorities())
-        {
-            if(authority.getAuthority().equals(MessageConstants.ADMIN_ROLE))
-                isAdmin = true;
-            if(authority.getAuthority().equals("ROLE_ANONYMOUS"))
-                canRegister = true;
-        }
-
-        if(!canRegister && !isAdmin) throw new ForbiddenException("You need to logout to register or you need to be admin.");
-
-        this.accountService.checkUsername(accountCreateDTO.getLoginAccount().getUsername());
-
-        Account account = new Account(accountCreateDTO.getLoginAccount().getUsername(), accountCreateDTO.getLoginAccount().getPassword());
-        //Mapiranje istoimenih atributa iz DTO objekta na objekat koji se snima u bazu
-        Account acc = convertAccountCreateDTOToAccount(accountCreateDTO);
-        //System.out.println(acc);
-        //System.out.println(account);
-        //if(isAdmin)
-        //    acc.setConfirmed(true);
-        //else
-        //    acc.setConfirmed(false);
-        account.setName(acc.getName());
-        account.setLastName(acc.getLastName());
-        account.setEmail(acc.getEmail());
-
-
-        Authority authority = this.authorityService.findByName("USER");
-
-        AccountAuthority accountAuthority = new AccountAuthority(account, authority);
-        account.getAccountAuthorities().add(accountAuthority);
         try {
-            emailService.sendActivationMail(account);
-        } /*catch (InterruptedException e) {
+            Boolean canRegister = false;
+            Boolean isAdmin = false;
+
+            for (GrantedAuthority authority : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+                if (authority.getAuthority().equals(MessageConstants.ADMIN_ROLE))
+                    isAdmin = true;
+                if (authority.getAuthority().equals("ROLE_ANONYMOUS"))
+                    canRegister = true;
+            }
+
+            if (!canRegister && !isAdmin)
+                throw new ForbiddenException("You need to logout to register or you need to be admin.");
+
+            this.accountService.checkUsername(accountCreateDTO.getLoginAccount().getUsername());
+
+            Account account = new Account(accountCreateDTO.getLoginAccount().getUsername(), accountCreateDTO.getLoginAccount().getPassword());
+            //Mapiranje istoimenih atributa iz DTO objekta na objekat koji se snima u bazu
+            Account acc = convertAccountCreateDTOToAccount(accountCreateDTO);
+            //System.out.println(acc);
+            //System.out.println(account);
+            //if(isAdmin)
+            //    acc.setConfirmed(true);
+            //else
+            //    acc.setConfirmed(false);
+            account.setName(acc.getName());
+            account.setLastName(acc.getLastName());
+            account.setEmail(acc.getEmail());
+
+
+            Authority authority = this.authorityService.findByName("USER");
+
+            AccountAuthority accountAuthority = new AccountAuthority(account, authority);
+            account.getAccountAuthorities().add(accountAuthority);
+            try {
+                emailService.sendActivationMail(account);
+            } /*catch (InterruptedException e) {
             e.printStackTrace();
         }*/ catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        account = this.accountService.save(account);
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            account = this.accountService.save(account);
 
-        accountAuthority.setAccount(account);
-        accountAuthority.setAuthority(authority);
-        this.accountAuthorityService.save(accountAuthority);
-        return new ResponseEntity<>(new AccountDTO(account), HttpStatus.CREATED);
+            accountAuthority.setAccount(account);
+            accountAuthority.setAuthority(authority);
+            this.accountAuthorityService.save(accountAuthority);
+            return new ResponseEntity<>(new AccountDTO(account), HttpStatus.CREATED);
+        } catch(OptimisticEntityLockException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
     @RequestMapping(
