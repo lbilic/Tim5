@@ -73,3 +73,8 @@ INSERT INTO PROPS(ID, DESCRIPTION, NAME, PRICE, AMOUNT, CINETER_ID, ACCOUNT_ID) 
 insert into showreservation(id, performance_id, total_price) values (900, 22, 200)
 insert into moviereservation(id, screening_id, total_price) values (901, 13, 200)
 insert into account_movie_reservations(account_id, movie_reservations_id) values(789, 901)
+
+insert into system_scale(system_id, scale) values (1, 0)
+insert into system_scale(system_id, scale) values (1, 20)
+insert into system_scale(system_id, scale) values (1, 40)
+insert into system_scale(system_id, scale) values (1, 60)

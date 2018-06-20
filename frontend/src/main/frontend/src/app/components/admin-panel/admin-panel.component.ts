@@ -30,9 +30,11 @@ export class AdminPanelComponent implements OnInit {
       this.toasterConfig = new ToasterConfig({timeout: 4000});
       this.systemService.getScale().subscribe(data => {
         this.scale = (data as Scale);
-        this.goldValue = this.scale.scale.pop();
+        this.diamondValue = this.scale.scale.pop();
         this.platinumValue = this.scale.scale.pop();
         this.goldValue = this.scale.scale.pop();
+        this.form.setValue({gold: this.goldValue, platinum: this.platinumValue, diamond: this.diamondValue});
+        console.log(this.goldValue, this.platinumValue, this.diamondValue);
       });
     }
 
