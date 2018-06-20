@@ -45,10 +45,12 @@ export class ListMoviesComponent implements OnInit {
     // lista filmova u odnosu na cineter id
     this.showService.getShowsByCineterId(this.id).subscribe(data=>{
       this.movies_cineter_id= data as Array<ShowCreate>;
+      console.log(this.movies_cineter_id);
     });
 
     this.showService.getPerformances("movie.id").subscribe(data => {
       this.performances = data as Array<PerformanceCreate>;
+      console.log(this.performances);
     });
 
   }
