@@ -62,12 +62,9 @@ public class Account {
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<ShowReservation> showReservations;
 
-<<<<<<< Updated upstream
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "account")
     private List<Review> reviews;
     
-=======
->>>>>>> Stashed changes
     @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
     private int points;
 
@@ -197,7 +194,6 @@ public class Account {
 
     public void setShowReservations(List<ShowReservation> showReservations) { this.showReservations = showReservations; }
 
-<<<<<<< Updated upstream
     public List<Review> getReviews() {
         return reviews;
     }
@@ -206,8 +202,6 @@ public class Account {
         this.reviews = reviews;
     }
     
-=======
->>>>>>> Stashed changes
     public int getPoints() { return this.points; }
 
     public void setPoints(int points) { this.points = points; }
