@@ -1,5 +1,5 @@
 .all-cineters .cineter-details .cineter-info,
-.all-cineters.all-cineters .cineter-details .cineter-info {
+.all-cineters.cineter .cineter-details .cineter-info {
 	padding-left: 15px;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .all-cineters .cineter-details .cineter-info .info ul .lbl,
-	.all-cineters.all-cineters .cineter-details .cineter-info .info ul .lbl {
+	.all-cineters.cineter .cineter-details .cineter-info .info ul .lbl {
 		width: auto;
   }
 
