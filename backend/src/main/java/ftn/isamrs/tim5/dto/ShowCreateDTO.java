@@ -12,7 +12,7 @@ public class ShowCreateDTO implements Serializable{
     private String director;
     private String runtime;
     private String genre;
-    private String stars;
+    private String actors;
     private int version;
 
     public ShowCreateDTO() {
@@ -33,7 +33,7 @@ public class ShowCreateDTO implements Serializable{
         this.director = show.getDirector();
         this.runtime = show.getRuntime();
         this.genre=show.getGenre();
-        this.stars =show.getStars();
+        this.actors =show.getActors();
         this.version = show.getVersion();
     }
 
@@ -85,12 +85,12 @@ public class ShowCreateDTO implements Serializable{
         this.genre = genre;
     }
 
-    public String getStars() {
-        return stars;
+    public String getActors() {
+        return actors;
     }
 
-    public void setStars(String stars) {
-        this.stars = stars;
+    public void setActors(String actors) {
+        this.actors = actors;
     }
 
     public int getVersion() {

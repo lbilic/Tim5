@@ -24,20 +24,20 @@ export class AddShowComponent implements OnInit {
         Validators.minLength(5)
       ]],
 
-      stars: ['', [
-        Validators.required,
+      actors: ['', [
+        Validators.required
       ]],
 
       genre: ['', [
-        Validators.required,
+        Validators.required
       ]],
 
       director: ['', [
-        Validators.required,
+        Validators.required
       ]],
 
       runtime: ['', [
-        Validators.required,
+        Validators.required
       ]],
 
 
@@ -53,8 +53,8 @@ export class AddShowComponent implements OnInit {
     return this.form.get('description');
   }
 
-  get stars(){
-    return this.form.get('stars');
+  get actors(){
+    return this.form.get('actors');
   }
 
   get genre(){
@@ -76,7 +76,7 @@ export class AddShowComponent implements OnInit {
   register(){
     this.show.registerShow(new ShowCreate(this.name.value,
       this.description.value, false, this.director.value, this.runtime.value,
-      this.genre.value, this.stars.value)).subscribe((data) =>{
+      this.genre.value, this.actors.value)).subscribe((data) =>{
       console.log(data);
     });
   }

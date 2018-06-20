@@ -30,7 +30,7 @@ public class Show {
 	String genre;
 
 	@Column
-	String stars;
+	String actors;
 
 	@Column (nullable = false, columnDefinition = "BOOL DEFAULT FALSE")
 	boolean isMovie;
@@ -63,13 +63,13 @@ public class Show {
 */
 
 	public Show(String name, String description, String director,
-				String runtime, String genre, String stars, boolean isMovie) {
+				String runtime, String genre, String actors, boolean isMovie) {
 		this.name = name;
 		this.description = description;
 		this.director = director;
 		this.runtime = runtime;
 		this.genre = genre;
-		this.stars = stars;
+		this.actors = actors;
 		this.isMovie = isMovie;
 	}
 
@@ -141,12 +141,12 @@ public class Show {
 		this.genre = genre;
 	}
 
-	public String getStars() {
-		return stars;
+	public String getActors() {
+		return actors;
 	}
 
-	public void setStars(String stars) {
-		this.stars = stars;
+	public void setActors(String actors) {
+		this.actors = actors;
 	}
 
 	public List<Review> getReviews() {

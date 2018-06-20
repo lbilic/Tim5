@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Add new show</h1>
+  <h1>Add new movie</h1>
   <form [formGroup]="form" (ngSubmit)="register()">
     <div class="form-group">
       <label for="name">Name</label>
@@ -20,6 +20,68 @@
             </div>
           </ng-container>
         </ng-template>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="director">Director</label>
+      <input
+        formControlName="director"
+        id="director"
+        placeholder="Director..."
+        type="text"
+        class="form-control">
+      <div *ngIf="director.touched && director.invalid" class="alert alert-danger">
+        <div id="directorRequiredError" *ngIf="director.errors.required">
+          The director is required!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <input
+        formControlName="genre"
+        id="genre"
+        placeholder="Genre..."
+        type="text"
+        class="form-control">
+      <div *ngIf="genre.touched && genre.invalid" class="alert alert-danger">
+        <div id="genreRequiredError" *ngIf="genre.errors.required">
+          The genre is required!
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="actors">Actors</label>
+      <input
+        formControlName="actors"
+        id="actors"
+        placeholder="Actors..."
+        type="text"
+        class="form-control">
+      <div *ngIf="actors.touched && actors.invalid" class="alert alert-danger">
+        <div id="actorsRequiredError" *ngIf="actors.errors.required">
+          Actors are required!
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="runtime">Runtime</label>
+      <input
+        formControlName="runtime"
+        id="runtime"
+        placeholder="Runtime..."
+        type="text"
+        class="form-control">
+      <div *ngIf="runtime.touched && runtime.invalid" class="alert alert-danger">
+        <div id="runtimeRequiredError" *ngIf="runtime.errors.required">
+          The runtime is required!
+        </div>
       </div>
     </div>
 
@@ -47,7 +109,7 @@
       </div>
     </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
+    <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Register</button>
 
   </form>
 </div>
