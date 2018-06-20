@@ -15,12 +15,13 @@ public class SystemServiceImpl implements SystemService {
     SystemRepository systemRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<System> findAll() {
         return this.systemRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public System save(System system) {
         return this.systemRepository.save(system);
     }

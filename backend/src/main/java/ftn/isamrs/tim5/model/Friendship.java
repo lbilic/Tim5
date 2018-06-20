@@ -13,6 +13,10 @@ public class Friendship {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Version
+    private int version;
+
     @OneToOne
     Account sender;
 
@@ -25,6 +29,13 @@ public class Friendship {
     public Friendship() {}
 
     public Friendship(Account sender, Account receiver, FriendshipStatus status) {
+        this.sender = sender;
+        this.receiver = receiver;
+        this.status = status;
+    }
+
+    public Friendship(int version, Account sender, Account receiver, FriendshipStatus status) {
+        this.version = version;
         this.sender = sender;
         this.receiver = receiver;
         this.status = status;
@@ -60,5 +71,13 @@ public class Friendship {
 
     public void setStatus(FriendshipStatus status) {
         this.status = status;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

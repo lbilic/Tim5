@@ -9,6 +9,10 @@ public class ShowReservation {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Version
+    private int version;
+
     @ManyToOne
     Performance performance;
 
@@ -18,6 +22,12 @@ public class ShowReservation {
     public ShowReservation() {}
 
     public ShowReservation(Performance performance, float total_price) {
+        this.performance = performance;
+        this.total_price = total_price;
+    }
+
+    public ShowReservation(int version, Performance performance, float total_price) {
+        this.version = version;
         this.performance = performance;
         this.total_price = total_price;
     }
@@ -44,5 +54,13 @@ public class ShowReservation {
 
     public void setTotal_price(float total_price) {
         this.total_price = total_price;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

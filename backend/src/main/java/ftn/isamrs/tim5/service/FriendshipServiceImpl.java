@@ -21,6 +21,7 @@ public class FriendshipServiceImpl implements FriendshipService{
     private AccountService accountService;
 
     @Override
+    @Transactional
     public Friendship save(Friendship f) {
         Friendship fs = friendshipRepository.save(f);
         return fs;

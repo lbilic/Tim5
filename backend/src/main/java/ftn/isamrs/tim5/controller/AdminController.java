@@ -248,13 +248,17 @@ public class AdminController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity update_scale(@RequestBody ScaleDTO scale) {
-        System system = systemService.findAll().get(0);
+        try {
+            System system = systemService.findAll().get(0);
 
-        system.setScale(scale.getScale());
+            system.setScale(scale.getScale());
 
-        systemService.save(system);
+            systemService.save(system);
 
-        return new ResponseEntity<>(scale, HttpStatus.OK);
+            return new ResponseEntity<>(scale, HttpStatus.OK);
+        } catch(OptimisticEntityLockException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
     @RequestMapping(value = "/get_scale",

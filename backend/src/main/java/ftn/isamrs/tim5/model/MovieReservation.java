@@ -9,6 +9,10 @@ public class MovieReservation {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @Column(nullable = false, columnDefinition = "INTEGER DEFAULT 0")
+    @Version
+    private int version;
+
     @ManyToOne
     private MovieScreening screening;
 
@@ -18,6 +22,12 @@ public class MovieReservation {
     public MovieReservation() {}
 
     public MovieReservation(MovieScreening screening, float total_price) {
+        this.screening = screening;
+        this.total_price = total_price;
+    }
+
+    public MovieReservation(int version, MovieScreening screening, float total_price) {
+        this.version = version;
         this.screening = screening;
         this.total_price = total_price;
     }
@@ -44,5 +54,13 @@ public class MovieReservation {
 
     public void setTotal_price(float total_price) {
         this.total_price = total_price;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

@@ -1,13 +1,4 @@
-<ngb-datepicker #dp [minDate]="minDate" [ngModel]="model" (navigate)="date = $event.next" [dayTemplate]="customDay"></ngb-datepicker>
-<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
-  <span class="customDay"
-        [class.bg-primary]="selected"
-        [class.projectionDay]="hasProjection(date)"
-        (click)="pickDate(date, $event)">
-
-  </span>
-</ng-template>
-<!--div class="content">
+<div class="content">
   <h2 class="title">{{show.name}}</h2>
 
   <p style="font-size:50px;color:#ff1436">Screen this way!</p>
@@ -37,4 +28,4 @@
     <button (click)="clearSelected()">Clear</button>
     <button (click)="showSelected()">Show selected seats!</button>
   </div>
-</div-->
+</div>

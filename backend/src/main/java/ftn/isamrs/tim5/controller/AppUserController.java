@@ -14,6 +14,7 @@ import ftn.isamrs.tim5.service.AccountService;
 import ftn.isamrs.tim5.service.FriendshipService;
 import ftn.isamrs.tim5.util.MessageConstants;
 import io.swagger.annotations.*;
+import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -160,31 +161,35 @@ public class AppUserController {
     public ResponseEntity changePassword(@RequestHeader("Authentication-Token") String token,
                                          @RequestBody PasswordDTO password) {
 
-        String username = jwtUtils.getUsernameFromToken(token);
+        try {
+            String username = jwtUtils.getUsernameFromToken(token);
 
-        Account acc = accountService.findByUsername(username);
+            Account acc = accountService.findByUsername(username);
 
-        if (!BCrypt.checkpw(password.getOldPassword(), acc.getPassword()))
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            if (!BCrypt.checkpw(password.getOldPassword(), acc.getPassword()))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        if (!password.getNewPassword().equals(password.getConfirmPassword()))
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            if (!password.getNewPassword().equals(password.getConfirmPassword()))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        CineterAdmin admin = (CineterAdmin) acc;
+            CineterAdmin admin = (CineterAdmin) acc;
 
-        String newPassword = BCrypt.hashpw(password.getNewPassword(), BCrypt.gensalt());
-        acc.setPassword(newPassword);
+            String newPassword = BCrypt.hashpw(password.getNewPassword(), BCrypt.gensalt());
+            acc.setPassword(newPassword);
 
-        if (admin.getCineter() != null) {
-            if (!admin.getChangedPassword())
-                admin.setChangedPassword(true);
+            if (admin.getCineter() != null) {
+                if (!admin.getChangedPassword())
+                    admin.setChangedPassword(true);
 
-            accountService.save(admin);
-            return new ResponseEntity<>(new CineterAdminCreateDTO(admin), HttpStatus.OK);
+                accountService.save(admin);
+                return new ResponseEntity<>(new CineterAdminCreateDTO(admin), HttpStatus.OK);
+            }
+
+            accountService.save(acc);
+            return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+        } catch(OptimisticEntityLockException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
-
-        accountService.save(acc);
-        return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
 
     }
 
@@ -197,17 +202,20 @@ public class AppUserController {
 
     public ResponseEntity changeProfile(@RequestHeader("Authentication-Token") String token,
                                         @RequestBody ProfileChangeDTO profile){
+        try {
+            String username = jwtUtils.getUsernameFromToken(token);
 
-        String username = jwtUtils.getUsernameFromToken(token);
+            Account acc = accountService.findByUsername(username);
 
-        Account acc = accountService.findByUsername(username);
+            acc.setName(profile.getName());
+            acc.setLastName(profile.getLastName());
 
-        acc.setName(profile.getName());
-        acc.setLastName(profile.getLastName());
+            accountService.save(acc);
 
-        accountService.save(acc);
-
-        return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+            return new ResponseEntity<>(new AccountDTO(acc), HttpStatus.OK);
+        } catch(OptimisticEntityLockException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
     @RequestMapping(
@@ -229,17 +237,21 @@ public class AppUserController {
     })
     public ResponseEntity send_request(@RequestHeader("Authentication-Token") String token,
                                        @RequestBody String receiverUsername) {
-        if(!this.accountService.isUsernameTaken(receiverUsername))
-            throw new NotFoundException("Account doesn't exist!");
-        String senderUsername = jwtUtils.getUsernameFromToken(token);
-        Account sender = this.accountService.findByUsername(senderUsername);
-        Account receiver = this.accountService.findByUsername(receiverUsername);
+        try {
+            if (!this.accountService.isUsernameTaken(receiverUsername))
+                throw new NotFoundException("Account doesn't exist!");
+            String senderUsername = jwtUtils.getUsernameFromToken(token);
+            Account sender = this.accountService.findByUsername(senderUsername);
+            Account receiver = this.accountService.findByUsername(receiverUsername);
 
-        Friendship f = new Friendship(sender, receiver, FriendshipStatus.AWAITING);
+            Friendship f = new Friendship(sender, receiver, FriendshipStatus.AWAITING);
 
-        friendshipService.save(f);
+            friendshipService.save(f);
 
-        return new ResponseEntity(this.friendshipService.findBySenderAndReceiver(sender.getUsername(), receiver.getUsername()), HttpStatus.OK);
+            return new ResponseEntity(this.friendshipService.findBySenderAndReceiver(sender.getUsername(), receiver.getUsername()), HttpStatus.OK);
+        } catch(OptimisticEntityLockException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
     @RequestMapping(value = "/api/get_friends",
@@ -359,11 +371,10 @@ public class AppUserController {
 
             return new ResponseEntity(null, HttpStatus.OK);
         }
-        catch (Exception ex) {
+        catch (OptimisticEntityLockException ex) {
             ex.printStackTrace();
         }
         return new ResponseEntity(null, HttpStatus.NOT_FOUND);
-
     }
 
 
