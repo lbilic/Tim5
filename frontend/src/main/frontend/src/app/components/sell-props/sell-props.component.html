@@ -1,3 +1,4 @@
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>
 <div class="container">
   <h1>Sell Props for Cinema or Theater</h1>
   <form [formGroup]="form" (ngSubmit)="register()">
@@ -8,7 +9,8 @@
         id="name"
         placeholder="Name..."
         type="text"
-        class="form-control">
+        class="form-control"
+        [(ngModel)]="prop.name">
       <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
         <div id="nameRequiredError" *ngIf="name.errors.required; else firstNameMinLength">
           The name is required!
@@ -29,7 +31,9 @@
       id="price"
       placeholder="price..."
       type="number"
-      class="form-control">
+      class="form-control"
+      [(ngModel)]="prop.price"
+    >
     <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
       <div id="numberRequiredError" *ngIf="price.errors.required;">
         The number is required!
@@ -42,6 +46,7 @@
       id="description"
       placeholder="Description..."
       type="text"
+      [(ngModel)]="prop.description"
       class="form-control">
     <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
       <div id="descriptionRequiredError" *ngIf="description.errors.required; else descriptionMinLength">

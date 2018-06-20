@@ -1,4 +1,5 @@
 export class PropsCreate{
 
-  constructor(public name : string, public price : number, public description: string, public amount: number){}
+  constructor(public name : string, public price : number, public description: string, public amount: number,
+              public cineterId: number){}
 }

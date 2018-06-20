@@ -1,6 +1,8 @@
 package ftn.isamrs.tim5.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -32,6 +34,10 @@ public class Props {
 	@Version
 	@Column(nullable = false, columnDefinition = "integer default 0")
 	private int version;
+
+	@OneToOne(mappedBy = "props", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
+	private PropRequest request;
 
 /*	@Column(nullable = false)
 	Date date;
@@ -131,5 +137,13 @@ public class Props {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public PropRequest getRequest() {
+		return request;
+	}
+
+	public void setRequest(PropRequest request) {
+		this.request = request;
 	}
 }

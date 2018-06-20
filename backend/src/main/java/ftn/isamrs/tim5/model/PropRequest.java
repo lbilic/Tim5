@@ -1,5 +1,6 @@
 package ftn.isamrs.tim5.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Cascade;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
@@ -20,7 +21,8 @@ public class PropRequest {
     @OneToMany(cascade = CascadeType.DETACH)
     List<CineterAdmin> adminAccounts;
 
-    @OneToOne()
+    @OneToOne
+    @JsonBackReference
     Props props;
 
 

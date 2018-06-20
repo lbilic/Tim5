@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,9 @@ public class AdminController {
 
     @Autowired
     PropsRequestService propsRequestService;
+
+    @Autowired
+    EmailService emailService;
 
     @RequestMapping(value = "/create_cinetar",
                     method = RequestMethod.POST,
@@ -159,13 +163,19 @@ public class AdminController {
     @RequestMapping(value = "/accept_request",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity accept_request(@RequestParam("id") Long id){
+    public ResponseEntity accept_request(@RequestParam("id") Long id) throws MessagingException {
 
 
         try {
             PropRequest request = propsRequestService.findRequestById(id);
+            String email = accountService.findEmailById(request.getUserAccount().getId());
+            emailService.sendMail("Congratulations! Your prop has been approved for sale!",
+                    "Hi! We are pleased to inform you that our costumers can now see your prop and bid for it!" +
+                            "We wish you high bidding! Best regards, Admin Team", email);
 
-            if(request == null) throw new NullPointerException();
+            if(request == null) {
+                throw new NullPointerException();
+            }
 
             List<CineterAdmin> admins = request.getAdminAccounts();
 
@@ -194,11 +204,17 @@ public class AdminController {
     @RequestMapping(value = "/deny_request",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deny_request(@RequestParam("id") Long id){
+    public ResponseEntity deny_request(@RequestParam("id") Long id) throws MessagingException {
 
 
         try {
             PropRequest request = propsRequestService.findRequestById(id);
+
+            String email = accountService.findEmailById(request.getUserAccount().getId());
+            emailService.sendMail("We are sorry. Your prop has been denied for sale!",
+                    "Hi. We are sorry to inform you that your prop did not meet our standards and was not approved for sale!" +
+                            "We wish you better luck next time! Best regards, Admin Team", email);
+
             List<CineterAdmin> admins = request.getAdminAccounts();
 
             for (CineterAdmin admin:

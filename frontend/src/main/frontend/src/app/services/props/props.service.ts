@@ -47,7 +47,7 @@ export class PropsService {
   }
 
   boughtProps(){
-    return this.http.get('htt://localhost:8080/api/props/bought_props');
+    return this.http.get('http://localhost:8080/api/props/bought_props');
   }
 
   bidForProp(id, price, version){
