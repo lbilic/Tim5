@@ -1,5 +1,6 @@
 package ftn.isamrs.tim5.controller;
 
+import ftn.isamrs.tim5.dto.ReviewDTO;
 import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.security.JWTUtils;
 import ftn.isamrs.tim5.service.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/rate")
-public class RateController {
+public class ReviewController {
 
     @Autowired
     private AccountService accountService;
@@ -31,6 +32,9 @@ public class RateController {
 
     @Autowired
     private ShowReservationService showReservationService;
+
+    @Autowired
+    private ShowService showService;
 
     @Autowired
     private CineterService cineterService;
@@ -61,9 +65,10 @@ public class RateController {
         movies = movies == null ? new ArrayList<>() : movies;
         shows = shows == null ? new ArrayList<>() : shows;
 
-        return new ResponseEntity( movies.size() == 0
+        return new ResponseEntity(movies.size() == 0
                 && shows.size() == 0 ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
     }
+
     @RequestMapping
             (
                     value = "/cineter",
@@ -72,10 +77,11 @@ public class RateController {
             )
     public ResponseEntity rate(@RequestParam Long id, int rate, @RequestHeader("Authentication-Token")
             String token) {
+        if(rate > 5 || rate < 1)  return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         Cineter cineter = cineterService.findById(id);
         Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
-        if(cineter == null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        if (cineter == null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
 
         Review review = new Review();
         review.setAccount(account);
@@ -83,11 +89,76 @@ public class RateController {
         review.setDate(new Date());
         review.setScore(rate);
 
-
-        //TODO:NAPRAVITI REVIEW SERVIS I REPOZITORIJUM I SACUVATI REVIEW
+        this.reviewService.save(review);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //TODO: DODATI REVIEW ZA FILMOVE I PREDSTAVE KAO I RACUNANJE UKUPNOG RATE-A ZA ODREJDENI FILM, PREDSTAVU ILI CINETER
+
+    @RequestMapping
+            (
+                    value = "/show",
+                    method = RequestMethod.POST,
+                    produces = MediaType.APPLICATION_JSON_VALUE
+            )
+    public ResponseEntity rateShow(@RequestParam Long id, int rate, @RequestHeader("Authentication-Token")
+            String token) {
+
+        if(rate > 5 || rate < 1)  return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
+        Show show = showService.findById(id);
+        Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
+        if (show == null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
+        Review review = new Review();
+        review.setAccount(account);
+        review.setShow(show);
+        review.setDate(new Date());
+        review.setScore(rate);
+
+        this.reviewService.save(review);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping
+            (
+                    value = "/cineter",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE
+            )
+    public ResponseEntity rate(@RequestParam Long id) {
+
+        List<Review> reviews = this.reviewService.findByCineterId(id);
+        double sum = 0;
+        for (Review review : reviews) {
+            sum += review.getScore();
+        }
+        if (sum == 0) return new ResponseEntity<>(new ReviewDTO(0), HttpStatus.OK);
+
+        sum /= reviews.size();
+
+        return new ResponseEntity<>(new ReviewDTO(sum), HttpStatus.OK);
+    }
+
+    @RequestMapping
+            (
+                    value = "/show",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE
+            )
+    public ResponseEntity show(@RequestParam Long id) {
+
+        List<Review> reviews = this.reviewService.findByShowId(id);
+        double sum =0;
+        for (Review review : reviews) {
+            sum += review.getScore();
+        }
+        if(sum == 0) return new ResponseEntity<>(new ReviewDTO(0), HttpStatus.OK);
+
+        sum /= reviews.size();
+
+        return new ResponseEntity<>(new ReviewDTO(sum), HttpStatus.OK);
+    }
+
 }

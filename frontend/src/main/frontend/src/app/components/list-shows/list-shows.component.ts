@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {ShowService} from "../../services/show/show.service";
 import { JwtService } from "../../core/services/jwt.service";
 import {Show} from "../../models/show";
 import {Router} from "@angular/router";
+import {RateService} from "../../services/rate/rate.service";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {RateModalComponent} from "../rate-modal/rate-modal.component";
 
 
 
@@ -15,14 +18,15 @@ export class ListShowsComponent implements OnInit {
 
 
   shows : Array<Show>;
-
+  bsModalRef : BsModalRef;
   constructor(private showService: ShowService, jwtutils :JwtService,
-              private router: Router) {
+              private router: Router, private rateSertvice: RateService,private modalService : BsModalService) {
     console.log(jwtutils.decodeToken());
     this.showService.getAllShows().subscribe(data =>{
       //this.shows = (data as Array<Show>).filter(item => !item.movie);
       this.shows = data as Array<Show>;
-      console.log(this.shows);
+      for(let i of this.shows)
+        this.rateSertvice.getShowRate(i.id).subscribe(result => i.rate = result.rate);
     });
   }
 
@@ -59,5 +63,20 @@ export class ListShowsComponent implements OnInit {
   ListPerformances(i){
     this.router.navigate([`/performances/${i.id}`]);
 
+  }
+
+  Rate(i : Show){
+    this.bsModalRef = this.modalService.show(RateModalComponent);
+    console.log(i.id);
+    this.bsModalRef.content.id = i.id;
+    this.bsModalRef.content.name = i.name;
+    this.bsModalRef.content.type = "show";
+    let a : EventEmitter<any> = new EventEmitter();
+
+    a.subscribe(result =>{
+      this.bsModalRef.hide();
+      window.location.reload();
+    });
+    this.bsModalRef.content.rateSubmited = a;
   }
 }

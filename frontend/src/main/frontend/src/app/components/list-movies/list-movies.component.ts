@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ShowService} from "../../services/show/show.service";
-import {Show} from "../../models/show";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {MovieScreeningCreate} from "../../models/movieScreeningCreate";
 import * as moment from 'moment';
@@ -19,23 +18,22 @@ export class ListMoviesComponent implements OnInit {
   movies: Array<ShowCreate>;
 
 
-
   performances: Array<PerformanceCreate>;
   cineter_id: number;
   id: number;
 
   constructor(private showService: ShowService, private router: Router,
-              private route : ActivatedRoute, private movieScreeningService : MovieScreeningService) {
+              private route: ActivatedRoute, private movieScreeningService: MovieScreeningService) {
 
     /**
-    this.showService.getAllShows().subscribe(data =>{
+     this.showService.getAllShows().subscribe(data =>{
       this.movies = (data as Array<ShowCreate>).filter(item => item.isMovie);
       //this.movies = this.movies.filter(item => item.id);
       //console.log(this.movies);
     });
 
-    /*
-    this.showService.getPerformances("movie").subscribe(data => {
+     /*
+     this.showService.getPerformances("movie").subscribe(data => {
       this.projections = data as Array<MovieScreeningCreate>;
       //console.log(this.projections);
     });*/
@@ -45,13 +43,11 @@ export class ListMoviesComponent implements OnInit {
     });
 
     // lista filmova u odnosu na cineter id
-    this.showService.getShowsByCineterId(this.id).subscribe(data=>{
-      this.movies= data as Array<ShowCreate>;
-      console.log(this.movies);
-      for(let i of this.movies)
-      {
-        this.movieScreeningService.getProjectionsByMovieId(i.id).subscribe(result =>{
-            this.projections.push(result as Array<MovieScreeningCreate>);
+    this.showService.getShowsByCineterId(this.id).subscribe(data => {
+      this.movies = data as Array<ShowCreate>;
+      for (let i of this.movies) {
+        this.movieScreeningService.getProjectionsByMovieId(i.id).subscribe(result => {
+          this.projections.push(result as Array<MovieScreeningCreate>);
         });
       }
       console.log(this.projections);

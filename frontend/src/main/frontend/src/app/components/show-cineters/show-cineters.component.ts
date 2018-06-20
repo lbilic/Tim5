@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {CineterService} from "../../services/cineter/cineter.service";
 import {Cineter} from "../../models/cineter";
 import {JwtService} from "../../core/services/jwt.service";
@@ -27,6 +27,9 @@ export class ShowCinetersComponent implements OnInit {
       this.cineters = data as Array<Cineter>;
 
       for (let i of this.cineters) this.canRate(i);
+      for(let i of this.cineters) this.rateService.getCinterRate(i.id).subscribe(result =>{
+          i.rate = result.rate.toFixed(2);
+      });
     });
   }
 
@@ -58,6 +61,20 @@ export class ShowCinetersComponent implements OnInit {
 
   SellProps(i) {
     this.router.navigate([`/sell_prop/${i.id}`])
+  }
+
+  Rate(i : Cineter){
+    console.log(i.name);
+    this.bsModalRef = this.modalService.show(RateModalComponent);
+    this.bsModalRef.content.id = i.id;
+    this.bsModalRef.content.name = i.name;
+    let a : EventEmitter<any>;
+    a = new EventEmitter();
+    a.subscribe(result =>{
+      this.bsModalRef.hide();
+      window.location.reload();
+    });
+    this.bsModalRef.content.rateSubmited = a;
   }
 
   canRate(i: Cineter) {

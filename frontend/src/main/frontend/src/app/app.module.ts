@@ -306,7 +306,7 @@ import { ShowCineterComponent } from './components/show-cineter/show-cineter.com
     AddCinetarServiceService, PropsService, AccountService, AddPerformanceService,
     MovieScreeningService, AuthService, FriendsService, HallService, RateService, ReservationService, SystemService],
   bootstrap: [AppComponent],
-  entryComponents: [BidModalComponent]
+  entryComponents: [BidModalComponent, RateModalComponent]
 })
 
 export class AppModule {

@@ -24,6 +24,7 @@ export class ReserveSeatsComponent implements OnInit {
   cols = [1, 2, 3, 4, 5, 6, 7, 8];
   reserved = ['A2', 'A3', 'C5', 'C6', 'C7', 'C8', 'J1', 'J2', 'J3', 'J4'];
   selected = [];
+  type: string;
 
   constructor(private showService : ShowService, private route : ActivatedRoute) {
     this.route.params.subscribe((param: Params) => {

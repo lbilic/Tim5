@@ -4,6 +4,7 @@
     <th scope="col">ID</th>
     <th scope="col">Name</th>
     <th scope="col">Description</th>
+    <th>Rate</th>
   </tr>
   </thead>
   <tbody>
@@ -11,9 +12,11 @@
     <td>{{i.id}}</td>
     <td>{{i.name}}</td>
     <td>{{i.description}}</td>
+    <td>{{i.rate}}</td>
 
     <td> <button (click)="Update(i)"  class="btn btn-success" >Change</button> </td>
     <td> <button (click)="Delete(i)"  class="btn btn-success" >Delete</button> </td>
+    <td> <button (click)="Rate(i)"  class="btn btn-success" >Rate</button> </td>
 
     <td *ngIf="i.movie"> <button (click)="AddProjection(i)"  class="btn btn-success" >
       Add projection</button> </td>
