@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtService } from "../../services/jwt.service";
+import { CineterCreate } from "../../models/cineterCreate"
+import { CineterService } from "../../services/cineter/cineter.service";
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +10,14 @@ import { JwtService } from "../../services/jwt.service";
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(protected jwtService: JwtService) {}
+  cineters: Array<CineterCreate>;
+
+  constructor(protected jwtService: JwtService, private cineterService: CineterService) {
+    this.cineterService.getAllCineters().subscribe(data =>{
+      this.cineters = data as Array<CineterCreate>;
+      console.log(this.cineters);
+    });
+  }
 
   ngOnInit() {
   }

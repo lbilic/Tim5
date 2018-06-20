@@ -1,2 +1,46 @@
-<a routerLink="/movies" style="position:fixed; bottom:50%; left:45%">Movies</a>
-<a routerLink="/shows" style="position:fixed; bottom:50%; right:45%">Shows</a>
+<!--a routerLink="/movies" style="position:fixed; bottom:50%; left:45%">Movies</a>
+<a routerLink="/shows" style="position:fixed; bottom:50%; right:45%">Shows</a-->
+<div class="container">
+  <div id="all-cineters-container" class="all-cineters">
+      <div *ngFor="let cineter of cineters" class="cineter" id="cineter_{{cineter.id}}">
+          <div class="cineter-details">
+            <div class="cineter-image">
+                <img src="../../../assets/images/userprofile.png" alt={{cineter.name}}>
+            </div>
+            <div class="cineter-info">
+              <a routerLink="movies_{{cineter.id}}" class="title"><span class="title-container">{{cineter.name}}</span></a>
+              <div class="info">
+                <ul class="address">
+                  <li class="lbl">
+                    Address:
+                  </li>
+                  <li>
+                    {{cineter.address}}
+                  </li>
+                </ul>
+                <ul class="City">
+                  <li class="lbl">
+                    City:
+                  </li>
+                  <li>
+                    {{cineter.city}}
+                  </li>
+                </ul>
+                <ul class="Type">
+                  <li class="lbl">
+                    Type:
+                  </li>
+                  <li *ngIf="!cineter.isTheater">
+                    Cinema
+                  </li>
+                  <li *ngIf="cineter.isTheater">
+                    Theater
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+  
