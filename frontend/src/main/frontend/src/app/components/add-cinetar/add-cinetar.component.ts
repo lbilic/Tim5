@@ -3,6 +3,7 @@ import {CineterCreate} from "../../models/cineterCreate";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CineterService} from "../../services/cineter/cineter.service";
 import {Router, ActivatedRoute} from "@angular/router";
+import {ToasterConfig, ToasterService} from "angular5-toaster/dist";
 
 
 @Component({
@@ -15,9 +16,11 @@ export class AddCinetarComponent implements OnInit {
   form : FormGroup;
   returnURL: string = '';
   isTheater : boolean;
+  toasterConfig: ToasterConfig;
 
   constructor(private fb : FormBuilder, private router: Router,
-              private cinetarService : CineterService, private route: ActivatedRoute) {
+              private cinetarService : CineterService, private route: ActivatedRoute, private toasterService: ToasterService) {
+    this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -55,5 +58,6 @@ export class AddCinetarComponent implements OnInit {
       this.address.value, this.city.value, this.isTheater)).subscribe(data => {
       this.router.navigateByUrl(this.returnURL);
     });
+    this.toasterService.pop('success', 'Success!','You have successfully added a new cinema!');
   }
 }

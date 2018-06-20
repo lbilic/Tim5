@@ -1,13 +1,10 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.PropsCreateDTO;
-import ftn.isamrs.tim5.model.Account;
-import ftn.isamrs.tim5.model.Cineter;
-import ftn.isamrs.tim5.model.CineterAdmin;
+import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.repository.AccountRepository;
 import ftn.isamrs.tim5.repository.CineterRepository;
 import ftn.isamrs.tim5.repository.PropsRepository;
-import ftn.isamrs.tim5.model.Props;
 import ftn.isamrs.tim5.util.ConvertDTOToModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,10 +94,6 @@ public class PropsServiceImpl implements PropsService{
         return propsRepository.findMyProps(id);
     }
 
-    @Override
-    public List<Props> findBoughtProps(Long id) {
-        return propsRepository.findBoughtProps(id);
-    }
 
 
 }

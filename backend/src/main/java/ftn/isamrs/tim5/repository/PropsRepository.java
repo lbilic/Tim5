@@ -1,5 +1,6 @@
 package ftn.isamrs.tim5.repository;
 
+import ftn.isamrs.tim5.model.BoughtProps;
 import ftn.isamrs.tim5.model.Props;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,6 @@ public interface PropsRepository extends JpaRepository<Props, Long>{
     @Query(value = "SELECT * FROM Props p WHERE p.account_id = :accId", nativeQuery = true)
     List<Props> findMyProps(@Param("accId") Long id);
 
-    @Query(value = "SELECT * FROM BOUGHT_PROPS bp WHERE bp.account_id = :accId", nativeQuery = true)
-    List<Props> findBoughtProps(@Param("accId") Long id);
+
 
 }

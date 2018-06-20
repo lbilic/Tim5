@@ -11,6 +11,7 @@ public class PropsCreateDTO implements Serializable {
     private String description;
     private int amount;
     private int version;
+    private Long cineterId;
 
 
     public PropsCreateDTO() {
@@ -32,7 +33,7 @@ public class PropsCreateDTO implements Serializable {
         description = prop.getDescription();
         amount = prop.getAmount();
         version = prop.getVersion();
-
+        cineterId = prop.getCineter().getId();
     }
 
     public int getAmount() {
@@ -81,6 +82,14 @@ public class PropsCreateDTO implements Serializable {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public Long getCineterId() {
+        return cineterId;
+    }
+
+    public void setCineterId(Long cineterId) {
+        this.cineterId = cineterId;
     }
 
     @Override

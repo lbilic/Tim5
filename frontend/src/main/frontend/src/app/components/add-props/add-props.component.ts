@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PropsService} from "../../services/props/props.service";
 import {PropsCreate} from "../../models/propsCreate";
+import {ToasterConfig, ToasterService} from "angular5-toaster/dist";
 
 @Component({
   selector: 'app-add-props',
@@ -11,9 +12,11 @@ import {PropsCreate} from "../../models/propsCreate";
 export class AddPropsComponent implements OnInit {
 
   form : FormGroup;
+  toasterConfig: ToasterConfig;
 
-  constructor(private fb : FormBuilder, private propsService: PropsService)
+  constructor(private fb : FormBuilder, private propsService: PropsService, private toasterService: ToasterService)
   {
+    this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -62,7 +65,7 @@ export class AddPropsComponent implements OnInit {
     this.propsService.registerProps(props).subscribe(data => {
       console.log(data);
     });
-
+    this.toasterService.pop('success', 'Success!','You have successfully added a new prop!');
   }
 }
 

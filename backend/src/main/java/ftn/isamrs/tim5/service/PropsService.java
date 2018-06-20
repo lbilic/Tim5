@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.PropsCreateDTO;
 import ftn.isamrs.tim5.model.Account;
+import ftn.isamrs.tim5.model.BoughtProps;
 import ftn.isamrs.tim5.model.Props;
 
 import java.util.List;
@@ -16,6 +17,5 @@ public interface PropsService {
     Props sellProp(Long id);
     Props saveSoldProps(PropsCreateDTO props, Account account, Long id);
     List<Props> findMyProps(Long id);
-    List<Props> findBoughtProps(Long id);
 
 }
