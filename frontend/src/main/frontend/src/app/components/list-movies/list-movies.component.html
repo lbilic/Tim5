@@ -2,7 +2,7 @@
     <tabset [justified]="true">
         <tab *ngFor="let i of [0,1,2,3,4,5,6]" heading="{{getDate(i)}}">
           <div id="all-movies-container" class="movies-showing">
-            <div *ngFor="let movie of movies" class="movie" id="movie_{{movie.id}}">
+            <div *ngFor="let movie of movies_cineter_id" class="movie" id="movie_{{movie.id}}">
               <div class="movie-details">
                 <div class="movie-poster">
                     <!--img src={{i.image}} class="user-image" *ngIf="i.image"-->
@@ -60,11 +60,11 @@
                   </div>
                   <div>
                     <div class="schedule-format">
-                      <div class="shows">
+                      <div class="shows" *ngFor="let i of getPerformances(movie.id)">
                         <div class="time"> <!-- add ngfor-->
                           <a role="button" onclick="Reserve(movie.projection)">00:00</a>
                           <div class="price">
-                              200RSD
+                            200 RSD
                             </div>
                         </div>
                         <div class="time"> <!-- add ngfor-->

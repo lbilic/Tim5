@@ -16,6 +16,7 @@ import ftn.isamrs.tim5.service.PerformanceService;
 import org.hibernate.JDBCException;
 import org.hibernate.dialect.lock.OptimisticEntityLockException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -55,18 +56,33 @@ public class ShowController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/get_shows",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getShowsByCineterId(@RequestParam("id") Long cineter_id) {
+
+        List<Show> shows = this.showService.findByCineterId(cineter_id);
+
+        List<ShowCreateDTO> dtos = new ArrayList<>();
+
+        for (Show show : shows)
+            dtos.add(new ShowCreateDTO(show));
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/get_performances",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getPerformances(@RequestParam("type") String type) {
+    public ResponseEntity getPerformances(@RequestParam("id") Long id) {
 
-        //Show show = showService.findById(id);
+        Show show = showService.findById(id);
 
         //ako je film dodaj movie screenings
-        if (type.equalsIgnoreCase("movie")){
+        if (show.getIsMovie()){
 
-            //List<MovieScreening> movieScreenings = movieScreeningService.findAllByShowId(id);
-            List<MovieScreening> movieScreenings = movieScreeningService.findAll();
+            List<MovieScreening> movieScreenings = movieScreeningService.findAllByShowId(id);
+            //List<MovieScreening> movieScreenings = movieScreeningService.findAll();
             ArrayList<MovieScreeningCreateDTO> dtos = new ArrayList<>();
             for (MovieScreening ms : movieScreenings)
                 dtos.add(new MovieScreeningCreateDTO(ms));
@@ -75,8 +91,9 @@ public class ShowController {
         }
         // inace trazi performances
         else {
-            //List<Performance> performances = performanceService.findAllByShowId(id);
-            List<Performance> performances = performanceService.findAll();
+
+            List<Performance> performances = performanceService.findAllByShowId(id);
+            //List<Performance> performances = performanceService.findAll();
             ArrayList<PerformanceCreateDTO> dtos = new ArrayList<>();
             for (Performance p : performances)
                 dtos.add(new PerformanceCreateDTO(p));

@@ -66,4 +66,10 @@ public class ShowServiceImpl implements ShowService{
         return show.orElse(null);
 
     }
+
+    @Override
+    public List<Show> findByCineterId(Long cineter_id) {
+        List<Show> shows = this.showRepository.findByCineterId(cineter_id);
+        return shows;
+    }
 }

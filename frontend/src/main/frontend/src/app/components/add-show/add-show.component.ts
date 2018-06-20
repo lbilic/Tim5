@@ -80,7 +80,7 @@ export class AddShowComponent implements OnInit {
   }
 
   register(){
-    this.show.registerShow(new ShowCreate(this.name.value,
+    this.show.registerShow(new ShowCreate(null, this.name.value,
       this.description.value, false, this.director.value, this.runtime.value,
       this.genre.value, this.actors.value)).subscribe((data) =>{
         this.router.navigateByUrl(this.returnURL);

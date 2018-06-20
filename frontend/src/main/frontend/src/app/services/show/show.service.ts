@@ -29,8 +29,13 @@ export class ShowService {
     return this.http.post('http://localhost:8080/api/show/update_show', show);
   }
 
-  getPerformances(type){
-    return this.http.get('http://localhost:8080/api/show/get_performances?type=' + type);
+  getPerformances(id){
+    return this.http.get('http://localhost:8080/api/show/get_performances?id=' + id);
+  }
+
+  getShowsByCineterId(id){
+    return this.http.get('http://localhost:8080/api/show/get_shows?id='+id);
+
   }
 
 
