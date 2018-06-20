@@ -17,12 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.persistence.PreUpdate;
-import javax.print.attribute.standard.Media;
-import javax.websocket.server.PathParam;
-import javax.xml.ws.Response;
-import java.io.Console;
+import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 
