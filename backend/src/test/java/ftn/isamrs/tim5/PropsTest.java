@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -50,7 +51,7 @@ public class PropsTest {
         admin = new CineterAdmin("jova", "jova", cineter, false, true);
         this.props = new Props("AAAA", 200f, "opis", cineter, 200, admin, 0);
          propsCreateDTO = new PropsCreateDTO(2L, "pera",
-                200f,"opis", 100, 0);
+                200f,"opis", 100, 0, new Date(2100-1-1));
 
         given(
                 this.propsService.saveProps(propsCreateDTO, admin)

@@ -6,6 +6,7 @@ import {MovieScreeningCreate} from "../../models/movieScreeningCreate";
 import * as moment from 'moment';
 import {ShowCreate} from "../../models/showCreate";
 import {PerformanceCreate} from "../../models/performanceCreate";
+import {MovieScreeningService} from "../../services/movie-screening/movie-screening.service";
 
 @Component({
   selector: 'app-list-movies',
@@ -14,16 +15,17 @@ import {PerformanceCreate} from "../../models/performanceCreate";
 })
 export class ListMoviesComponent implements OnInit {
 
-  movies : Array<ShowCreate>;
-  projections: Array<MovieScreeningCreate>;
-  movies_cineter_id: Array<ShowCreate>;
+  projections: Array<Array<MovieScreeningCreate>>;
+  movies: Array<ShowCreate>;
+
+
 
   performances: Array<PerformanceCreate>;
   cineter_id: number;
   id: number;
 
   constructor(private showService: ShowService, private router: Router,
-              private route : ActivatedRoute) {
+              private route : ActivatedRoute, private movieScreeningService : MovieScreeningService) {
 
     /**
     this.showService.getAllShows().subscribe(data =>{
@@ -37,19 +39,24 @@ export class ListMoviesComponent implements OnInit {
       this.projections = data as Array<MovieScreeningCreate>;
       //console.log(this.projections);
     });*/
-
+    this.projections = new Array<Array<MovieScreeningCreate>>();
     this.route.params.subscribe((param: Params) => {
       this.id = param['id'];
     });
 
     // lista filmova u odnosu na cineter id
     this.showService.getShowsByCineterId(this.id).subscribe(data=>{
-      this.movies_cineter_id= data as Array<ShowCreate>;
+      this.movies= data as Array<ShowCreate>;
+      for(let i of this.movies)
+      {
+        this.movieScreeningService.getProjectionsByMovieId(i.id).subscribe(result =>{
+            this.projections.push(result as Array<MovieScreeningCreate>);
+        });
+      }
+
+      console.log(this.projections);
     });
 
-    this.showService.getPerformances("movie.id").subscribe(data => {
-      this.performances = data as Array<PerformanceCreate>;
-    });
 
   }
 
@@ -65,9 +72,7 @@ export class ListMoviesComponent implements OnInit {
   }
 
    getPerformances(id){
-    this.showService.getPerformances(id).subscribe(data => {
-      this.performances = data as Array<PerformanceCreate>;
-    });
+
   }
 
 }

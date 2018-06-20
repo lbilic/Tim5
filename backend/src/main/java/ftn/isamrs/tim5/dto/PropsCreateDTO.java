@@ -3,6 +3,7 @@ package ftn.isamrs.tim5.dto;
 import ftn.isamrs.tim5.model.Props;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class PropsCreateDTO implements Serializable {
     private Long id;
@@ -12,18 +13,20 @@ public class PropsCreateDTO implements Serializable {
     private int amount;
     private int version;
     private Long cineterId;
+    private Date date;
 
 
     public PropsCreateDTO() {
     }
 
-    public PropsCreateDTO(Long id, String name, float price, String description, int amount, int version) {
+    public PropsCreateDTO(Long id, String name, float price, String description, int amount, int version, Date date) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.amount = amount;
         this.version = version;
+        this.date = date;
     }
 
     public PropsCreateDTO(Props prop) {
@@ -34,6 +37,7 @@ public class PropsCreateDTO implements Serializable {
         amount = prop.getAmount();
         version = prop.getVersion();
         cineterId = prop.getCineter().getId();
+        date = prop.getDate();
     }
 
     public int getAmount() {
@@ -100,6 +104,18 @@ public class PropsCreateDTO implements Serializable {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
+                ", version=" + version +
+                ", cineterId=" + cineterId +
+                ", date=" + date +
                 '}';
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 }

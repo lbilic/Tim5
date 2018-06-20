@@ -39,13 +39,13 @@ public class Props {
 	@JsonManagedReference
 	private PropRequest request;
 
-/*	@Column(nullable = false)
+	@Column(nullable = false)
 	Date date;
-*/
+
 
 	public Props() {}
 
-	public Props(String name, float price, String descripiton, int amount//, Date date
+	public Props(String name, float price, String descripiton, int amount, Date date
 	) {
 		super();
 		this.name = name;
@@ -53,7 +53,7 @@ public class Props {
 
 		this.description = descripiton;
 		this.amount = amount;
-		//this.date = date;
+		this.date = date;
 	}
 
 	public Props(String name, float price, String description, Cineter cineter, int amount, Account account, int version) {
@@ -66,13 +66,13 @@ public class Props {
 		this.version = version;
 	}
 
-	/*	public Date getDate() {
+		public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
-	}*/
+	}
 
 	public int getAmount() {
 		return amount;

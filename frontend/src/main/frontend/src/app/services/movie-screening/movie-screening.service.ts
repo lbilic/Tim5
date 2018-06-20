@@ -35,4 +35,8 @@ export class MovieScreeningService {
       return Observable.throw(new ForbiddenError());
     return Observable.throw(new AppError(response));
   }
+
+  getProjectionsByMovieId(id: number) {
+    return this.http.get(`/api/show/get_performances?id=${id}`);
+  }
 }

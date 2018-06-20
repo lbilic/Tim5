@@ -126,6 +126,7 @@ public class AdminController {
                                       @RequestBody PropsCreateDTO prop)
     {
         if(token == null) return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        java.lang.System.out.println(prop.getDate());
         Account account = accountService.findByUsername(jwtUtils.getUsernameFromToken(token));
         Props props = propsService.saveProps(prop, account);
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -1,5 +1,7 @@
 package ftn.isamrs.tim5.dto;
 
+import java.util.Date;
+
 public class PropsDTO {
 
 
@@ -9,19 +11,21 @@ public class PropsDTO {
     private String description;
     private int amount;
     private int version;
+    private Date date;
 
 
     public PropsDTO() {
     }
 
 
-    public PropsDTO(Long id, String name, float price, String description, int amount, int version) {
+    public PropsDTO(Long id, String name, float price, String description, int amount, int version, Date date) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.amount = amount;
         this.version = version;
+        this.date = date;
     }
 
     public int getAmount() {
@@ -81,6 +85,16 @@ public class PropsDTO {
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", version=" + version +
+                ", date=" + date +
                 '}';
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 }

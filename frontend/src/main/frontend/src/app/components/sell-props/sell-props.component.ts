@@ -20,7 +20,7 @@ export class SellPropsComponent implements OnInit {
 
   constructor(private fb : FormBuilder, private route : ActivatedRoute, private propsService: PropsService, private toasterService: ToasterService)
   {
-    this.prop = new PropsCreate('', 0, '', 1 , 0);
+    this.prop = new PropsCreate('', 0, '', 1 , 0, new Date(1-1-2100));
 
     this.toasterConfig = new ToasterConfig({timeout: 4000});
     this.form = this.fb.group({
@@ -35,12 +35,10 @@ export class SellPropsComponent implements OnInit {
       description: ['', [
         Validators.required,
         Validators.minLength(5)
-      ]]
-/*      date: ['', [
-        Validators.required,
-       // Validators.
-
-      ]]*/
+      ]],
+        date: ['', [
+        Validators.required
+      ]],
     });
 
     this.route.params.subscribe((param: Params) => {
@@ -72,6 +70,11 @@ export class SellPropsComponent implements OnInit {
   get description()
   {
     return this.form.get('description');
+  }
+
+  get date()
+  {
+    return this.form.get('date');
   }
 
   ngOnInit() {

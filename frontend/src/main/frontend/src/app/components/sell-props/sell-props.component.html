@@ -61,6 +61,16 @@
       </ng-template>
     </div>
 
+    <div class="form-group">
+      <label>Last date to bid</label>
+      <input
+        formControlName="date"
+        id="date"
+        placeholder="Date..."
+        type="date"
+        class="form-control">
+    </div>
+
     <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Send request for sale</button>
 
   </form>

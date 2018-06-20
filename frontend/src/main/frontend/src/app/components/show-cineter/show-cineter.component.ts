@@ -18,7 +18,7 @@ export class ShowCineterComponent implements OnInit {
 
     this.cineterService.getCineterByAccount().subscribe(data => {
       this.cineter = data as Cineter;
-      console.log(data);
+
     });
   }
 
@@ -37,9 +37,10 @@ export class ShowCineterComponent implements OnInit {
 
   // dodati izlistavanje filmova i predstava
   ViewAllShows(i){
+      this.router.navigateByUrl('movies/'+this.cineter.id);
 
   }
   ViewAllMovies(i){
-
+    this.router.navigateByUrl('movies/'+this.cineter.id);
   }
 }
