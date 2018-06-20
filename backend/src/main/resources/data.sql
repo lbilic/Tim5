@@ -78,3 +78,7 @@ insert into system_scale(system_id, scale) values (1, 0)
 insert into system_scale(system_id, scale) values (1, 20)
 insert into system_scale(system_id, scale) values (1, 40)
 insert into system_scale(system_id, scale) values (1, 60)
+
+insert into review(id, cineter_id, score) VALUES (799, 11, 5)
+insert into review(id, cineter_id, score) VALUES (800, 11, 3)
+insert into review(id, cineter_id, score) VALUES (675, 11, 2)

@@ -6,6 +6,7 @@
     <th scope="col">Address</th>
     <th scope="col">City</th>
     <th scope="col">Is theater</th>
+    <th scope="col">Rate</th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
     <td>{{i.address}}</td>
     <td>{{i.city}}</td>
     <td>{{i.isTheater}}</td>
+    <td>{{i.rate}}</td>
 
 
     <td> <button (click)="ChangeCineter(i)"  class="btn btn-success" >{{changeText}}</button> </td>
@@ -25,7 +27,7 @@
     <td *ngIf="!i.isTheater"> <button (click)="AddMovie(i)"  class="btn btn-success" >
       Add movie</button> </td>
 
-    <td *ngIf="i.canRate"> <button (click)="Rate(i.id)" class="btn btn-success">Rate</button> </td>
+    <td> <button (click)="Rate(i)" class="btn btn-success">Rate</button> </td>
     <td> <button (click)="ShowProps(i)"  class="btn btn-success" >Props</button> </td>
     <td> <button (click)="SellProps(i)"  class="btn btn-success" >Sell props</button> </td>
   </tr>

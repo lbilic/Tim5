@@ -13,6 +13,7 @@ export class RateModalComponent implements OnInit {
   rate : number;
   id : number;
   rateSubmited : EventEmitter<any>;
+  type : string = "cineter";
 
   constructor(public bsModal : BsModalRef, private rateService: RateService) {
 
@@ -23,8 +24,16 @@ export class RateModalComponent implements OnInit {
 
   Rate()
   {
-    this.rateService.rate(this.id, this.rate).subscribe(result => {
+    if(this.type == "cineter") {
+      this.rateService.rateCineter(this.id, this.rate).subscribe(result => {
         this.rateSubmited.emit(null);
-    });
+      });
+    }
+    else {
+
+      this.rateService.rateShow(this.id, this.rate).subscribe(result => {
+        this.rateSubmited.emit(null);
+      });
+    }
   }
 }
