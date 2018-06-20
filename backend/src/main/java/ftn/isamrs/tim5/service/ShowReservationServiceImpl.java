@@ -23,4 +23,9 @@ public class ShowReservationServiceImpl implements ShowReservationService {
     public List<ShowReservation> findMyReservations(Long id, Long cineterId) {
         return null;
     }
+
+    @Override
+    public List<ShowReservation> findShowReservationsByPerformance_Id(long id) {
+        return this.showReservationRepository.findShowReservationsByPerformance_Id(id);
+    }
 }

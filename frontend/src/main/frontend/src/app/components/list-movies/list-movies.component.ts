@@ -75,8 +75,4 @@ export class ListMoviesComponent implements OnInit {
     return moment(date).format("HH:mm");
   }
 
-   getPerformances(id){
-
-  }
-
 }
