@@ -61,7 +61,7 @@ export class AddPropsComponent implements OnInit {
   }
 
   register() {
-    let props = new PropsCreate(this.name.value, this.price.value, this.description.value, this.amount.value);
+    let props = new PropsCreate(this.name.value, this.price.value, this.description.value, this.amount.value, 0);
     this.propsService.registerProps(props).subscribe(data => {
       console.log(data);
     });
