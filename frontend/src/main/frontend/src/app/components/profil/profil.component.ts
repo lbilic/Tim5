@@ -11,6 +11,7 @@ import { AppError } from "../../shared/errors/app-error";
 import { BadRequestError } from "../../shared/errors/bad-request-error";
 import { NotFoundError } from "../../shared/errors/not-found-error";
 import { ForbiddenError } from "../../shared/errors/forbidden-error";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-profil',
@@ -26,7 +27,11 @@ export class ProfilComponent implements OnInit {
   account: Account;
   movieReservations: Array<any>;
   showReservations: Array<any>;
-  reservations: Array<any>;
+  //reservations: Array<any>;
+  pastMovieReservations: Array<any>;
+  currentMovieReservations: Array<any>;
+  pastShowReservations: Array<any>;
+  currentShowReservations: Array<any>;
 
   constructor(private fb: FormBuilder, private router: Router,
               private friendsService: FriendsService, private toasterService: ToasterService,
@@ -104,10 +109,16 @@ export class ProfilComponent implements OnInit {
   updateReservations() {
     this.reservationService.getAllMovieReservations().subscribe(data => {
       this.movieReservations = data as Array<any>;
+      this.pastMovieReservations = this.movieReservations.filter(item => moment().isAfter(item.screening.date));
+      this.currentMovieReservations = this.movieReservations.filter(item => !moment().isAfter(item.screening.date));
+      //let d = this.movieReservations.pop().screening.date;
+      //console.log(d, moment().isBefore(d));
     });
 
     this.reservationService.getAllShowReservations().subscribe(data => {
       this.showReservations = data as Array<any>;
+      this.pastShowReservations = this.showReservations.filter(item => moment().isAfter(item.performance.date));
+      this.currentShowReservations = this.showReservations.filter(item => !moment().isAfter(item.performance.date));
     });
   }
 

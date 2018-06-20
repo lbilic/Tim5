@@ -17,37 +17,19 @@
         <div class="col-lg-6">
           <form [formGroup]="form" (ngSubmit)="sendRequest()" accept-charset="UTF-8">
             <label for="username">Add by username:</label>
-            <div class="form-group">
-              <input 
-                formControlName="username"
-                id="username" 
-                placeholder="username..." 
-                type="text" 
-                class="form-control"/>
-                <button class="btn btn-default" type="submit">Add</button>
-            </div>
+              <div class="form-group">
+                <input
+                  formControlName="username"
+                  id="username" 
+                  placeholder="username..." 
+                  type="text" 
+                  class="form-control"/>
+                  <button class="btn btn-default" type="submit">Add</button>
+              </div>
           </form>
         </div>
         <div class="row"></div>
         <div class="friend-list">
-          <!--ul>
-            <li *ngFor="let friend of friends">
-              <!--img class="user-image" ng-src="https://www.elixir-europe.org/sites/default/files/images/userprofile.png"/>{{friend.name}}<span>{{friend.number}}</span>
-            </li>
-          </ul-->
-          <!--table>
-            <tr *ngFor="let friend of friends">
-              <td>
-                <img src="../../../assets/images/userprofile.png" class="user-image">
-              </td>
-              <td>
-                {{friend.name}}
-              </td>
-              <td>
-                {{friend.number}}
-              </td>
-            </tr>
-          </table-->
           <div *ngFor="let friend of friends" class="friend">
             <div class="col-sm-6 friend-content">
               <table>
@@ -93,8 +75,22 @@
               </div>
             </div>
       </tab>
-      <tab heading="Reserved tickets">All reserved tickets</tab>
-      <tab heading="Past visits">All previous visits</tab>
+      <tab heading="Reserved tickets">
+        <div *ngFor="let cmr of currentMovieReservations">
+          <p>{{cmr.id}}</p>
+        </div>
+        <div *ngFor="let csr of currentShowReservations">
+            <p>{{csr.id}}</p>
+        </div>
+      </tab>
+      <tab heading="Past visits">
+        <div *ngFor="let pmr of pastMovieReservations">
+            <p>{{pmr.id}}</p>
+          </div>
+          <div *ngFor="let psr of pastShowReservations">
+              <p>{{psr.id}}</p>
+          </div>
+      </tab>
     </tabset>
   </div>
 </div>

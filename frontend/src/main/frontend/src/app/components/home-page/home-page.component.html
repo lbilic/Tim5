@@ -5,7 +5,8 @@
       <div *ngFor="let cineter of cineters" class="cineter" id="cineter_{{cineter.id}}">
           <div class="cineter-details">
             <div class="cineter-image">
-                <img src="../../../assets/images/userprofile.png" alt={{cineter.name}}>
+              <img src={{cineter.image}} *ngIf="cineter.image">
+              <img src="../../../assets/images/userprofile.png" alt={{cineter.name}}>
             </div>
             <div class="cineter-info">
               <a routerLink="/movies/{{cineter.id}}" class="title"><span class="title-container">{{cineter.name}}</span></a>
