@@ -17,13 +17,14 @@ public class ShowCreateDTO implements Serializable{
 
     public ShowCreateDTO() {
     }
-/*
-    public ShowCreateDTO(String name, String description, boolean getIsMovie) {
+
+    public ShowCreateDTO(Long id, String name, String description, boolean getIsMovie) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.getIsMovie = getIsMovie;
+        this.isMovie = getIsMovie;
     }
-*/
+
 
      public ShowCreateDTO (Show show){
         this.id = show.getId();

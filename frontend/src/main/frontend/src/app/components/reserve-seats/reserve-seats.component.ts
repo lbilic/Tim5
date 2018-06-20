@@ -41,6 +41,8 @@ export class ReserveSeatsComponent implements OnInit {
   getShow(){
     this.showService.getShowById(this.id).subscribe(data =>{
       this.show = data as Show;
+      this.reserved = this.reserved.concat(this.show.fastReservationSeats.split(","));
+      console.log(this.reserved)
     });
   }
 

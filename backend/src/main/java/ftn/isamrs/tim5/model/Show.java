@@ -51,16 +51,17 @@ public class Show {
 
 	public Show() {}
 
-	/*
-	public Show(String name, String description, boolean getIsMovie, List<Performance> performances) {
+
+	public Show(Long id, String name, String description, boolean getIsMovie, List<Performance> performances) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.performances = performances;
-		this.getIsMovie = getIsMovie;
+		this.isMovie = getIsMovie;
 
 	}
-*/
+
 
 	public Show(String name, String description, String director,
 				String runtime, String genre, String actors, boolean isMovie) {

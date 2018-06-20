@@ -18,13 +18,14 @@ public class HallCreateDTO implements Serializable {
 
     public HallCreateDTO() {
     }
-/*
-    public HallCreateDTO(int number, int rows, int columns) {
+
+    public HallCreateDTO(Long id, int number, int rows, int columns) {
+        this.id = id;
         this.number = number;
         this.rows = rows;
         this.columns = columns;
     }
-*/
+
     public HallCreateDTO(Hall hall) {
         this.id= hall.getId();
         this.number = hall.getNumber();

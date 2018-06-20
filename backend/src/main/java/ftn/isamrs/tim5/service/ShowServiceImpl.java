@@ -41,7 +41,6 @@ public class ShowServiceImpl implements ShowService{
     @Override
     public Show updateShow(ShowCreateDTO dto){
         Optional<Show> s = this.showRepository.findById(dto.getId());
-
         if(!s.isPresent()) return null;
 
         Show show = s.get();

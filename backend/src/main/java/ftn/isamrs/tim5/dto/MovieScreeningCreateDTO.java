@@ -2,6 +2,7 @@ package ftn.isamrs.tim5.dto;
 
 import ftn.isamrs.tim5.model.Hall;
 import ftn.isamrs.tim5.model.MovieScreening;
+import ftn.isamrs.tim5.model.PSBase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,13 +22,13 @@ public class MovieScreeningCreateDTO {
     public MovieScreeningCreateDTO(){
     }
 
-   /* public MovieScreeningCreateDTO(Date date, float price, String type, HallCreateDTO hall/) {
+    public MovieScreeningCreateDTO(Date date, float price, String type, HallCreateDTO hall) {
         this.date = date;
         this.price = price;
-        this.hall = hall;
+        this.hall = hall.getId();
         this.type = type;
         //this.show = show;
-    }*/
+    }
 
     public MovieScreeningCreateDTO (MovieScreening ms){
         this.id = ms.getId();
@@ -35,6 +36,14 @@ public class MovieScreeningCreateDTO {
         this.hall = ms.getHall().getId();
         this.price= ms.getPrice();
         this.type= ms.getType();
+        this.fastReservationSeats = ms.getFastReservationSeats();
+    }
+
+    public MovieScreeningCreateDTO (PSBase ms){
+        this.id = ms.getId();
+        this.date = ms.getDate();
+        this.hall = ms.getHall().getId();
+        this.price= ms.getPrice();
         this.fastReservationSeats = ms.getFastReservationSeats();
     }
 

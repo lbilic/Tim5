@@ -53,6 +53,12 @@ public abstract class PSBase {
         this.price = price;
         this.hall = hall;
     }
+    public PSBase(Long id, Date date, float price, Hall hall) {
+        this.id = id;
+        this.date = date;
+        this.price = price;
+        this.hall = hall;
+    }
 
     public Date getDate() {
         return date;

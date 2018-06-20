@@ -29,8 +29,9 @@ public class Hall {
 
     Hall() {
     }
-/*
-    public Hall(int number, int rows, int columns, Cineter cineter) {
+
+    public Hall(Long id, int number, int rows, int columns, Cineter cineter) {
+        this.id = id;
         this.number = number;
         this.rows = rows;
         this.columns = columns;
@@ -41,7 +42,7 @@ public class Hall {
         this.number = number;
         this.rows = rows;
         this.columns = columns;
-    }*/
+    }
 
     public int getRows() { return rows; }
 

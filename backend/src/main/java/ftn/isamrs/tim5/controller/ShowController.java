@@ -5,6 +5,7 @@ import ftn.isamrs.tim5.dto.PerformanceCreateDTO;
 import ftn.isamrs.tim5.dto.ShowCreateDTO;
 
 import ftn.isamrs.tim5.model.MovieScreening;
+import ftn.isamrs.tim5.model.PSBase;
 import ftn.isamrs.tim5.model.Performance;
 import ftn.isamrs.tim5.model.Show;
 
@@ -108,9 +109,9 @@ public class ShowController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findProp(@RequestParam("id") Long id){
 
-        Show show = showService.findById(id);
+        PSBase show = movieScreeningService.findById(id);
 
-        return new ResponseEntity<>(new ShowCreateDTO(show), HttpStatus.OK);
+        return new ResponseEntity<>(new MovieScreeningCreateDTO(show), HttpStatus.OK);
     }
 
     // delete shows and movie projections
