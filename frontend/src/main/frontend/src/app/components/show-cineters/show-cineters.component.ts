@@ -18,7 +18,9 @@ export class ShowCinetersComponent implements OnInit {
   changeText: string;
   bsModalRef: BsModalRef;
 
-  constructor(private rateService: RateService, private modalService: BsModalService, private cineterService: CineterService, private jwtService: JwtService, private router: Router) {
+  constructor(private rateService: RateService, private modalService: BsModalService,
+              private cineterService: CineterService,
+              private jwtService: JwtService, private router: Router) {
     this.changeText = this.jwtService.hasRole('ADMIN') ? "Change" : "Details";
 
     this.cineterService.getAllCineters().subscribe(data => {

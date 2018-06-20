@@ -63,7 +63,6 @@ public class ShowServiceImpl implements ShowService{
     @Override
     public Show findById(Long id) {
         Optional<Show> show = this.showRepository.findById(id);
-
         return show.orElse(null);
 
     }

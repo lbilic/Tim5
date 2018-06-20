@@ -79,6 +79,7 @@ import { RateModalComponent } from './components/rate-modal/rate-modal.component
 import {ListProjectionsComponent} from "./components/list-projections/list-projections.component";
 import {ListPerformancesComponent} from "./components/list-performances/list-performances.component";
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { ShowCineterComponent } from './components/show-cineter/show-cineter.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -117,6 +118,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
     ListProjectionsComponent,
     ListPerformancesComponent,
     RateModalComponent,
+    ShowCineterComponent,
     AdminPanelComponent
   ],
   imports: [
@@ -182,6 +184,10 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
       {
         path: 'props/:id',
         component: PropsDetailComponent
+      },
+      {
+        path:'cineter',
+        component: ShowCineterComponent
       },
       {
         path: 'cineters',

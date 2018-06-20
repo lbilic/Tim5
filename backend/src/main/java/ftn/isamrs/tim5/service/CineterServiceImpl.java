@@ -1,7 +1,9 @@
 package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.CineterCreateDTO;
+import ftn.isamrs.tim5.model.Account;
 import ftn.isamrs.tim5.model.Cineter;
+import ftn.isamrs.tim5.model.CineterAdmin;
 import ftn.isamrs.tim5.repository.CineterRepository;
 import ftn.isamrs.tim5.util.ConvertDTOToModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +69,5 @@ public class CineterServiceImpl implements CineterService {
     public Cineter save(Cineter cineter) {
       return  cineterRepository.save(cineter);
     }
+
 }

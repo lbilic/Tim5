@@ -36,4 +36,9 @@ export class CineterService {
   getLocation(city: string, address: string) : Observable<any> {
     return this.http.get(`api/location?address=${city} ${address}`);
   }
+
+  getCineterByAccount(){
+    return this.http.get("http://localhost:8080/api/cineter/get_cineter");
+
+  }
 }

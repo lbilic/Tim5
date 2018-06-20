@@ -11,7 +11,12 @@
             <span class="fa fa-home fa-lg"></span>
           </a>
         </li>
-        <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
+        <li class="btn-group" dropdown *ngIf = "jwtService.hasRole('CINETER_ADMIN')">
+          <button id="button-classic" type="button" class="navbar-blue btn">
+            <a class="dropdown-item" routerLink="/cineter" style="color:black">My cineter</a>
+          </button>
+        </li>
+        <li class="btn-group" dropdown *ngIf = "!jwtService.hasRole('CINETER_ADMIN')">
             <button id="button-classic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
               Admins <span class="caret"></span>
             </button>
@@ -19,7 +24,7 @@
               <li role="menuitem"><a class="dropdown-item" routerLink="/add_cineter_admin">Add a new admin</a></li>
             </ul>
         </li>
-        <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
+        <li class="btn-group" dropdown *ngIf = "!jwtService.hasRole('CINETER_ADMIN')">
 
           <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
               Cinemas and theaters <span class="caret"></span>
@@ -38,7 +43,7 @@
               <li role="menuitem"><a class="dropdown-item" routerLink="/admin_shows">View all shows</a></li>
             </ul>
         </li>
-        <li class="btn-group" dropdown *ngIf="jwtService.tokenExist()">
+        <li class="btn-group" dropdown *ngIf = "!jwtService.hasRole('CINETER_ADMIN')">
             <button id="button-basic" dropdownToggle type="button" class="navbar-blue btn dropdown-toggle" aria-controls="dropdown-basic">
               Props <span class="caret"></span>
             </button>

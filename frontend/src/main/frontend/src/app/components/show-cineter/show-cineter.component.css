@@ -1,0 +1,17 @@
+.row {
+  width: 100%;
+  margin: 0 auto;
+}
+.block {
+  width: 500px;
+  height: 350px;
+  display: inline-block;
+}
+
+.picture {
+  width: 250px;
+  height: 250px;
+  background: lightgrey;
+  padding: 120px 0;
+
+}

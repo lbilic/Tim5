@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ShowService} from "../../services/show/show.service";
 import {ShowCreate} from "../../models/showCreate";
+import {ActivatedRoute, Router} from "@angular/router";
+import {JwtService} from '../../services/jwt.service';
 
 @Component({
   selector: 'app-add-show',
@@ -11,8 +13,10 @@ import {ShowCreate} from "../../models/showCreate";
 export class AddShowComponent implements OnInit {
 
   form : FormGroup;
-
-  constructor(private fb: FormBuilder, private show: ShowService) {
+  returnURL: string= "";
+  constructor(private fb: FormBuilder, private show: ShowService,
+              private router: Router, private jwtService : JwtService,
+              private route : ActivatedRoute) {
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -71,13 +75,15 @@ export class AddShowComponent implements OnInit {
 
 
   ngOnInit() {
+    if (this.jwtService.hasRole('CINETER_ADMIN'))
+      this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/cineter';
   }
 
   register(){
     this.show.registerShow(new ShowCreate(this.name.value,
       this.description.value, false, this.director.value, this.runtime.value,
       this.genre.value, this.actors.value)).subscribe((data) =>{
-      console.log(data);
+        this.router.navigateByUrl(this.returnURL);
     });
   }
 

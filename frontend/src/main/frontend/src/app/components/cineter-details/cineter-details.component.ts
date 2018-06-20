@@ -47,8 +47,10 @@ export class CineterDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/cineters';
-
+    if (this.jwtService.hasRole('CINETER_ADMIN'))
+      this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/cineter';
+    else
+      this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/cineters';
   }
 
 

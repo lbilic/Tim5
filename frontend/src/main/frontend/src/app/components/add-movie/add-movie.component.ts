@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ShowService} from "../../services/show/show.service";
 import {ShowCreate} from "../../models/showCreate";
+import {ActivatedRoute, Router} from "@angular/router";
+import {JwtService} from "../../core/services/jwt.service";
 
 @Component({
   selector: 'app-add-movie',
@@ -11,8 +13,11 @@ import {ShowCreate} from "../../models/showCreate";
 export class AddMovieComponent implements OnInit {
 
   form : FormGroup;
+  returnURL : string ="";
 
-  constructor(private fb: FormBuilder, private show: ShowService) {
+  constructor(private fb: FormBuilder, private show: ShowService,
+              private router: Router, private jwtService : JwtService,
+              private route : ActivatedRoute) {
     this.form = this.fb.group({
       name: ['', [
         Validators.required,
@@ -66,13 +71,16 @@ export class AddMovieComponent implements OnInit {
 
 
   ngOnInit() {
+    if (this.jwtService.hasRole('CINETER_ADMIN'))
+      this.returnURL = this.route.snapshot.queryParams['returnUrl'] || '/cineter';
   }
 
   register(){
     this.show.registerShow(new ShowCreate(this.name.value,
       this.description.value, true, this.director.value, this.runtime.value,
       this.genre.value, this.actors.value)).subscribe((data) =>{
-      console.log(data);
+      this.router.navigateByUrl(this.returnURL);
+
     });
   }
 

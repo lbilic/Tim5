@@ -4,6 +4,7 @@ import {Show} from "../../models/show";
 import {Router} from "@angular/router";
 import {MovieScreeningCreate} from "../../models/movieScreeningCreate";
 import * as moment from 'moment';
+import {ShowCreate} from "../../models/showCreate";
 
 @Component({
   selector: 'app-list-movies',
@@ -11,13 +12,13 @@ import * as moment from 'moment';
   styleUrls: ['./list-movies.component.css']
 })
 export class ListMoviesComponent implements OnInit {
-  
-  movies : Array<Show>;
+
+  movies : Array<ShowCreate>;
   projections: Array<MovieScreeningCreate>;
 
   constructor(private showService: ShowService, private router: Router) {
     this.showService.getAllShows().subscribe(data =>{
-      this.movies = (data as Array<Show>).filter(item => item.movie);
+      this.movies = (data as Array<ShowCreate>).filter(item => item.isMovie);
       //this.movies = this.movies.filter(item => item.id);
       //console.log(this.movies);
     });

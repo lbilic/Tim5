@@ -59,14 +59,18 @@
       </div>
     </div>
 
+    <!-- Ne moze da menja da li je bioskop ili pozoriste!
     <div class="checkbox">
       <label><input type="checkbox" [checked]="cineter.isTheater" (change)="clicked()">Is theater</label>
     </div>
+    -->
     <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="14">
       <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
     </agm-map>
 
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid || !jwtService.hasRole('ADMIN')" >Change</button>
+    <div *ngIf="jwtService.hasRole('ADMIN') || jwtService.hasRole('CINETER_ADMIN')">
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid" >Change</button>
+    </div>
 
   </form>
 </div>
