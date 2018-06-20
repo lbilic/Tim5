@@ -25,4 +25,9 @@ public class MovieReservationServiceImpl implements MovieReservationService {
     public List<MovieReservation> findMyReservationsForCineter(Long id, Long cineterId) {
         return movieReservationRepository.findMyReservationsForCineter(id, cineterId);
     }
+
+    @Override
+    public List<MovieReservation> findMovieReservationsByScreening_Id(long id) {
+        return movieReservationRepository.findMovieReservationsByScreening_Id(id);
+    }
 }

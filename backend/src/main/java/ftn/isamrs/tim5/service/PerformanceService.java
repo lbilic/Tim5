@@ -11,5 +11,6 @@ public interface PerformanceService {
     Performance savePerformance(PerformanceCreateDTO dto, Long id, String time);
     List<Performance> findAllByShowId(Long id);
     List<Performance> findAll();
+    Performance findById(long id);
 
 }

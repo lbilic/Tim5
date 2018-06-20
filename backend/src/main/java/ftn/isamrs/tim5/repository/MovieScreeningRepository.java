@@ -14,4 +14,6 @@ public interface MovieScreeningRepository extends JpaRepository<MovieScreening, 
 
     List<MovieScreening> findAll();
 
+    MovieScreening findById(long id);
+
 }

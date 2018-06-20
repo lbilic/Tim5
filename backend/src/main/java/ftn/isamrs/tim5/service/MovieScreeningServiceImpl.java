@@ -2,7 +2,6 @@ package ftn.isamrs.tim5.service;
 
 import ftn.isamrs.tim5.dto.MovieScreeningCreateDTO;
 import ftn.isamrs.tim5.model.MovieScreening;
-import ftn.isamrs.tim5.model.PSBase;
 import ftn.isamrs.tim5.repository.HallRepository;
 import ftn.isamrs.tim5.repository.ShowRepository;
 import ftn.isamrs.tim5.util.ConvertDTOToModel;
@@ -14,10 +13,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -76,6 +72,11 @@ public class MovieScreeningServiceImpl implements MovieScreeningService {
     @Override
     public List<MovieScreening> findAll() {
         return this.movieScreeningRepository.findAll();
+    }
+
+    @Override
+    public MovieScreening findById(long id) {
+        return this.movieScreeningRepository.findById(id);
     }
 
 }

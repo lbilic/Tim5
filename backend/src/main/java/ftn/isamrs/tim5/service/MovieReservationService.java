@@ -12,4 +12,6 @@ public interface MovieReservationService {
     List<MovieReservation> findAll();
 
     List<MovieReservation> findMyReservationsForCineter(Long id, Long cineterId);
+
+    List<MovieReservation> findMovieReservationsByScreening_Id(long id);
 }

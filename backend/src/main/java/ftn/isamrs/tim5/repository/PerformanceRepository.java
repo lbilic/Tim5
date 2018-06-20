@@ -13,4 +13,6 @@ public interface PerformanceRepository extends JpaRepository<Performance, Long> 
     List<Performance> findByShowId (@Param("showId") Long id);
 
     List<Performance> findAll();
+
+    Performance findById(long id);
 }

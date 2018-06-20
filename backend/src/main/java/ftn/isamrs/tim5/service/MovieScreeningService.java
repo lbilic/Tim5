@@ -5,6 +5,7 @@ import ftn.isamrs.tim5.model.MovieScreening;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface MovieScreeningService {
@@ -12,4 +13,5 @@ public interface MovieScreeningService {
 
     List<MovieScreening> findAllByShowId (Long id);
     List<MovieScreening> findAll();
+    MovieScreening findById(long id);
 }

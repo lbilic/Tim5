@@ -17,4 +17,6 @@ public interface MovieReservationRepository extends JpaRepository<MovieReservati
             "FROM PSBASE p WHERE p.DATE < CURRENT_TIME() AND p.HALL_ID IN (SELECT h.ID FROM HALL h WHERE h.CINETER_ID = :cineterId)))) " +
             "AS a ON a.movie_reservations_id = mr.id", nativeQuery = true)
     List<MovieReservation> findMyReservationsForCineter(@Param("id") Long id, @Param("cineterId") Long cineterId);
+
+    List<MovieReservation> findMovieReservationsByScreening_Id(long id);
 }

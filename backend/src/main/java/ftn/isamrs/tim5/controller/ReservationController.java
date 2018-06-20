@@ -4,12 +4,10 @@ import ftn.isamrs.tim5.dto.PropsCreateDTO;
 import ftn.isamrs.tim5.dto.ShowReservationDTO;
 import ftn.isamrs.tim5.model.Account;
 import ftn.isamrs.tim5.model.MovieReservation;
+import ftn.isamrs.tim5.model.Performance;
 import ftn.isamrs.tim5.model.ShowReservation;
 import ftn.isamrs.tim5.security.JWTUtils;
-import ftn.isamrs.tim5.service.AccountService;
-import ftn.isamrs.tim5.service.MovieReservationService;
-import ftn.isamrs.tim5.service.PerformanceService;
-import ftn.isamrs.tim5.service.ShowReservationService;
+import ftn.isamrs.tim5.service.*;
 import ftn.isamrs.tim5.dto.MovieReservationDTO;
 import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,9 @@ public class ReservationController {
 
     @Autowired
     private JWTUtils jwtUtils;
+
+    @Autowired
+    private MovieScreeningService movieScreeningService;
 
     @RequestMapping(value = "/get_all_movie_reservations",
             method = RequestMethod.GET,
@@ -81,5 +82,22 @@ public class ReservationController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity reserve(@RequestHeader("Authentication-Token") String token) {
         return null;
+    }
+
+    @RequestMapping(value = "/get",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getAllReservations(@RequestParam("id") Long id){
+
+        List<MovieReservation> mr = this.movieReservationService.findMovieReservationsByScreening_Id(id);
+        List<MovieReservationDTO> dtos;
+        if(mr != null) {
+            // vrati rezervacije za taj film
+        } else {
+            //ShowReservation sr = this.showReservationService.getByPerformanceId(id);
+            // vrati rezervacije za taj show
+        }
+
+        return new ResponseEntity(null, HttpStatus.OK);
     }
 }

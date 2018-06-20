@@ -72,4 +72,6 @@ public class PerformanceServiceImpl implements PerformanceService {
         return this.performanceRepository.findAll();
     }
 
+    @Override
+    public Performance findById(long id) { return this.performanceRepository.findById(id); }
 }
