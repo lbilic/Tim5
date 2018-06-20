@@ -35,8 +35,6 @@ export class ShowService {
 
   getShowsByCineterId(id){
     return this.http.get('http://localhost:8080/api/show/get_shows?id='+id);
-
   }
-
 
 }

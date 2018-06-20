@@ -4,6 +4,7 @@
           <div id="all-movies-container" class="movies-showing">
             <div *ngFor="let movie of movies" class="movie" id="movie_{{movie.id}}">
               <div class="movie-details">
+                <h2>{{movie.DATUM}}</h2>
                 <div class="movie-poster">
                     <!--img src={{i.image}} class="user-image" *ngIf="i.image"-->
                     <img src="../../../assets/images/userprofile.png" alt={{movie.name}}>
@@ -55,21 +56,18 @@
                 </div>
               </div>
               <div class="schedule-shows showed">
-                  <div class="dateofprojection">
+                  <!--div class="dateofprojection">
                     DATUM
-                  </div>
+                  </div-->
                   <div>
                     <div class="schedule-format">
-                      <div class="shows" *ngFor="let i of performances">
-                        <div class="time"> <!-- add ngfor-->
-                          <a role="button" onclick="Reserve(movie.projection)">00:00</a>
-                          <div class="price">
-                            200 RSD
-                            </div>
+                      <div class="shows" *ngFor="let projectionList of projections">
+                        <div class="time" *ngFor="let projection of projectionList"> <!-- add ngfor-->
+                          <a role="button" routerLink="/reserve/{{projection.id}}" *ngIf="!checkDate(projection.date, i)">{{getTime(projection.date)}}</a>
+                          <div class="price" *ngIf="!checkDate(projection.date, i)">
+                            {{projection.price}} RSD
+                          </div>
                         </div>
-                       <div *ngFor="let j of projections[i]">
-                         <p>{{j.price}}</p>
-                       </div>
                       </div>
                     </div>
                   </div>

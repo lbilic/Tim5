@@ -47,13 +47,13 @@ export class ListMoviesComponent implements OnInit {
     // lista filmova u odnosu na cineter id
     this.showService.getShowsByCineterId(this.id).subscribe(data=>{
       this.movies= data as Array<ShowCreate>;
+      console.log(this.movies);
       for(let i of this.movies)
       {
         this.movieScreeningService.getProjectionsByMovieId(i.id).subscribe(result =>{
             this.projections.push(result as Array<MovieScreeningCreate>);
         });
       }
-
       console.log(this.projections);
     });
 
@@ -63,12 +63,20 @@ export class ListMoviesComponent implements OnInit {
   ngOnInit() {
   }
 
-  Reserve(i){
-    this.router.navigate([`/reserve/${i.id}`])
+  Reserve(id){
+    this.router.navigate([`/reserve/id`])
   }
 
   getDate(i) {
     return (moment().add(i, 'days').format("DD.MM."));
+  }
+
+  checkDate(date, i) {
+    return moment(date).isSame(moment().add(i, 'days'), 'day');
+  }
+
+  getTime(date) {
+    return moment(date).format("HH:mm");
   }
 
    getPerformances(id){

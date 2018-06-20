@@ -11,14 +11,12 @@ import ftn.isamrs.tim5.service.MovieReservationService;
 import ftn.isamrs.tim5.service.PerformanceService;
 import ftn.isamrs.tim5.service.ShowReservationService;
 import ftn.isamrs.tim5.dto.MovieReservationDTO;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,5 +73,13 @@ public class ReservationController {
             dtos.add(new ShowReservationDTO(sr));
 
         return new ResponseEntity(dtos, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/reserve",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity reserve(@RequestHeader("Authentication-Token") String token) {
+        return null;
     }
 }
