@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<toaster-container [toasterconfig]="toasterConfig"></toaster-container>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel control-panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">Change reward thresholds:</h3>
+        </div>
+        <div class="panel-body">
+
+          <form [formGroup]="form" (ngSubmit)="changeThresholds()" accept-charset="UTF-8">
+            <div class="form-group">
+              <input
+                formControlName="gold"
+                id="gold"
+                placeholder="gold"
+                type="text"
+                class="form-control"
+                >
+                <div *ngIf="gold.touched && gold.invalid" class="alert alert-danger">
+                  <div id="goldRequiredError" *ngIf="gold.errors?.required; else numberPattern">
+                    Gold level is required!
+                  </div>
+                  <ng-template #numberPattern>
+                    <ng-container *ngIf="gold.errors?.pattern">
+                      <div id="goldValidError">
+                        Please provide a proper value.
+                      </div>
+                    </ng-container>
+                  </ng-template>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <input
+                formControlName="platinum"
+                id="platinum"
+                placeholder="platinum"
+                type="text"
+                class="form-control"
+                >
+            </div>
+            <div *ngIf="platinum.touched && platinum.invalid" class="alert alert-danger">
+              <div id="platinumRequiredError" *ngIf="platinum.errors?.required; else numberPattern">
+                Platinum level is required!
+              </div>
+              <ng-template #numberPattern>
+                <ng-container *ngIf="platinum.errors?.pattern">
+                  <div id="platinumValidError">
+                    Please provide a proper value.
+                  </div>
+                </ng-container>
+              </ng-template>
+            </div>
+
+            <div class="form-group">
+              <input
+                formControlName="diamond"
+                id="diamond"
+                placeholder="diamond"
+                type="text"
+                class="form-control"
+                >
+            </div>
+            <div *ngIf="diamond.touched && diamond.invalid" class="alert alert-danger">
+              <div id="diamondRequiredError" *ngIf="diamond.errors?.required; else numberPattern">
+                Diamond level is required!
+              </div>
+              <ng-template #numberPattern>
+                <ng-container *ngIf="diamond.errors?.pattern">
+                  <div id="diamondValidError">
+                    Please provide a proper value.
+                  </div>
+                </ng-container>
+              </ng-template>
+            </div>
+
+            <button class="btn" type="submit" [disabled]="!form.valid">Change values</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -76,10 +76,10 @@
               </a>
             </li>
             <li>
-                <a routerLink="/change_password">
-                  <span class="fa fa-expeditedssl"></span> Change password
-                </a>
-              </li>
+              <a routerLink="/change_password">
+                <span class="fa fa-expeditedssl"></span> Change password
+              </a>
+            </li>
             <li *ngIf="jwtService.hasRole('ADMIN')">
               <a routerLink="/admin_panel" >
                 <span class="fa fa-sliders"></span> Control panel

@@ -43,16 +43,6 @@ a {
   color: rgb(66, 139, 202);
 }
 
-.login-background {
-  position:absolute;
-  left:0;
-  right:0;
-  top:0;
-  bottom:0;
-  z-index:1;
-  filter: blur(1px);
-}
-
 input.ng-invalid.ng-touched {
   border-color: rgb(255, 100, 90);
 }

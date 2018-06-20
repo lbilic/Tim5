@@ -78,6 +78,7 @@ import {RateService} from "./services/rate/rate.service";
 import { RateModalComponent } from './components/rate-modal/rate-modal.component';
 import {ListProjectionsComponent} from "./components/list-projections/list-projections.component";
 import {ListPerformancesComponent} from "./components/list-performances/list-performances.component";
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 
 @NgModule({
   exports: [RouterModule],
@@ -115,7 +116,8 @@ import {ListPerformancesComponent} from "./components/list-performances/list-per
     AddMovieComponent,
     ListProjectionsComponent,
     ListPerformancesComponent,
-    RateModalComponent
+    RateModalComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -140,6 +142,10 @@ import {ListPerformancesComponent} from "./components/list-performances/list-per
       {
         path: '',
         component: HomePageComponent
+      },
+      {
+        path: 'admin_panel',
+        component: AdminPanelComponent
       },
       {
         path: 'add_cinetar',
