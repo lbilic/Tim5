@@ -199,7 +199,7 @@ import { ShowCineterComponent } from './components/show-cineter/show-cineter.com
         component: ListShowsComponent
       },
       {
-        path: 'movies',
+        path: 'movies/:id',
         component: ListMoviesComponent
       },
       {

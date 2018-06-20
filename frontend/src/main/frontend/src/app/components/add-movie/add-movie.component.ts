@@ -76,7 +76,7 @@ export class AddMovieComponent implements OnInit {
   }
 
   register(){
-    this.show.registerShow(new ShowCreate(this.name.value,
+    this.show.registerShow(new ShowCreate(null,this.name.value,
       this.description.value, true, this.director.value, this.runtime.value,
       this.genre.value, this.actors.value)).subscribe((data) =>{
       this.router.navigateByUrl(this.returnURL);

@@ -20,4 +20,6 @@ public interface ShowService {
     List<Show> findAll();
 
     Show findById(Long id);
+
+    List<Show> findByCineterId(Long cineter_id);
 }
