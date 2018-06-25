@@ -2,7 +2,6 @@ package ftn.isamrs.tim5.util;
 import ftn.isamrs.tim5.dto.*;
 import ftn.isamrs.tim5.model.*;
 import ftn.isamrs.tim5.model.System;
-import javafx.scene.transform.Scale;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
